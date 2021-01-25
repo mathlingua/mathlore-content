@@ -1,0 +1,5 @@
+
+Theorem:
+given: x
+where: 'x is \integer'
+then: '2*x is \integer'
