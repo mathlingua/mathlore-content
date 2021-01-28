@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-java -jar ./bin/mathlingua.jar $*
+java -jar ./.bin/mathlingua.jar $*
 
