@@ -1,6 +1,0 @@
-
-Foundation:
-. [\set]
-  Defines: X
-  means: "A collection of objects"
-  written: "\textrm{set}"
