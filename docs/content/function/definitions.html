@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+              integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq"
+              crossorigin="anonymous">
+        <script defer
+                src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+                integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz"
+                crossorigin="anonymous">
+        </script>
+        <script>
+            function buildMathFragment(rawText) {
+                var text = rawText;
+                if (text[0] === '"') {
+                    text = text.substring(1);
+                }
+                if (text[text.length - 1] === '"') {
+                    text = text.substring(0, text.length - 1);
+                }
+                text = text.replace(/([a-zA-Z0-9])\?\??/g, '$1');
+                const fragment = document.createDocumentFragment();
+                var buffer = '';
+                var i = 0;
+                while (i < text.length) {
+                    if (text[i] === '\\' && text[i+1] === '[') {
+                        i += 2; // skip over \ and [
+                        fragment.appendChild(document.createTextNode(buffer));
+                        buffer = '';
+
+                        const span = document.createElement('span');
+                        var math = '';
+                        while (i < text.length &&
+                            !(text[i] === '\\' && text[i+1] === ']')) {
+                            math += text[i++];
+                        }
+                        if (text[i] === '\\') {
+                            i++; // move past the \
+                        }
+                        if (text[i] === ']') {
+                            i++; // move past the ]
+                        }
+                        try {
+                            katex.render(math, span, {
+                                throwOnError: true,
+                                displayMode: true
+                            });
+                        } catch {
+                            span.appendChild(document.createTextNode(math));
+                        }
+                        fragment.appendChild(span);
+                    } else if (text[i] === '\\' && text[i+1] === '(') {
+                        i += 2; // skip over \ and ()
+                        fragment.appendChild(document.createTextNode(buffer));
+                        buffer = '';
+
+                        const span = document.createElement('span');
+                        var math = '';
+                        while (i < text.length &&
+                            !(text[i] === '\\' && text[i+1] === ')')) {
+                            math += text[i++];
+                        }
+                        if (text[i] === '\\') {
+                            i++; // move past the \
+                        }
+                        if (text[i] === ')') {
+                            i++; // move past the )
+                        }
+                        try {
+                            katex.render(math, span, {
+                                throwOnError: true,
+                                displayMode: true
+                            });
+                        } catch {
+                            span.appendChild(document.createTextNode(math));
+                        }
+                        fragment.appendChild(span);
+                    } else if (text[i] === '$' && text[i+1] === '$') {
+                        i += 2; // skip over $ and $
+                        fragment.appendChild(document.createTextNode(buffer));
+                        buffer = '';
+
+                        const span = document.createElement('span');
+                        var math = '';
+                        while (i < text.length &&
+                            !(text[i] === '$' && text[i+1] === '$')) {
+                            math += text[i++];
+                        }
+                        if (text[i] === '$') {
+                            i++; // move past the $
+                        }
+                        if (text[i] === '$') {
+                            i++; // move past the $
+                        }
+                        try {
+                            katex.render(math, span, {
+                                throwOnError: true,
+                                displayMode: true
+                            });
+                        } catch {
+                            span.appendChild(document.createTextNode(math));
+                        }
+                        fragment.appendChild(span);
+                    } else if (text[i] === '$') {
+                        i++; // skip over the $
+                        fragment.appendChild(document.createTextNode(buffer));
+                        buffer = '';
+
+                        const span = document.createElement('span');
+                        var math = '';
+                        while (i < text.length &&
+                             text[i] !== '$') {
+                            math += text[i++];
+                        }
+                        if (text[i] === '$') {
+                            i++; // move past the $
+                        }
+                        try {
+                            katex.render(math, span, {
+                                throwOnError: true,
+                                displayMode: true
+                            });
+                        } catch {
+                            span.appendChild(document.createTextNode(math));
+                        }
+                        fragment.appendChild(span);
+                    } else {
+                        buffer += text[i++];
+                    }
+                }
+
+                if (buffer.length > 0) {
+                    fragment.appendChild(document.createTextNode(buffer));
+                }
+
+                return fragment;
+            }
+
+            function render(node) {
+                if (node.className && node.className.indexOf('no-render') >= 0) {
+                    return;
+                }
+
+                let isInWritten = false;
+                const parent = node.parentNode;
+                if (node.className === 'mathlingua') {
+                    for (let i=0; i<node.childNodes.length; i++) {
+                        const n = node.childNodes[i];
+                        if (n && n.className === 'mathlingua-header' &&
+                            n.textContent === 'written:') {
+                            isInWritten = true;
+                            break;
+                        }
+                    }
+                }
+
+                for (let i = 0; i < node.childNodes.length; i++) {
+                    const child = node.childNodes[i];
+
+                    // node is an element node => nodeType === 1
+                    // node is an attribute node => nodeType === 2
+                    // node is a text node => nodeType === 3
+                    // node is a comment node => nodeType === 8
+                    if (child.nodeType === 3) {
+                        let text = child.textContent;
+                        if (text.trim()) {
+                            if (isInWritten) {
+                                // if the text is in a written: section
+                                // turn "some text" to \[some text\]
+                                // so the text is in math mode
+                                if (text[0] === '"') {
+                                    text = text.substring(1);
+                                }
+                                if (text[text.length - 1] === '"') {
+                                    text = text.substring(0, text.length - 1);
+                                }
+                                text = '\\[' + text + '\\]';
+                            }
+                            const fragment = buildMathFragment(text);
+                            i += fragment.childNodes.length - 1;
+                            node.replaceChild(fragment, child);
+                        }
+                    } else if (child.nodeType === 1) {
+                        render(child);
+                    }
+                }
+            }
+        </script>
+        <style>
+            .content {
+                margin-top: 1em;
+                margin-bottom: 1em;
+                font-size: 1em;
+            }
+
+            body {
+                background-color: #fafafa;
+            }
+
+            .mathlingua-top-level {
+                background-color: white;
+                border: solid;
+                border-width: 1px;
+                border-color: #e5e5e5;
+                border-radius: 2px;
+                box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 10px;
+                padding-top: 1em;
+                padding-bottom: 1em;
+                padding-left: 1em;
+                padding-right: 1em;
+                width: max-content;
+                max-width: 90%;
+            }
+
+            .mathlingua {
+                font-family: monospace;
+            }
+
+            .mathlingua-header {
+                color: #0055bb;
+                text-shadow: 0px 1px 0px rgba(255,255,255,0), 0px 0.4px 0px rgba(0,0,0,0.2);
+            }
+
+            .mathlingua-whitespace {
+                padding: 0;
+                margin: 0;
+                margin-left: 1ex;
+            }
+
+            .mathlingua-id {
+                color: #5500aa;
+            }
+
+            .mathlingua-text {
+                color: #007700;
+                display: block;
+                margin: 0 0 -1em 0;
+                padding: 0 0 0 2.5em;
+            }
+
+            .mathlingua-text-no-render {
+                color: #007700;
+                display: block;
+                margin: 0 0 -1em 0;
+                padding: 0 0 0 2.5em;
+            }
+
+            .mathlingua-statement-no-render {
+                color: #007377;
+            }
+
+            .katex {
+                font-size: 0.9em;
+            }
+
+            .katex-display {
+                display: contents;
+            }
+
+            .katex-display > .katex {
+                display: contents;
+            }
+
+            .katex-display > .katex > .katex-html {
+                display: contents;
+            }
+        </style>
+    </head>
+    <body onload="render(document.body)">
+        <div class="content">
+            <span class='mathlingua'><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[\function:on{A}:to{B}]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[f(x)\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='A, B is \set'>\[A, B\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[\textrm{set}\]</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>maps:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>from:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='A'>\[A\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>to:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='B'>\[B\]</span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"A?? \mapsto B??"</span></span></div><div class='end-mathlingua-top-level'></div><br/><br/><br/><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[\binary.operation:on{X}]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[f(x, y)\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='X is \set'>\[X\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[\textrm{set}\]</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>means:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='f is \function:on{X \set.times/ X}:to{X}'>\[f\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[\left ( X \times X \right ) \mapsto X\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"\textrm{binary operation on } X?"</span></span></div><div class='end-mathlingua-top-level'></div><br/><br/><br/><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[\injective.function:on{A}:to{B}]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[f(x)\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='A, B is \set'>\[A, B\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[\textrm{set}\]</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>means:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='f is \function:on{A}:to{B}'>\[f\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[A \mapsto B\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>satisfying:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>forAll:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[x_1\]</span></span><span class='mathlingua-comma'>,</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[x_2\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>where:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='x1, x2 in A'>\[x1, x2 \in A</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>then:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>if:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='f(x1) = f(x2)'>\[f (x_1) = f (x_2)\]</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>then:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='x1 = x2'>\[x_1 = x_2\]</span></span></span></span></span></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"\textrm{injective function on } A? \text{ to } B?"</span></span></div><div class='end-mathlingua-top-level'></div><br/><br/><br/><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[\surjective.function:on{A}:to{B}]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[f(x)\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='A, B is \set'>\[A, B\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[\textrm{set}\]</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>means:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='f is \function:on{A}:to{B}'>\[f\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[A \mapsto B\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>satisfying:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>forAll:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[b\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>where:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='b in B'>\[b \in B</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>then:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>exists:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[a\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>where:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='a in A'>\[a \in A</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>suchThat:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='f(a) = b'>\[f (a) = b\]</span></span></span></span></span></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"\textrm{surjective function on } A? \text{ to } B?"</span></span></div><div class='end-mathlingua-top-level'></div><br/><br/><br/><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[\bijective.function:on{A}:to{B}]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[f(x)\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='A, B is \set'>\[A, B\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[\textrm{set}\]</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>means:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='f is \function:on{A}:to{B}'>\[f\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[A \mapsto B\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>satisfying:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='f is \injective.function:on{A}:to{B}'>\[f\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[\textrm{injective function on } A \text{ to } B\]</span></span><br/><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='f is \surjective.function:on{A}:to{B}'>\[f\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[\textrm{surjective function on } A \text{ to } B\]</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"\textrm{bijective function on } A? \text{ to } B?"</span></span></div><div class='end-mathlingua-top-level'></div><br/><br/><br/><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[\function.inverse:of{f}]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[g(x)\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>requiring:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[A\]</span></span><span class='mathlingua-comma'>,</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[B\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='f is \function:on{A}:to{B}'>\[f\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[A \mapsto B\]</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>means:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='g is \function:on{A}:to{B}'>\[g\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[A \mapsto B\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>satisfying:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>forAll:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[a\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>where:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='a in A'>\[a \in A</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>then:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='g(f(a)) = a'>\[g (f (a)) = a\]</span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>forAll:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[b\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>where:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='b in B'>\[b \in B</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>then:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='f(g(b)) = b'>\[f (g (b)) = b\]</span></span></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"f??^{-1}"</span></span></div><div class='end-mathlingua-top-level'></div><br/><br/><br/><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[f \function.compose/ g]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[h(x)\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>requiring:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[A\]</span></span><span class='mathlingua-comma'>,</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[B\]</span></span><span class='mathlingua-comma'>,</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[C\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='g is \function:on{A}:to{B}'>\[g\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[A \mapsto B\]</span></span><br/><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='f is \function:on{B}:to{C}'>\[f\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[B \mapsto C\]</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>means:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='h is \function:on{A}:to{C}'>\[h\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[A \mapsto C\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>evaluated:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='h(x) := f(g(x))'>\[h (x) := f (g (x))\]</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"f?? \circ g??"</span></span></div><div class='end-mathlingua-top-level'></div><br/><br/><br/><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[\identity.function:on{A}]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[f(x)\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='A is \set'>\[A\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[\textrm{set}\]</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>means:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='f is \function:on{A}:to{A}'>\[f\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[A \mapsto A\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>evaluated:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='f(x) := x'>\[f (x) := x\]</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"\textrm{id}_{A?}"</span></span></div><div class='end-mathlingua-top-level'></div></span>
+        </div>
+    </body>
+</html>

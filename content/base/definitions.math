@@ -1,0 +1,51 @@
+
+Foundation:
+. [\type]
+  Defines: T
+  means: "A description of the type of an item"
+  written: "\textrm{type}"
+  Metadata: 
+  . summary: "Everything item in this collection
+              has an associated type.  For example,
+              the type of an item could be an
+              integer or a real number.  These
+              types can be related.
+
+              For example, it is possible to view
+              an integer as a real number.  Moreover,
+              when talking about sets, the elements
+              of the set are always of the same type.
+
+              This makes it easier to avoid pathologies
+              when discussing sets."
+
+
+[A \neq/ B]
+States:
+that:
+. not: 'A = B'
+written: "A? \neq B?"
+
+
+[P \or/ Q]
+States:
+that:
+. or:
+  . 'P'
+  . 'Q'
+written: "P?? \vee Q??"
+
+
+[P \and/ Q]
+States:
+that:
+. 'P'
+. 'Q'
+written: "P?? \wedge Q??"
+
+
+[\not{P}]
+States:
+that:
+. not: 'P'
+written: "\neg P??"

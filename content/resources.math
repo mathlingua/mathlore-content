@@ -1,0 +1,9 @@
+
+[BassRealAnalysisForGraduateStudents]
+Resource:
+. type: "Book"
+. name: "Real Analysis For Graduate Students"
+. author: "Richard F. Bass"
+. homepage: "http://bass.math.uconn.edu/real.html"
+. url: "http://bass.math.uconn.edu/v41.pdf"
+. offset: "19"
