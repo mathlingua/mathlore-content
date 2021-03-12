@@ -1,0 +1,91 @@
+
+[\magma]
+Defines: M := (X, *)
+means:
+. 'X is \set'
+. '* is \binary.operation:on{X}'
+viewed:
+. as: '\set'
+  via: 'X'
+. membership:
+  through: 'X'
+written: "\textrm{magma}"
+
+
+[\magma.morphism:on{M}:to{N}]
+Defines: f(?)
+when:
+. 'M := (X, *) is \magma'
+. 'N := (Y, **) is \magma'
+means: 'f is \function:on{M}:to{N}'
+satisfying:
+. forAll: x, y
+  where: 'x, y in M'
+  then: 'f(x * y) = f(x) ** f(y)'
+written: "\textrm{magma morphism on } M?? \textrm{ to } N??"
+
+
+[\semigroup]
+Defines: S := (X, *)
+means: 'S is \magma'
+satisfying:
+. forAll: x, y, z
+  where: 'x, y, z in X'
+  then: '(x * y) * z = x * (y * z)'
+viewed:
+. as: '\set'
+  via: 'X'
+. membership:
+  through: 'X'
+written: "\textrm{semigroup}"
+
+
+
+[\semigroup.morphism:on{M}:to{N}]
+Defines: f(?)
+when:
+. 'M := (X, *) is \semigroup'
+. 'N := (Y, **) is \semigroup'
+means: 'f is \function:on{M}:to{N}'
+satisfying:
+. forAll: x, y
+  where: 'x, y in M'
+  then: 'f(x * y) = f(x) ** f(y)'
+written: "\textrm{semigroup morphism on } M?? \textrm{ to } N??"
+
+
+[\monoid]
+Defines: M := (X, *, e)
+means: '(X, *) is \semigroup'
+satisfying:
+. forAll: x
+  where: 'x in X'
+  then:
+  . 'x * e = x'
+  . 'e * x = x'
+viewed:
+. as: '\set'
+  via: 'X'
+. membership:
+  through: 'X'
+written: "\textrm{monoid}"
+
+
+[\group]
+Defines: G := (X, *, e)
+means: '(X, *, e) is \semigroup'
+satisfying:
+. forAll: x
+  where: 'x in X'
+  then:
+  . exists: y
+    where: 'y in X'
+    suchThat:
+    . 'x * y = e'
+    . 'y * x = e'
+viewed:
+. as: '\set'
+  via: 'X'
+. membership:
+  through: 'X'
+written: "\textrm{group}"

@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+              integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq"
+              crossorigin="anonymous">
+        <script defer
+                src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+                integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz"
+                crossorigin="anonymous">
+        </script>
+        <script>
+            function buildMathFragment(rawText) {
+                var text = rawText;
+                if (text[0] === '"') {
+                    text = text.substring(1);
+                }
+                if (text[text.length - 1] === '"') {
+                    text = text.substring(0, text.length - 1);
+                }
+                text = text.replace(/([a-zA-Z0-9])\?\??/g, '$1');
+                const fragment = document.createDocumentFragment();
+                var buffer = '';
+                var i = 0;
+                while (i < text.length) {
+                    if (text[i] === '\\' && text[i+1] === '[') {
+                        i += 2; // skip over \ and [
+                        fragment.appendChild(document.createTextNode(buffer));
+                        buffer = '';
+
+                        const span = document.createElement('span');
+                        var math = '';
+                        while (i < text.length &&
+                            !(text[i] === '\\' && text[i+1] === ']')) {
+                            math += text[i++];
+                        }
+                        if (text[i] === '\\') {
+                            i++; // move past the \
+                        }
+                        if (text[i] === ']') {
+                            i++; // move past the ]
+                        }
+                        try {
+                            katex.render(math, span, {
+                                throwOnError: true,
+                                displayMode: true
+                            });
+                        } catch {
+                            span.appendChild(document.createTextNode(math));
+                        }
+                        fragment.appendChild(span);
+                    } else if (text[i] === '\\' && text[i+1] === '(') {
+                        i += 2; // skip over \ and ()
+                        fragment.appendChild(document.createTextNode(buffer));
+                        buffer = '';
+
+                        const span = document.createElement('span');
+                        var math = '';
+                        while (i < text.length &&
+                            !(text[i] === '\\' && text[i+1] === ')')) {
+                            math += text[i++];
+                        }
+                        if (text[i] === '\\') {
+                            i++; // move past the \
+                        }
+                        if (text[i] === ')') {
+                            i++; // move past the )
+                        }
+                        try {
+                            katex.render(math, span, {
+                                throwOnError: true,
+                                displayMode: true
+                            });
+                        } catch {
+                            span.appendChild(document.createTextNode(math));
+                        }
+                        fragment.appendChild(span);
+                    } else if (text[i] === '$' && text[i+1] === '$') {
+                        i += 2; // skip over $ and $
+                        fragment.appendChild(document.createTextNode(buffer));
+                        buffer = '';
+
+                        const span = document.createElement('span');
+                        var math = '';
+                        while (i < text.length &&
+                            !(text[i] === '$' && text[i+1] === '$')) {
+                            math += text[i++];
+                        }
+                        if (text[i] === '$') {
+                            i++; // move past the $
+                        }
+                        if (text[i] === '$') {
+                            i++; // move past the $
+                        }
+                        try {
+                            katex.render(math, span, {
+                                throwOnError: true,
+                                displayMode: true
+                            });
+                        } catch {
+                            span.appendChild(document.createTextNode(math));
+                        }
+                        fragment.appendChild(span);
+                    } else if (text[i] === '$') {
+                        i++; // skip over the $
+                        fragment.appendChild(document.createTextNode(buffer));
+                        buffer = '';
+
+                        const span = document.createElement('span');
+                        var math = '';
+                        while (i < text.length &&
+                             text[i] !== '$') {
+                            math += text[i++];
+                        }
+                        if (text[i] === '$') {
+                            i++; // move past the $
+                        }
+                        try {
+                            katex.render(math, span, {
+                                throwOnError: true,
+                                displayMode: true
+                            });
+                        } catch {
+                            span.appendChild(document.createTextNode(math));
+                        }
+                        fragment.appendChild(span);
+                    } else {
+                        buffer += text[i++];
+                    }
+                }
+
+                if (buffer.length > 0) {
+                    fragment.appendChild(document.createTextNode(buffer));
+                }
+
+                return fragment;
+            }
+
+            function render(node) {
+                if (node.className && node.className.indexOf('no-render') >= 0) {
+                    return;
+                }
+
+                let isInWritten = false;
+                const parent = node.parentNode;
+                if (node.className === 'mathlingua') {
+                    for (let i=0; i<node.childNodes.length; i++) {
+                        const n = node.childNodes[i];
+                        if (n && n.className === 'mathlingua-header' &&
+                            n.textContent === 'written:') {
+                            isInWritten = true;
+                            break;
+                        }
+                    }
+                }
+
+                for (let i = 0; i < node.childNodes.length; i++) {
+                    const child = node.childNodes[i];
+
+                    // node is an element node => nodeType === 1
+                    // node is an attribute node => nodeType === 2
+                    // node is a text node => nodeType === 3
+                    // node is a comment node => nodeType === 8
+                    if (child.nodeType === 3) {
+                        let text = child.textContent;
+                        if (text.trim()) {
+                            if (isInWritten) {
+                                // if the text is in a written: section
+                                // turn "some text" to \[some text\]
+                                // so the text is in math mode
+                                if (text[0] === '"') {
+                                    text = text.substring(1);
+                                }
+                                if (text[text.length - 1] === '"') {
+                                    text = text.substring(0, text.length - 1);
+                                }
+                                text = '\\[' + text + '\\]';
+                            }
+                            const fragment = buildMathFragment(text);
+                            i += fragment.childNodes.length - 1;
+                            node.replaceChild(fragment, child);
+                        }
+                    } else if (child.nodeType === 1) {
+                        render(child);
+                    }
+                }
+            }
+        </script>
+        <style>
+            .content {
+                margin-top: 1em;
+                margin-bottom: 1em;
+                font-size: 1em;
+            }
+
+            body {
+                background-color: #fafafa;
+            }
+
+            .mathlingua-top-level {
+                background-color: white;
+                border: solid;
+                border-width: 1px;
+                border-color: #e5e5e5;
+                border-radius: 2px;
+                box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 10px;
+                padding-top: 1em;
+                padding-bottom: 1em;
+                padding-left: 1em;
+                padding-right: 1em;
+                width: max-content;
+                max-width: 90%;
+            }
+
+            .mathlingua {
+                font-family: monospace;
+            }
+
+            .mathlingua-header {
+                color: #0055bb;
+                text-shadow: 0px 1px 0px rgba(255,255,255,0), 0px 0.4px 0px rgba(0,0,0,0.2);
+            }
+
+            .mathlingua-whitespace {
+                padding: 0;
+                margin: 0;
+                margin-left: 1ex;
+            }
+
+            .mathlingua-id {
+                color: #5500aa;
+            }
+
+            .mathlingua-text {
+                color: #007700;
+                display: block;
+                margin: 0 0 -1em 0;
+                padding: 0 0 0 2.5em;
+            }
+
+            .mathlingua-text-no-render {
+                color: #007700;
+                display: block;
+                margin: 0 0 -1em 0;
+                padding: 0 0 0 2.5em;
+            }
+
+            .mathlingua-statement-no-render {
+                color: #007377;
+            }
+
+            .katex {
+                font-size: 0.9em;
+            }
+
+            .katex-display {
+                display: contents;
+            }
+
+            .katex-display > .katex {
+                display: contents;
+            }
+
+            .katex-display > .katex > .katex-html {
+                display: contents;
+            }
+        </style>
+    </head>
+    <body onload="render(document.body)">
+        <div class="content">
+            <span class='mathlingua'><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[\magma]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[M := (X, *)\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>means:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='X is \set'>\[X\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[\textrm{set}\]</span></span><br/><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='* is \binary.operation:on{X}'>\[*\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[\textrm{binary operation on } X\]</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>viewed:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>as:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='\set'>\[\textrm{set}\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>via:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='X'>\[X\]</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>membership:</span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>through:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='X'>\[X\]</span></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"\textrm{magma}"</span></span></div><div class='end-mathlingua-top-level'></div><br/><br/><br/><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[\magma.morphism:on{M}:to{N}]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[f(?)\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='M := (X, *) is \magma'>\[M := (X, *)\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[\textrm{magma}\]</span></span><br/><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='N := (Y, **) is \magma'>\[N := (Y, **)\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[\textrm{magma}\]</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>means:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='f is \function:on{M}:to{N}'>\[f\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[M \mapsto N\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>satisfying:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>forAll:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[x\]</span></span><span class='mathlingua-comma'>,</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[y\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>where:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='x, y in M'>\[x, y \in M</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>then:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='f(x * y) = f(x) ** f(y)'>\[f (x * y) = f (x) ** f (y)\]</span></span></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"\textrm{magma morphism on } M?? \textrm{ to } N??"</span></span></div><div class='end-mathlingua-top-level'></div><br/><br/><br/><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[\semigroup]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[S := (X, *)\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>means:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='S is \magma'>\[S\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[\textrm{magma}\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>satisfying:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>forAll:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[x\]</span></span><span class='mathlingua-comma'>,</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[y\]</span></span><span class='mathlingua-comma'>,</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[z\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>where:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='x, y, z in X'>\[x, y, z \in X</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>then:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='(x * y) * z = x * (y * z)'>\[(x * y) * z = x * (y * z)\]</span></span></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>viewed:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>as:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='\set'>\[\textrm{set}\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>via:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='X'>\[X\]</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>membership:</span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>through:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='X'>\[X\]</span></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"\textrm{semigroup}"</span></span></div><div class='end-mathlingua-top-level'></div><br/><br/><br/><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[\semigroup.morphism:on{M}:to{N}]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[f(?)\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='M := (X, *) is \semigroup'>\[M := (X, *)\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[\textrm{semigroup}\]</span></span><br/><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='N := (Y, **) is \semigroup'>\[N := (Y, **)\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[\textrm{semigroup}\]</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>means:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='f is \function:on{M}:to{N}'>\[f\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[M \mapsto N\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>satisfying:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>forAll:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[x\]</span></span><span class='mathlingua-comma'>,</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[y\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>where:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='x, y in M'>\[x, y \in M</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>then:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='f(x * y) = f(x) ** f(y)'>\[f (x * y) = f (x) ** f (y)\]</span></span></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"\textrm{semigroup morphism on } M?? \textrm{ to } N??"</span></span></div><div class='end-mathlingua-top-level'></div><br/><br/><br/><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[\monoid]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[M := (X, *, e)\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>means:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='(X, *) is \semigroup'>\[(X, *)\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[\textrm{semigroup}\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>satisfying:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>forAll:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[x\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>where:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='x in X'>\[x \in X</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>then:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='x * e = x'>\[x * e = x\]</span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='e * x = x'>\[e * x = x\]</span></span></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>viewed:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>as:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='\set'>\[\textrm{set}\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>via:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='X'>\[X\]</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>membership:</span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>through:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='X'>\[X\]</span></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"\textrm{monoid}"</span></span></div><div class='end-mathlingua-top-level'></div><br/><br/><br/><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[\group]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[G := (X, *, e)\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>means:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='(X, *, e) is \semigroup'>\[(X, *, e)\]<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>\[\textrm{semigroup}\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>satisfying:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>forAll:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[x\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>where:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='x in X'>\[x \in X</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>then:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>exists:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>\[y\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>where:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='y in X'>\[y \in X</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>suchThat:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='x * y = e'>\[x * y = e\]</span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='y * x = e'>\[y * x = e\]</span></span></span></span></span></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>viewed:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>as:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='\set'>\[\textrm{set}\]</span></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>via:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='X'>\[X\]</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>membership:</span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>through:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='X'>\[X\]</span></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"\textrm{group}"</span></span></div><div class='end-mathlingua-top-level'></div></span>
+        </div>
+    </body>
+</html>
