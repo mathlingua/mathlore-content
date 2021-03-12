@@ -14,14 +14,13 @@ means: '\set:over{T}'
 written: "\textrm{set}"
 
 
--- TODO: Fix all: to be correct
 [\set[x...]:where{within}:suchThat{cond}...]
 Defines: X
 means: 'X is \set'
 collects:
 . given: t...
   where: 'within'
-  all: 'within'
+  all: 't'
   suchThat: 'cond...'
 written: "\left \{ within? \: | \:
               cond{... \textrm{ and } ...}?
