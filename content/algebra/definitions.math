@@ -19,9 +19,9 @@ when:
 . 'N := (Y, **) is \magma'
 means: 'f is \function:on{M}:to{N}'
 satisfying:
-. forAll: x, y
-  where: 'x, y in M'
-  then: 'f(x * y) = f(x) ** f(y)'
+. forAll: x1, x2
+  where: 'x1, x2 in X'
+  then: 'f(x1 * x2) = f(x1) ** f(x2)'
 written: "\textrm{magma morphism on } M?? \textrm{ to } N??"
 
 
@@ -48,9 +48,9 @@ when:
 . 'N := (Y, **) is \semigroup'
 means: 'f is \function:on{M}:to{N}'
 satisfying:
-. forAll: x, y
-  where: 'x, y in M'
-  then: 'f(x * y) = f(x) ** f(y)'
+. forAll: x1, x2
+  where: 'x1, x2 in X'
+  then: 'f(x1 * x2) = f(x1) ** f(x2)'
 written: "\textrm{semigroup morphism on } M?? \textrm{ to } N??"
 
 
