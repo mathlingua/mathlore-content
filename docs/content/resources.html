@@ -202,6 +202,10 @@
                 background-color: #fafafa;
             }
 
+            hr {
+                border: 1px solid #efefef;
+            }
+
             .mathlingua-top-level {
                 background-color: white;
                 border: solid;
@@ -210,13 +214,19 @@
                 border-radius: 2px;
                 box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 10px,
                             inset 0  0 10px 0 rgba(200, 200, 200, 0.25);
-                padding-top: 1em;
+                padding-top: 1.25em;
                 padding-bottom: 1em;
-                padding-left: 1em;
-                padding-right: 1em;
+                padding-left: 1.1em;
+                padding-right: 1.1em;
                 width: max-content;
+                max-width: 90%;
                 margin-left: auto; /* for centering content */
                 margin-right: auto; /* for centering content */
+            }
+
+            .end-mathlingua-top-level {
+                padding-top: 0.5em;
+                margin: 0;
             }
 
             .mathlingua {
@@ -241,17 +251,21 @@
             }
 
             .mathlingua-text {
-                color: #007700;
+                color: #000000;
                 display: block;
                 margin: 0 0 -1em 0;
                 padding: 0 0 0 2.5em;
+                font-size: 80%;
+                font-family: Georgia, 'Times New Roman', Times, serif;
             }
 
             .mathlingua-text-no-render {
-                color: #007700;
+                color: #000000;
                 display: block;
                 margin: 0 0 -1em 0;
                 padding: 0 0 0 2.5em;
+                font-size: 80%;
+                font-family: Georgia, 'Times New Roman', Times, serif;
             }
 
             .mathlingua-statement-no-render {
@@ -277,7 +291,7 @@
     </head>
     <body onload="render(document.body)">
         <div class="content">
-            <span class='mathlingua'><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[BassRealAnalysisForGraduateStudents]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Resource:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>type:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="Book">Book</span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>name:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="Real Analysis For Graduate Students">Real Analysis For Graduate Students</span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>author:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="Richard F. Bass">Richard F. Bass</span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>homepage:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="http://bass.math.uconn.edu/real.html">http://bass.math.uconn.edu/real.html</span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>url:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="http://bass.math.uconn.edu/v41.pdf">http://bass.math.uconn.edu/v41.pdf</span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>offset:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="19">19</span></span></span></span></span></div><div class='end-mathlingua-top-level'></div></span>
+            <span class='mathlingua'><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[BassRealAnalysisForGraduateStudents]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Resource:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>type:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="Book">Book</span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>name:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="Real Analysis For Graduate Students">Real Analysis For Graduate Students</span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>author:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="Richard F. Bass">Richard F. Bass</span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>homepage:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="http://bass.math.uconn.edu/real.html">http://bass.math.uconn.edu/real.html</span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>url:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="http://bass.math.uconn.edu/v41.pdf">http://bass.math.uconn.edu/v41.pdf</span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>offset:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="19">19</span></span></span></span></span><div class='end-mathlingua-top-level'></div></div></span>
         </div>
     </body>
 </html>
