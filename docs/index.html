@@ -2,10 +2,33 @@
 <html>
     <head>
         <meta name="viewport" content="width=100%, initial-scale=1.0">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
         <style>
             body {
                 background-color: #fafafa;
                 overflow: hidden;
+            }
+
+            .topbar {
+                display: block;
+                height: 1.75em;
+                background-color: #ffffff;
+                position: fixed;
+                z-index: 2;
+                top: 0;
+                left: 0;
+                width: 100%;
+                border-width: 1px;
+                border-color: rgba(200, 200, 200);
+                box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 10px,
+                            inset 0  0 10px 0 rgba(200, 200, 200, 0.25);
+                padding-top: 0.5em;
+            }
+
+            .search-area {
+                margin-left: auto;
+                margin-right: auto;
             }
 
             .sidebar {
@@ -13,7 +36,7 @@
                 width: 20%;
                 position: fixed;
                 z-index: 1;
-                top: 0;
+                top: 1.75em;
                 left: 0;
                 background-color: #ffffff;
                 border-right: solid;
@@ -48,6 +71,7 @@
             .closeButton {
                 text-decoration: none;
                 color: black;
+                margin-left: 0.75em;
             }
 
             #main {
@@ -67,7 +91,7 @@
                 }
             }
 
-            #content {
+            #__content__frame__ {
                 border: none;
                 width: 100%;
                 height: 100%;
@@ -76,6 +100,495 @@
             }
         </style>
         <script>
+            const ALL_FILE_IDS = ['content/function/definitions','content/function','content/resources','content/set/definitions','content/set','content/base/definitions','content/base','content/algebra/definitions','content/algebra','content'];
+            const INITIAL_SRC = "content/function/definitions.html";
+            const SEARCH_INDEX = (function() {
+                const index = new Map();
+const map0 = new Map();
+const set0_0 = new Set();
+set0_0.add(0);
+set0_0.add(2);
+set0_0.add(3);
+set0_0.add(4);
+set0_0.add(5);
+set0_0.add(6);
+set0_0.add(7);
+map0.set('content/function/definitions', set0_0);
+const set0_1 = new Set();
+set0_1.add(5);
+set0_1.add(6);
+set0_1.add(7);
+set0_1.add(8);
+set0_1.add(9);
+set0_1.add(10);
+set0_1.add(11);
+set0_1.add(12);
+set0_1.add(13);
+set0_1.add(14);
+map0.set('content/set/definitions', set0_1);
+const set0_2 = new Set();
+set0_2.add(1);
+map0.set('content/base/definitions', set0_2);
+index.set('a', map0);
+const map1 = new Map();
+const set1_0 = new Set();
+set1_0.add(0);
+set1_0.add(2);
+set1_0.add(3);
+set1_0.add(4);
+set1_0.add(5);
+set1_0.add(6);
+map1.set('content/function/definitions', set1_0);
+const set1_1 = new Set();
+set1_1.add(5);
+set1_1.add(6);
+set1_1.add(7);
+set1_1.add(8);
+set1_1.add(9);
+set1_1.add(10);
+set1_1.add(11);
+set1_1.add(12);
+set1_1.add(13);
+set1_1.add(14);
+map1.set('content/set/definitions', set1_1);
+const set1_2 = new Set();
+set1_2.add(1);
+map1.set('content/base/definitions', set1_2);
+index.set('b', map1);
+const map2 = new Map();
+const set2_0 = new Set();
+set2_0.add(0);
+set2_0.add(1);
+set2_0.add(2);
+set2_0.add(3);
+set2_0.add(4);
+set2_0.add(7);
+map2.set('content/function/definitions', set2_0);
+const set2_1 = new Set();
+set2_1.add(1);
+set2_1.add(2);
+set2_1.add(3);
+set2_1.add(4);
+set2_1.add(5);
+set2_1.add(6);
+set2_1.add(7);
+set2_1.add(8);
+set2_1.add(9);
+set2_1.add(10);
+set2_1.add(11);
+set2_1.add(12);
+set2_1.add(13);
+set2_1.add(14);
+map2.set('content/set/definitions', set2_1);
+const set2_2 = new Set();
+set2_2.add(0);
+set2_2.add(2);
+set2_2.add(4);
+set2_2.add(5);
+map2.set('content/algebra/definitions', set2_2);
+index.set('set', map2);
+const map3 = new Map();
+const set3_0 = new Set();
+set3_0.add(1);
+set3_0.add(6);
+set3_0.add(7);
+map3.set('content/function/definitions', set3_0);
+const set3_1 = new Set();
+set3_1.add(2);
+set3_1.add(3);
+set3_1.add(4);
+map3.set('content/set/definitions', set3_1);
+const set3_2 = new Set();
+set3_2.add(0);
+set3_2.add(1);
+set3_2.add(2);
+set3_2.add(3);
+set3_2.add(4);
+set3_2.add(5);
+map3.set('content/algebra/definitions', set3_2);
+index.set('x', map3);
+const map4 = new Map();
+const set4_0 = new Set();
+set4_0.add(1);
+set4_0.add(2);
+set4_0.add(3);
+set4_0.add(4);
+set4_0.add(5);
+set4_0.add(6);
+set4_0.add(7);
+map4.set('content/function/definitions', set4_0);
+const set4_1 = new Set();
+set4_1.add(1);
+set4_1.add(3);
+map4.set('content/algebra/definitions', set4_1);
+index.set('f', map4);
+const map5 = new Map();
+const set5_0 = new Set();
+set5_0.add(1);
+set5_0.add(2);
+set5_0.add(3);
+set5_0.add(4);
+set5_0.add(5);
+set5_0.add(6);
+set5_0.add(7);
+map5.set('content/function/definitions', set5_0);
+const set5_1 = new Set();
+set5_1.add(1);
+set5_1.add(3);
+map5.set('content/algebra/definitions', set5_1);
+index.set('function', map5);
+const map6 = new Map();
+const set6_0 = new Set();
+set6_0.add(1);
+set6_0.add(2);
+set6_0.add(3);
+set6_0.add(4);
+set6_0.add(5);
+set6_0.add(6);
+set6_0.add(7);
+map6.set('content/function/definitions', set6_0);
+const set6_1 = new Set();
+set6_1.add(0);
+set6_1.add(1);
+set6_1.add(3);
+map6.set('content/algebra/definitions', set6_1);
+index.set('on', map6);
+const map7 = new Map();
+const set7_0 = new Set();
+set7_0.add(1);
+map7.set('content/function/definitions', set7_0);
+index.set('times', map7);
+const map8 = new Map();
+const set8_0 = new Set();
+set8_0.add(1);
+set8_0.add(2);
+set8_0.add(3);
+set8_0.add(4);
+set8_0.add(5);
+set8_0.add(6);
+set8_0.add(7);
+map8.set('content/function/definitions', set8_0);
+const set8_1 = new Set();
+set8_1.add(1);
+set8_1.add(3);
+map8.set('content/algebra/definitions', set8_1);
+index.set('to', map8);
+const map9 = new Map();
+const set9_0 = new Set();
+set9_0.add(2);
+map9.set('content/function/definitions', set9_0);
+const set9_1 = new Set();
+set9_1.add(1);
+set9_1.add(3);
+map9.set('content/algebra/definitions', set9_1);
+index.set('x1', map9);
+const map10 = new Map();
+const set10_0 = new Set();
+set10_0.add(2);
+map10.set('content/function/definitions', set10_0);
+const set10_1 = new Set();
+set10_1.add(1);
+set10_1.add(3);
+map10.set('content/algebra/definitions', set10_1);
+index.set('x2', map10);
+const map11 = new Map();
+const set11_0 = new Set();
+set11_0.add(2);
+set11_0.add(3);
+set11_0.add(5);
+map11.set('content/function/definitions', set11_0);
+const set11_1 = new Set();
+set11_1.add(1);
+map11.set('content/base/definitions', set11_1);
+const set11_2 = new Set();
+set11_2.add(1);
+set11_2.add(2);
+set11_2.add(3);
+set11_2.add(4);
+set11_2.add(5);
+map11.set('content/algebra/definitions', set11_2);
+index.set('=', map11);
+const map12 = new Map();
+const set12_0 = new Set();
+set12_0.add(4);
+map12.set('content/function/definitions', set12_0);
+index.set('injective', map12);
+const map13 = new Map();
+const set13_0 = new Set();
+set13_0.add(4);
+map13.set('content/function/definitions', set13_0);
+index.set('surjective', map13);
+const map14 = new Map();
+const set14_0 = new Set();
+set14_0.add(5);
+set14_0.add(6);
+map14.set('content/function/definitions', set14_0);
+index.set('g', map14);
+const map15 = new Map();
+const set15_0 = new Set();
+set15_0.add(6);
+map15.set('content/function/definitions', set15_0);
+const set15_1 = new Set();
+set15_1.add(7);
+set15_1.add(8);
+set15_1.add(9);
+set15_1.add(10);
+set15_1.add(11);
+set15_1.add(12);
+set15_1.add(14);
+map15.set('content/set/definitions', set15_1);
+index.set('c', map15);
+const map16 = new Map();
+const set16_0 = new Set();
+set16_0.add(6);
+map16.set('content/function/definitions', set16_0);
+index.set('h', map16);
+const map17 = new Map();
+const set17_0 = new Set();
+set17_0.add(0);
+map17.set('content/set/definitions', set17_0);
+const set17_1 = new Set();
+set17_1.add(0);
+map17.set('content/base/definitions', set17_1);
+index.set('"a', map17);
+const map18 = new Map();
+const set18_0 = new Set();
+set18_0.add(0);
+map18.set('content/set/definitions', set18_0);
+index.set('collection', map18);
+const map19 = new Map();
+const set19_0 = new Set();
+set19_0.add(0);
+map19.set('content/set/definitions', set19_0);
+const set19_1 = new Set();
+set19_1.add(0);
+map19.set('content/base/definitions', set19_1);
+index.set('of', map19);
+const map20 = new Map();
+const set20_0 = new Set();
+set20_0.add(0);
+map20.set('content/set/definitions', set20_0);
+index.set('items', map20);
+const map21 = new Map();
+const set21_0 = new Set();
+set21_0.add(0);
+set21_0.add(1);
+map21.set('content/set/definitions', set21_0);
+const set21_1 = new Set();
+set21_1.add(0);
+map21.set('content/base/definitions', set21_1);
+index.set('type', map21);
+const map22 = new Map();
+const set22_0 = new Set();
+set22_0.add(0);
+map22.set('content/set/definitions', set22_0);
+index.set('${t}"', map22);
+const map23 = new Map();
+const set23_0 = new Set();
+set23_0.add(1);
+set23_0.add(2);
+map23.set('content/set/definitions', set23_0);
+index.set('t', map23);
+const map24 = new Map();
+const set24_0 = new Set();
+set24_0.add(1);
+map24.set('content/set/definitions', set24_0);
+index.set('over', map24);
+const map25 = new Map();
+const set25_0 = new Set();
+set25_0.add(2);
+set25_0.add(8);
+set25_0.add(10);
+map25.set('content/set/definitions', set25_0);
+index.set('within', map25);
+const map26 = new Map();
+const set26_0 = new Set();
+set26_0.add(2);
+map26.set('content/set/definitions', set26_0);
+index.set('cond', map26);
+const map27 = new Map();
+const set27_0 = new Set();
+set27_0.add(6);
+set27_0.add(8);
+set27_0.add(9);
+map27.set('content/set/definitions', set27_0);
+index.set('subset', map27);
+const map28 = new Map();
+const set28_0 = new Set();
+set28_0.add(6);
+map28.set('content/set/definitions', set28_0);
+index.set('neq', map28);
+const map29 = new Map();
+const set29_0 = new Set();
+set29_0.add(7);
+set29_0.add(8);
+set29_0.add(9);
+set29_0.add(10);
+set29_0.add(13);
+map29.set('content/set/definitions', set29_0);
+index.set('u', map29);
+const map30 = new Map();
+const set30_0 = new Set();
+set30_0.add(7);
+set30_0.add(9);
+set30_0.add(11);
+set30_0.add(13);
+map30.set('content/set/definitions', set30_0);
+index.set('where', map30);
+const map31 = new Map();
+const set31_0 = new Set();
+set31_0.add(7);
+set31_0.add(9);
+set31_0.add(11);
+set31_0.add(13);
+map31.set('content/set/definitions', set31_0);
+index.set('in', map31);
+const map32 = new Map();
+const set32_0 = new Set();
+set32_0.add(7);
+set32_0.add(9);
+set32_0.add(11);
+set32_0.add(13);
+map32.set('content/set/definitions', set32_0);
+index.set('suchthat', map32);
+const map33 = new Map();
+const set33_0 = new Set();
+set33_0.add(8);
+map33.set('content/set/definitions', set33_0);
+index.set('intersect', map33);
+const map34 = new Map();
+const set34_0 = new Set();
+set34_0.add(9);
+map34.set('content/set/definitions', set34_0);
+index.set('or', map34);
+const map35 = new Map();
+const set35_0 = new Set();
+set35_0.add(10);
+set35_0.add(12);
+map35.set('content/set/definitions', set35_0);
+index.set('union', map35);
+const map36 = new Map();
+const set36_0 = new Set();
+set36_0.add(11);
+set36_0.add(13);
+map36.set('content/set/definitions', set36_0);
+index.set('notin', map36);
+const map37 = new Map();
+const set37_0 = new Set();
+set37_0.add(12);
+map37.set('content/set/definitions', set37_0);
+index.set('minus', map37);
+const map38 = new Map();
+const set38_0 = new Set();
+set38_0.add(0);
+map38.set('content/base/definitions', set38_0);
+index.set('description', map38);
+const map39 = new Map();
+const set39_0 = new Set();
+set39_0.add(0);
+map39.set('content/base/definitions', set39_0);
+index.set('the', map39);
+const map40 = new Map();
+const set40_0 = new Set();
+set40_0.add(0);
+map40.set('content/base/definitions', set40_0);
+index.set('an', map40);
+const map41 = new Map();
+const set41_0 = new Set();
+set41_0.add(0);
+map41.set('content/base/definitions', set41_0);
+index.set('item"', map41);
+const map42 = new Map();
+const set42_0 = new Set();
+set42_0.add(2);
+set42_0.add(3);
+set42_0.add(4);
+map42.set('content/base/definitions', set42_0);
+index.set('p', map42);
+const map43 = new Map();
+const set43_0 = new Set();
+set43_0.add(2);
+set43_0.add(3);
+map43.set('content/base/definitions', set43_0);
+index.set('q', map43);
+const map44 = new Map();
+const set44_0 = new Set();
+set44_0.add(0);
+set44_0.add(1);
+set44_0.add(2);
+set44_0.add(3);
+set44_0.add(4);
+set44_0.add(5);
+map44.set('content/algebra/definitions', set44_0);
+index.set('*', map44);
+const map45 = new Map();
+const set45_0 = new Set();
+set45_0.add(0);
+map45.set('content/algebra/definitions', set45_0);
+index.set('binary', map45);
+const map46 = new Map();
+const set46_0 = new Set();
+set46_0.add(0);
+map46.set('content/algebra/definitions', set46_0);
+index.set('operation', map46);
+const map47 = new Map();
+const set47_0 = new Set();
+set47_0.add(1);
+set47_0.add(3);
+map47.set('content/algebra/definitions', set47_0);
+index.set('m', map47);
+const map48 = new Map();
+const set48_0 = new Set();
+set48_0.add(1);
+set48_0.add(2);
+map48.set('content/algebra/definitions', set48_0);
+index.set('magma', map48);
+const map49 = new Map();
+const set49_0 = new Set();
+set49_0.add(1);
+set49_0.add(3);
+map49.set('content/algebra/definitions', set49_0);
+index.set('n', map49);
+const map50 = new Map();
+const set50_0 = new Set();
+set50_0.add(1);
+set50_0.add(2);
+set50_0.add(3);
+set50_0.add(5);
+map50.set('content/algebra/definitions', set50_0);
+index.set('y', map50);
+const map51 = new Map();
+const set51_0 = new Set();
+set51_0.add(1);
+set51_0.add(3);
+map51.set('content/algebra/definitions', set51_0);
+index.set('**', map51);
+const map52 = new Map();
+const set52_0 = new Set();
+set52_0.add(2);
+map52.set('content/algebra/definitions', set52_0);
+index.set('s', map52);
+const map53 = new Map();
+const set53_0 = new Set();
+set53_0.add(2);
+map53.set('content/algebra/definitions', set53_0);
+index.set('z', map53);
+const map54 = new Map();
+const set54_0 = new Set();
+set54_0.add(3);
+set54_0.add(4);
+set54_0.add(5);
+map54.set('content/algebra/definitions', set54_0);
+index.set('semigroup', map54);
+const map55 = new Map();
+const set55_0 = new Set();
+set55_0.add(4);
+set55_0.add(5);
+map55.set('content/algebra/definitions', set55_0);
+index.set('e', map55);
+return index;
+            })();
+
             function forMobile() {
                 return window?.screen?.width <= 400;
             }
@@ -86,39 +599,126 @@
                 if (open) {
                     document.getElementById('sidebar').style.width = '0';
                     document.getElementById('main').style.marginLeft = '0';
-                    document.getElementById('closeButton').textContent = '›';
                 } else {
                     let margin = forMobile() ? '50%' : '20%';
                     document.getElementById('sidebar').style.width = margin;
                     document.getElementById('main').style.marginLeft = margin;
-                    document.getElementById('closeButton').textContent = '‹';
                 }
                 open = !open;
             }
 
             function view(path) {
-                const content = document.getElementById('content');
+                const content = document.getElementById('__content__frame__');
                 if (content) {
                     content.src = path;
                 }
             }
 
-            function updateCloseButton() {
-                if (forMobile()) {
-                    document.getElementById('closeButton').textContent = '›';
-                } else {
-                    document.getElementById('closeButton').textContent = '‹';
+            function clearSearch() {
+                for (const id of ALL_FILE_IDS) {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.style.display = 'block';
+                        el.setAttribute('onclick', "view('" + id + ".html" + "')");
+                    }
+                }
+                view(INITIAL_SRC);
+                const el = document.getElementById('search-input');
+                if (el) {
+                    el.value = '';
+                }
+            }
+
+            function search(terms) {
+                const el = document.getElementById('search-input');
+                if (el) {
+                    const term = el.value;
+                    if (!term) {
+                        clearSearch();
+                        return;
+                    }
+
+                    view('');
+                    const pathsToIndices = SEARCH_INDEX.get(term);
+                    if (!pathsToIndices) {
+                        alert('No results found');
+                        return;
+                    }
+
+                    const pathToNewPath = new Map();
+                    for (const [path, ids] of pathsToIndices) {
+                        let newPath = path + '.html';
+                        if (ids.size > 0) {
+                            newPath += '?';
+                            let isFirst = true;
+                            for (const id of ids) {
+                                if (!isFirst) {
+                                    newPath += '&'
+                                }
+                                isFirst = false;
+                                newPath += "show=" + id;
+                            }
+                            pathToNewPath.set(path, newPath);
+                        }
+                    }
+
+                    for (const id of ALL_FILE_IDS) {
+                        const el = document.getElementById(id);
+                        if (el) {
+                            if (pathToNewPath.has(id)) {
+                                el.style.display = 'block';
+                                el.setAttribute('onclick', "view('" + pathToNewPath.get(id) + "')");
+                            } else {
+                                el.style.display = 'none';
+                            }
+                        }
+                    }
+
+                    for (const id of ALL_FILE_IDS) {
+                        if (pathToNewPath.has(id)) {
+                            const parts = id.split('/');
+                            while (parts.length > 0) {
+                                parts.pop();
+                                let parent = parts.join('/');
+                                if (parent) {
+                                    const parentEl = document.getElementById(parent);
+                                    if (parentEl) {
+                                        parentEl.style.display = 'block';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            function initPage() {
+                const el = document.getElementById('search-input');
+                if (el) {
+                    el.addEventListener("keyup", function(event) {
+                        if (event.keyCode === 13) {
+                            event.preventDefault();
+                            search();
+                        }
+                    });
                 }
             }
         </script>
     </head>
-    <body id="main" onload="updateCloseButton()">
-        <div id="sidebar" class="sidebar">
-            <a onclick="view('content')"><span style="padding-left: 0px;font-weight: bold;">content</span></a><a onclick="view('content/function')"><span style="padding-left: 12px;font-weight: bold;">function</span></a><a onclick="view('content/function/definitions.html')"><span style="padding-left: 24px;">definitions</span></a><a onclick="view('content/resources.html')"><span style="padding-left: 12px;">resources</span></a><a onclick="view('content/set')"><span style="padding-left: 12px;font-weight: bold;">set</span></a><a onclick="view('content/set/definitions.html')"><span style="padding-left: 24px;">definitions</span></a><a onclick="view('content/base')"><span style="padding-left: 12px;font-weight: bold;">base</span></a><a onclick="view('content/base/definitions.html')"><span style="padding-left: 24px;">definitions</span></a><a onclick="view('content/algebra')"><span style="padding-left: 12px;font-weight: bold;">algebra</span></a><a onclick="view('content/algebra/definitions.html')"><span style="padding-left: 24px;">definitions</span></a>
+    <body id="main" onload="initPage()">
+        <div id="top-bar" class="topbar">
+            <a id="closeButton" class="closeButton" onclick="toggleSidePanel()">&#x2630;</a>
+            <span class="search-area">
+                <input type="search" id="search-input" onkeypress="searchListener(event)" aria-label="search">
+                <button type="button" onclick="clearSearch()">Clear</button>
+                <button type="button" onclick="search()">Search</button>
+            </span>
         </div>
 
-        <a href="javascript:void(0)" id="closeButton" class="closeButton" onclick="toggleSidePanel()"></a>
+        <div id="sidebar" class="sidebar">
+            <a id='content' onclick="view('content')"><span style="padding-left: 0px;font-weight: bold;">content</span></a><a id='content/function' onclick="view('content/function')"><span style="padding-left: 12px;font-weight: bold;">function</span></a><a id='content/function/definitions' onclick="view('content/function/definitions.html')"><span style="padding-left: 24px;">definitions</span></a><a id='content/resources' onclick="view('content/resources.html')"><span style="padding-left: 12px;">resources</span></a><a id='content/set' onclick="view('content/set')"><span style="padding-left: 12px;font-weight: bold;">set</span></a><a id='content/set/definitions' onclick="view('content/set/definitions.html')"><span style="padding-left: 24px;">definitions</span></a><a id='content/base' onclick="view('content/base')"><span style="padding-left: 12px;font-weight: bold;">base</span></a><a id='content/base/definitions' onclick="view('content/base/definitions.html')"><span style="padding-left: 24px;">definitions</span></a><a id='content/algebra' onclick="view('content/algebra')"><span style="padding-left: 12px;font-weight: bold;">algebra</span></a><a id='content/algebra/definitions' onclick="view('content/algebra/definitions.html')"><span style="padding-left: 24px;">definitions</span></a>
+        </div>
 
-        <iframe id="content" src="content/function/definitions.html"></iframe>
+        <iframe id="__content__frame__" src="content/function/definitions.html"></iframe>
     </body>
 </html>

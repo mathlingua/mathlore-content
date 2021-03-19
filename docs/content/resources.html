@@ -3,6 +3,8 @@
 <html>
     <head>
         <meta name="viewport" content="width=100%, initial-scale=1.0">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
         <link rel="stylesheet"
               href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
               integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq"
@@ -188,10 +190,31 @@
                     }
                 }
             }
+
+            function setup() {
+                render(document.body);
+                const params = new URLSearchParams(window.location.search);
+                const showIds = new Set(params.getAll('show'));
+                if (showIds.size > 0) {
+                    let i = 0;
+                    while (true) {
+                        const id = '' + (i++);
+                        const el = document.getElementById(id);
+                        if (!el) {
+                            break;
+                        }
+                        if (showIds.has(id)) {
+                            el.style.display = 'block';
+                        } else {
+                            el.style.display = 'none';
+                        }
+                    }
+                }
+            }
         </script>
         <style>
             .content {
-                margin-top: 1em;
+                margin-top: 1.5em;
                 margin-bottom: 1em;
                 font-size: 1em;
                 width: 50%;
@@ -297,9 +320,9 @@
             }
         </style>
     </head>
-    <body onload="render(document.body)">
+    <body onload="setup()">
         <div class="content">
-            <span class='mathlingua'><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[BassRealAnalysisForGraduateStudents]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Resource:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>type:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="Book">Book</span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>name:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="Real Analysis For Graduate Students">Real Analysis For Graduate Students</span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>author:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="Richard F. Bass">Richard F. Bass</span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>homepage:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="http://bass.math.uconn.edu/real.html">http://bass.math.uconn.edu/real.html</span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>url:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="http://bass.math.uconn.edu/v41.pdf">http://bass.math.uconn.edu/v41.pdf</span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>offset:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="19">19</span></span></span></span></span><div class='end-mathlingua-top-level'></div></div></span>
+            <span class='mathlingua'><div id='0'><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[BassRealAnalysisForGraduateStudents]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Resource:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>type:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="Book">Book</span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>name:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="Real Analysis For Graduate Students">Real Analysis For Graduate Students</span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>author:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="Richard F. Bass">Richard F. Bass</span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>homepage:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="http://bass.math.uconn.edu/real.html">http://bass.math.uconn.edu/real.html</span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>url:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="http://bass.math.uconn.edu/v41.pdf">http://bass.math.uconn.edu/v41.pdf</span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>offset:</span><span class='mathlingua-whitespace'></span><span class='mathlingua-text' title="19">19</span></span></span></span></span><div class='end-mathlingua-top-level'></div></div><br/><br/><br/></div></span>
         </div>
     </body>
 </html>
