@@ -15,8 +15,7 @@ Metadata:
              It serves as a starting point to define
              more complicated algebraic structures."
 . reference:
-  . source: "@[BassAbstractAlgebra]"
-    page: "12"
+  . site: "https://en.wikipedia.org/wiki/Magma_(algebra)"
 . tag: "algebra"
 
 
