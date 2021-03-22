@@ -128,10 +128,15 @@
                 margin: 0;
                 padding: 0;
             }
+
+            hr {
+                border: 0.5px solid #efefef;
+            }
         </style>
         <script>
             const ALL_FILE_IDS = ['content/function/definitions','content/function','content/resources','content/set/definitions','content/set','content/base/definitions','content/base','content/algebra/definitions','content/algebra','content'];
-            const INITIAL_SRC = "content/function/definitions.html";
+            ALL_FILE_IDS.push('home');
+            const INITIAL_SRC = "home.html";
             const SEARCH_INDEX = (function() {
                 const index = new Map();
 const map0 = new Map();
@@ -895,9 +900,11 @@ return index;
         </div>
 
         <div id="sidebar" class="sidebar">
-            <a id='content' onclick="view('content')"><span style="padding-left: 0px;font-weight: bold;">content</span></a><a id='content/function' onclick="view('content/function')"><span style="padding-left: 12px;font-weight: bold;">function</span></a><a id='content/function/definitions' onclick="view('content/function/definitions.html')"><span style="padding-left: 24px;">definitions</span></a><a id='content/resources' onclick="view('content/resources.html')"><span style="padding-left: 12px;">resources</span></a><a id='content/set' onclick="view('content/set')"><span style="padding-left: 12px;font-weight: bold;">set</span></a><a id='content/set/definitions' onclick="view('content/set/definitions.html')"><span style="padding-left: 24px;">definitions</span></a><a id='content/base' onclick="view('content/base')"><span style="padding-left: 12px;font-weight: bold;">base</span></a><a id='content/base/definitions' onclick="view('content/base/definitions.html')"><span style="padding-left: 24px;">definitions</span></a><a id='content/algebra' onclick="view('content/algebra')"><span style="padding-left: 12px;font-weight: bold;">algebra</span></a><a id='content/algebra/definitions' onclick="view('content/algebra/definitions.html')"><span style="padding-left: 24px;">definitions</span></a>
+            <a id='home' onclick="view('home.html')" style="padding-top: 0;padding-bottom: 0;margin-top: 0;margin-bottom: 0;"><span style="padding-left: 0px;font-weight: bold;">Home</span></a>
+            <hr>
+            <a id='content' ><span style="padding-left: 0px;font-weight: bold;">content</span></a><a id='content/function' ><span style="padding-left: 12px;font-weight: bold;">function</span></a><a id='content/function/definitions' onclick="view('content/function/definitions.html')"><span style="padding-left: 24px;">definitions</span></a><a id='content/resources' onclick="view('content/resources.html')"><span style="padding-left: 12px;">resources</span></a><a id='content/set' ><span style="padding-left: 12px;font-weight: bold;">set</span></a><a id='content/set/definitions' onclick="view('content/set/definitions.html')"><span style="padding-left: 24px;">definitions</span></a><a id='content/base' ><span style="padding-left: 12px;font-weight: bold;">base</span></a><a id='content/base/definitions' onclick="view('content/base/definitions.html')"><span style="padding-left: 24px;">definitions</span></a><a id='content/algebra' ><span style="padding-left: 12px;font-weight: bold;">algebra</span></a><a id='content/algebra/definitions' onclick="view('content/algebra/definitions.html')"><span style="padding-left: 24px;">definitions</span></a>
         </div>
 
-        <iframe id="__content__frame__" src="content/function/definitions.html"></iframe>
+        <iframe id="__content__frame__" src="home.html"></iframe>
     </body>
 </html>

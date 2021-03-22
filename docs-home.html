@@ -1,0 +1,162 @@
+<div style="margin-left: auto;margin-right: auto;width: 75%;">
+    <h1>Welcome to the Math Codex</h1>
+    <p>
+        The Math Codex is a free and open repository of mathematical
+        knowledge encoded in the <a href="https://www.mathlingua.org/">
+        MathLingua</a> language that allows mathematical concepts to be
+        describe precisely and rendered beautifully.
+     </p>
+     <p>
+        The source code for the codex can be found GitHub at the
+        <a href="https://github.com/DominicKramer/codex">codex</a> repo.
+    </p>
+    <p>
+        The Math Codex is ideal for anyone that, when looking for a mathematical
+        concept, wants to immediately see the exact precise description of the
+        concept (definition, theorem, etc.) with links for more information,
+        rather than have to search through documents providing
+        an overview/history to find the precise description.
+    </p>
+    <p>
+        Note: The Math Codex is a handcrafted collection of knowledge with
+        entries written by hand.  It is small but growing.
+    </p>
+    <h2>
+        What is MathLingua
+    </h2>
+    <p>
+        MathLingua is a language used to describe mathematical concepts in a way
+        that is easy for mathematicians to write and can automatically checked
+        by a computer.
+    </p>
+    <p>
+        MathLingua currently checks that definitions are used in theorems and
+        other definitions in a way that is consistent with the requirements of
+        the defintion.  In particular, the number of arguments expected by the
+        definition.
+    </p>
+    <p>
+        MathLingua currently doesn't provide automatic theorem proving
+        capabilities.
+    </p>
+    <p>
+        Instead, where automatic theorem provers require complete formalization
+        and encyclopedias have zero formalization, MathLingua lies
+        in the middle to provide a language to precisely and concisely describe
+        mathematical concepts that verifies they reference each other
+        consistently but still be easy to write.
+    </p>
+    <p>
+        That is, the Math Codex, utilizing MathLingua, is like an encyclopedia
+        of math knowledge with type checking.
+    </p>
+    <p>
+        However, unlike other encylopedias, each mathematical concept encoded
+        in MathLingua is precise and concise with links to books and encylopedia
+        entries for more information.
+    </p>
+    <h2>
+        The Math Codex vs. mathlore.org
+    </h2>
+    <p>
+        <a href="https://mathlore.org/">mathlore.org</a> is another site
+        developed by the author of MathLingua and the Math Codex that allows
+        for searching for and contributing mathematical knowledge in a single
+        place.
+    </p>
+    <p>
+        Mathlore.org uses an older version of the MathLingua language and is
+        instead geared toward recording mathematical information directly in
+        LaTeX.  Furthermore, mathlore.org is designed to provide an advanced
+        web application for sharing mathematical information.
+    </p>
+    <p>
+        The Math Codex, on the other hand, is designed to be used primarily
+        with the MathLingua language.  Furthermore, whereas mathlore.org uses
+        sophisticated JavaScript frameworks and requires a server to run,
+        the Math Codex uses plain JavaScript and HTML and does not require
+        a server to run as all pages are statically generated.
+    </p>
+    <p>
+        As such, the Math Codex is ideal for those that want to focus on
+        mathematics and not worry about web application engineering concerns
+        to either contribute to the Math Codex or build their own collection
+        of math knowledge and easily host that collection on GitHub pags,
+        factuly web pages, or other hosting providers.
+    </p>
+    <h2>
+        Contributing
+    </h2>
+    <p>
+        To contribute knowledge to the Math Codex
+        <a href="https://docs.github.com/en/github/getting-started-with-github/fork-a-repo">fork</a>
+        the <a href="https://github.com/DominicKramer/codex">codex</a> repo,
+        update your fork, and create a pull request to incorporate your change.
+    </p>
+    <h2>
+        Creating Your Own Codex
+    </h2>
+    <p>
+        To create your own personal collection of mathematical knowledge
+        based on the Math Codex,
+        <a href="https://docs.github.com/en/github/getting-started-with-github/fork-a-repo">fork</a>
+        the <a href="https://github.com/DominicKramer/codex">codex</a> repo.  The
+        fork is your own personal copy of the Math Codex that you can change
+        or add to however you like.
+    </p>
+    <h2>
+        Authoring Mathematical Concepts
+    </h2>
+    <p>
+        Any editor can be used to author mathematical concepts in the MathLingua
+        language since MathLingua files (with a <code>.math</code> extension)
+        are simply plain text files.
+    </p>
+    <p>
+        The <a href="https://code.visualstudio.com">Visual Studio Code</a> editor
+        is the preferred editor since the
+        <a href="https://marketplace.visualstudio.com/items?itemName=dominickramer.mathlingua-language-support">
+        MathLingua Language Support</a> extension provides support for authoring
+        content in the MathLingua language.
+    </p>
+    <p>
+        The extension will automatically point out errors in your MathLingua
+        code on file save and will render MathLingua documents side-by-side to
+        the source code to allow easy editing.
+    </p>
+    <p>
+        After writing code, simply run <code>./mlg render</code> from the
+        root of the <code>codex</code> repository on your computer to regenerate
+        the HTML rendered versions of your code.  This website, consists of the
+        rendered version of the Math Codex repository.
+    </p>
+    <p>
+        Note: You need Java installed to run the <code>mlg</code> tool.  In
+        addition, the <code>mlg</code> script currently only works on MacOS,
+        Linux, and other Unix based platforms.  On Windows, you can run the
+        mlg tool directly using <code>java -jar .bin\mathlingua.jar</code>.
+    </p>
+    <p>
+        You can also run <code>./mlg check</code> to check your code or
+        <code>./mlg watch</code> to automatically regenerate the HTML rendered
+        version of your code whenever a file has been modified.
+    </p>
+    <p>
+        Note that the HTML files generated by <code>./mlg render</code> are
+        static and utilize plain JavaScript and CSS.  That is, they do not rely
+        on any JavaScript framework or require a server to display.
+    </p>
+    <p>
+        As such, they are ideal for hosting on GitHub pages or a university
+        faculty provided web space.
+    </p>
+    <h2>
+        Contact
+    </h2>
+    <p>
+        Feel free to reach out to the author of MathLingua and the Math Codex,
+        Dr. Dominic Kramer at <a href="mailto:DominicKramer@gmail.com">
+        DominicKramer@gmail.com</a>.  Questions, comments, and feedback are
+        always greatly appreciated.
+    </p>
+</div>
