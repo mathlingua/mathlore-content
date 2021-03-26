@@ -15,6 +15,29 @@
                 crossorigin="anonymous">
         </script>
         <script>
+            const SIGNATURE_TO_PATH = (function() {
+    const sigToPath = new Map();sigToPath.set('\function:on:to', '../../content/function/definitions.html?show=0');sigToPath.set('\binary.operation:on', '../../content/function/definitions.html?show=1');sigToPath.set('\injective.function:on:to', '../../content/function/definitions.html?show=2');sigToPath.set('\surjective.function:on:to', '../../content/function/definitions.html?show=3');sigToPath.set('\bijective.function:on:to', '../../content/function/definitions.html?show=4');sigToPath.set('\function.inverse:of', '../../content/function/definitions.html?show=5');sigToPath.set('\function.compose', '../../content/function/definitions.html?show=6');sigToPath.set('\identity.function:on', '../../content/function/definitions.html?show=7');sigToPath.set('\set:over', '../../content/set/definitions.html?show=0');sigToPath.set('\set', '../../content/set/definitions.html?show=1');sigToPath.set('\set:where:suchThat', '../../content/set/definitions.html?show=2');sigToPath.set('\in', '../../content/set/definitions.html?show=3');sigToPath.set('\notin', '../../content/set/definitions.html?show=4');sigToPath.set('\subset', '../../content/set/definitions.html?show=5');sigToPath.set('\strict.subset', '../../content/set/definitions.html?show=6');sigToPath.set('\set.intersect:within', '../../content/set/definitions.html?show=7');sigToPath.set('\set.intersect', '../../content/set/definitions.html?show=8');sigToPath.set('\set.union:within', '../../content/set/definitions.html?show=9');sigToPath.set('\set.union', '../../content/set/definitions.html?show=10');sigToPath.set('\set.minus', '../../content/set/definitions.html?show=11');sigToPath.set('\symmetric.difference', '../../content/set/definitions.html?show=12');sigToPath.set('\set.complement:within', '../../content/set/definitions.html?show=13');sigToPath.set('\set.times', '../../content/set/definitions.html?show=14');sigToPath.set('\type', '../../content/base/definitions.html?show=0');sigToPath.set('\neq', '../../content/base/definitions.html?show=1');sigToPath.set('\or', '../../content/base/definitions.html?show=2');sigToPath.set('\and', '../../content/base/definitions.html?show=3');sigToPath.set('\not', '../../content/base/definitions.html?show=4');sigToPath.set('\magma', '../../content/algebra/definitions.html?show=0');sigToPath.set('\magma.morphism:on:to', '../../content/algebra/definitions.html?show=1');sigToPath.set('\semigroup', '../../content/algebra/definitions.html?show=2');sigToPath.set('\semigroup.morphism:on:to', '../../content/algebra/definitions.html?show=3');sigToPath.set('\monoid', '../../content/algebra/definitions.html?show=4');sigToPath.set('\group', '../../content/algebra/definitions.html?show=5');return sigToPath;
+})();
+
+function mathlinguaToggleDropdown(id) {
+    const el = document.getElementById(id);
+    if (el) {
+        if (el.className === 'mathlingua-dropdown-menu-hidden') {
+            el.className = 'mathlingua-dropdown-menu-shown';
+        } else {
+            el.className = 'mathlingua-dropdown-menu-hidden';
+        }
+    }
+}
+
+function mathlinguaViewSignature(signature, id) {
+    mathlinguaToggleDropdown(id);
+    const path = SIGNATURE_TO_PATH.get(signature);
+    if (path) {
+        window.open(path, '_blank');
+    }
+}
+
             function buildMathFragment(rawText) {
                 var text = rawText;
                 if (text[0] === '"') {
@@ -311,6 +334,36 @@
 
             .mathlingua-statement-no-render {
                 color: #007377;
+            }
+
+            .mathlingua-statement-container {
+                display: inline;
+            }
+
+            .mathlingua-dropdown-menu-shown {
+                position: absolute;
+                display: block;
+                z-index: 1;
+                background-color: #ffffff;
+                box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 10px,
+                            inset 0  0 10px 0 rgba(200, 200, 200, 0.25);
+                border: solid;
+                border-width: 1px;
+                border-radius: 0px;
+                border-color: rgba(200, 200, 200);
+            }
+
+            .mathlingua-dropdown-menu-hidden {
+                display: none;
+            }
+
+            .mathlingua-dropdown-menu-item {
+                display: block;
+                margin: 0.75ex;
+            }
+
+            .mathlingua-dropdown-menu-item:hover {
+                font-style: italic;
             }
 
             .katex {

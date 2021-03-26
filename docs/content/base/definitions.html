@@ -15,6 +15,29 @@
                 crossorigin="anonymous">
         </script>
         <script>
+            const SIGNATURE_TO_PATH = (function() {
+    const sigToPath = new Map();sigToPath.set('\function:on:to', '../../content/function/definitions.html?show=0');sigToPath.set('\binary.operation:on', '../../content/function/definitions.html?show=1');sigToPath.set('\injective.function:on:to', '../../content/function/definitions.html?show=2');sigToPath.set('\surjective.function:on:to', '../../content/function/definitions.html?show=3');sigToPath.set('\bijective.function:on:to', '../../content/function/definitions.html?show=4');sigToPath.set('\function.inverse:of', '../../content/function/definitions.html?show=5');sigToPath.set('\function.compose', '../../content/function/definitions.html?show=6');sigToPath.set('\identity.function:on', '../../content/function/definitions.html?show=7');sigToPath.set('\set:over', '../../content/set/definitions.html?show=0');sigToPath.set('\set', '../../content/set/definitions.html?show=1');sigToPath.set('\set:where:suchThat', '../../content/set/definitions.html?show=2');sigToPath.set('\in', '../../content/set/definitions.html?show=3');sigToPath.set('\notin', '../../content/set/definitions.html?show=4');sigToPath.set('\subset', '../../content/set/definitions.html?show=5');sigToPath.set('\strict.subset', '../../content/set/definitions.html?show=6');sigToPath.set('\set.intersect:within', '../../content/set/definitions.html?show=7');sigToPath.set('\set.intersect', '../../content/set/definitions.html?show=8');sigToPath.set('\set.union:within', '../../content/set/definitions.html?show=9');sigToPath.set('\set.union', '../../content/set/definitions.html?show=10');sigToPath.set('\set.minus', '../../content/set/definitions.html?show=11');sigToPath.set('\symmetric.difference', '../../content/set/definitions.html?show=12');sigToPath.set('\set.complement:within', '../../content/set/definitions.html?show=13');sigToPath.set('\set.times', '../../content/set/definitions.html?show=14');sigToPath.set('\type', '../../content/base/definitions.html?show=0');sigToPath.set('\neq', '../../content/base/definitions.html?show=1');sigToPath.set('\or', '../../content/base/definitions.html?show=2');sigToPath.set('\and', '../../content/base/definitions.html?show=3');sigToPath.set('\not', '../../content/base/definitions.html?show=4');sigToPath.set('\magma', '../../content/algebra/definitions.html?show=0');sigToPath.set('\magma.morphism:on:to', '../../content/algebra/definitions.html?show=1');sigToPath.set('\semigroup', '../../content/algebra/definitions.html?show=2');sigToPath.set('\semigroup.morphism:on:to', '../../content/algebra/definitions.html?show=3');sigToPath.set('\monoid', '../../content/algebra/definitions.html?show=4');sigToPath.set('\group', '../../content/algebra/definitions.html?show=5');return sigToPath;
+})();
+
+function mathlinguaToggleDropdown(id) {
+    const el = document.getElementById(id);
+    if (el) {
+        if (el.className === 'mathlingua-dropdown-menu-hidden') {
+            el.className = 'mathlingua-dropdown-menu-shown';
+        } else {
+            el.className = 'mathlingua-dropdown-menu-hidden';
+        }
+    }
+}
+
+function mathlinguaViewSignature(signature, id) {
+    mathlinguaToggleDropdown(id);
+    const path = SIGNATURE_TO_PATH.get(signature);
+    if (path) {
+        window.open(path, '_blank');
+    }
+}
+
             function buildMathFragment(rawText) {
                 var text = rawText;
                 if (text[0] === '"') {
@@ -313,6 +336,36 @@
                 color: #007377;
             }
 
+            .mathlingua-statement-container {
+                display: inline;
+            }
+
+            .mathlingua-dropdown-menu-shown {
+                position: absolute;
+                display: block;
+                z-index: 1;
+                background-color: #ffffff;
+                box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 10px,
+                            inset 0  0 10px 0 rgba(200, 200, 200, 0.25);
+                border: solid;
+                border-width: 1px;
+                border-radius: 0px;
+                border-color: rgba(200, 200, 200);
+            }
+
+            .mathlingua-dropdown-menu-hidden {
+                display: none;
+            }
+
+            .mathlingua-dropdown-menu-item {
+                display: block;
+                margin: 0.75ex;
+            }
+
+            .mathlingua-dropdown-menu-item:hover {
+                font-style: italic;
+            }
+
             .katex {
                 font-size: 0.9em;
             }
@@ -348,7 +401,7 @@
                an integer as a real number.  Moreover,
                when talking about sets, the elements
                of the set are always of the same type.<br/></br>               This makes it easier to avoid pathologies
-               when discussing sets.</span></span></span></span></span></span></span><div class='end-mathlingua-top-level'></div></div><br/><br/><br/></div><div id='1'><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[A \neq/ B]</span><br/><span class='mathlingua'><span class='mathlingua-header'>States:</span></span><br/><span class='mathlingua'><span class='mathlingua-header'>that:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>not:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='A = B'>\[A = B\]</span></span></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"A? \neq B?"</span></span><div class='end-mathlingua-top-level'></div></div><br/><br/><br/></div><div id='2'><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[P \or/ Q]</span><br/><span class='mathlingua'><span class='mathlingua-header'>States:</span></span><br/><span class='mathlingua'><span class='mathlingua-header'>that:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>or:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='P'>\[P\]</span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='Q'>\[Q\]</span></span></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"P?? \vee Q??"</span></span><div class='end-mathlingua-top-level'></div></div><br/><br/><br/></div><div id='3'><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[P \and/ Q]</span><br/><span class='mathlingua'><span class='mathlingua-header'>States:</span></span><br/><span class='mathlingua'><span class='mathlingua-header'>that:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='P'>\[P\]</span></span><br/><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='Q'>\[Q\]</span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"P?? \wedge Q??"</span></span><div class='end-mathlingua-top-level'></div></div><br/><br/><br/></div><div id='4'><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[\not{P}]</span><br/><span class='mathlingua'><span class='mathlingua-header'>States:</span></span><br/><span class='mathlingua'><span class='mathlingua-header'>that:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>not:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-statement' title='P'>\[P\]</span></span></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"\neg P??"</span></span><div class='end-mathlingua-top-level'></div></div><br/><br/><br/></div></span>
+               when discussing sets.</span></span></span></span></span></span></span><div class='end-mathlingua-top-level'></div></div><br/><br/><br/></div><div id='1'><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[A \neq/ B]</span><br/><span class='mathlingua'><span class='mathlingua-header'>States:</span></span><br/><span class='mathlingua'><span class='mathlingua-header'>that:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>not:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-7038864425215301826')"><span class='mathlingua-statement' title='A = B'>\[A = B\]</span></div></span></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"A? \neq B?"</span></span><div class='end-mathlingua-top-level'></div></div><br/><br/><br/></div><div id='2'><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[P \or/ Q]</span><br/><span class='mathlingua'><span class='mathlingua-header'>States:</span></span><br/><span class='mathlingua'><span class='mathlingua-header'>that:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>or:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--8125310881224537315')"><span class='mathlingua-statement' title='P'>\[P\]</span></div></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-6588092368087195878')"><span class='mathlingua-statement' title='Q'>\[Q\]</span></div></span></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"P?? \vee Q??"</span></span><div class='end-mathlingua-top-level'></div></div><br/><br/><br/></div><div id='3'><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[P \and/ Q]</span><br/><span class='mathlingua'><span class='mathlingua-header'>States:</span></span><br/><span class='mathlingua'><span class='mathlingua-header'>that:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--182798126307833476')"><span class='mathlingua-statement' title='P'>\[P\]</span></div></span><br/><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--8170652329050164438')"><span class='mathlingua-statement' title='Q'>\[Q\]</span></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"P?? \wedge Q??"</span></span><div class='end-mathlingua-top-level'></div></div><br/><br/><br/></div><div id='4'><div class='mathlingua-top-level'><span class='mathlingua'><span class='mathlingua-id'>[\not{P}]</span><br/><span class='mathlingua'><span class='mathlingua-header'>States:</span></span><br/><span class='mathlingua'><span class='mathlingua-header'>that:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>not:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-7548813790784180266')"><span class='mathlingua-statement' title='P'>\[P\]</span></div></span></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"\neg P??"</span></span><div class='end-mathlingua-top-level'></div></div><br/><br/><br/></div></span>
         </div>
     </body>
 </html>
