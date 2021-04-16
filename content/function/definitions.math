@@ -15,6 +15,19 @@ means: 'f is \function:on{X \set.times/ X}:to{X}'
 written: "\textrm{binary operation on } X?"
 
 
+[\binary.operation:on{X}:restrictedTo{Y}]
+Defines: f(x, y)
+when:
+. 'X is \set'
+. 'Y \subset/ X'
+means: 'f is \binary.operation:on{X}'
+satisfying:
+. forAll: y1, y2
+  where: 'y1, y2 in Y'
+  then: 'f(y1, y2) in Y'
+written: "\textrm{binary operation on } X? \textrm{ restricted to } Y?"
+
+
 [\injective.function:on{A}:to{B}]
 Defines: f(x)
 when: 'A, B is \set'

@@ -134,3 +134,10 @@ collects:
   . 'b in B'
   all: '(a, b)'
 written: "A?? \times B??"
+
+
+Foundation:
+. [\empty.set]
+  Defines: E
+  means: "The set containing nothing"
+  written: "\emptyset"

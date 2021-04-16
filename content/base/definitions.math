@@ -18,34 +18,3 @@ Foundation:
 
                This makes it easier to avoid pathologies
                when discussing sets."
-
-
-[A \neq/ B]
-States:
-that:
-. not: 'A = B'
-written: "A? \neq B?"
-
-
-[P \or/ Q]
-States:
-that:
-. or:
-  . 'P'
-  . 'Q'
-written: "P?? \vee Q??"
-
-
-[P \and/ Q]
-States:
-that:
-. 'P'
-. 'Q'
-written: "P?? \wedge Q??"
-
-
-[\not{P}]
-States:
-that:
-. not: 'P'
-written: "\neg P??"

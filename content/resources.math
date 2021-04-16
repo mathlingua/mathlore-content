@@ -7,3 +7,21 @@ Resource:
 . homepage: "http://bass.math.uconn.edu/real.html"
 . url: "http://bass.math.uconn.edu/v41.pdf"
 . offset: "19"
+
+
+[TrenchIntroToRealAnalysis]
+Resource:
+. type: "Book"
+. name: "Introduction to Real Analysis"
+. author: "William F. Trench"
+. url: "https://digitalcommons.trinity.edu/cgi/viewcontent.cgi?article=1006&context=mono"
+. offset: "10"
+
+
+[JudsonAbstractAlgebraTheoryAndApplications]
+Resource:
+. type: "Book"
+. name: "Abstract Algebra Theory and Applications"
+. author: "Thomas W. Judson"
+. url: "http://abstract.ups.edu/download/aata-20140815.pdf"
+. offset: "11"
