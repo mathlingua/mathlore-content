@@ -4,7 +4,7 @@ Defines: M := (X, *)
 means:
 . 'X is \set'
 . '* is \binary.operation:on{X}'
-viewed:
+viewing:
 . as: '\set'
   via: 'X'
 . membership:
@@ -14,7 +14,7 @@ Metadata:
 . overview: "A magma is a set with a single operation.
              It serves as a starting point to define
              more complicated algebraic structures."
-. reference:
+. resources:
   . site: "https://en.wikipedia.org/wiki/Magma_(algebra)"
 . tag: "algebra"
 
@@ -39,7 +39,7 @@ satisfying:
 . forAll: x, y, z
   where: 'x, y, z in X'
   then: '(x * y) * z = x * (y * z)'
-viewed:
+viewing:
 . as: '\set'
   via: 'X'
 . membership:
@@ -70,7 +70,7 @@ satisfying:
   then:
   . 'x * e = x'
   . 'e * x = x'
-viewed:
+viewing:
 . as: '\set'
   via: 'X'
 . membership:
@@ -90,7 +90,7 @@ satisfying:
     suchThat:
     . 'x * y = e'
     . 'y * x = e'
-viewed:
+viewing:
 . as: '\set'
   via: 'X'
 . membership:
@@ -107,7 +107,7 @@ satisfying:
 . 'y * x = e'
 written: "{x??^{-1}}"
 Metadata:
-. reference:
+. resources:
   . source: "@JudsonAbstractAlgebraTheoryAndApplications"
     page: "43"
 
@@ -129,6 +129,6 @@ satisfying:
   then: '\group.inverse:of{h}:within{G} in Y'
 written: "H? \leqslant G?"
 Metadata:
-. reference:
+. resources:
   . source: "@JudsonAbstractAlgebraTheoryAndApplications"
     page: "49"

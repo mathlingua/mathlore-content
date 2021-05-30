@@ -12,7 +12,7 @@ if:
   . 'x * u = x'
 then: 'u = e'
 Metadata:
-. reference:
+. resources:
   . source: "@JudsonAbstractAlgebraTheoryAndApplications"
     page: "46"
 
@@ -23,7 +23,7 @@ where: 'G is \group'
 if: 'x, y is \group.inverse:of{a}:within{G}'
 then: 'x = y'
 Metadata:
-. reference:
+. resources:
   . source: "@JudsonAbstractAlgebraTheoryAndApplications"
     page: "47"
 
@@ -38,7 +38,7 @@ then:
    = \group.inverse:of{b}:within{G} *
      \group.inverse:of{a}:within{G}'
 Metadata:
-. reference:
+. resources:
   . source: "@JudsonAbstractAlgebraTheoryAndApplications"
     page: "47"
 
@@ -53,7 +53,7 @@ then:
      {\group.inverse:of{a}:within{G}}
    }:within{G} = a'
 Metadata:
-. reference:
+. resources:
   . source: "@JudsonAbstractAlgebraTheoryAndApplications"
     page: "47"
 
@@ -71,7 +71,7 @@ then:
   where: 'y in G'
   suchThat: 'y * a = b'
 Metadata:
-. reference:
+. resources:
   . source: "@JudsonAbstractAlgebraTheoryAndApplications"
     page: "48"
 
@@ -91,6 +91,6 @@ then:
   then:
   . 'g * \group.inverse:of{h}:within{G} in H'
 Metadata:
-. reference:
+. resources:
   . source: "@JudsonAbstractAlgebraTheoryAndApplications"
     page: "51"
