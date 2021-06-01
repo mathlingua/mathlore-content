@@ -1,0 +1,37 @@
+
+::
+\title{Logic}
+The logical connectives and, or, and not are essential for connecting
+statements together to build more complicated statements.
+::
+
+
+[A \neq/ B]
+States:
+that:
+. not: 'A = B'
+written: "A? \neq B?"
+
+
+[P \or/ Q]
+States:
+that:
+. or:
+  . 'P'
+  . 'Q'
+written: "P?? \vee Q??"
+
+
+[P \and/ Q]
+States:
+that:
+. 'P'
+. 'Q'
+written: "P?? \wedge Q??"
+
+
+[\not{P}]
+States:
+that:
+. not: 'P'
+written: "\neg P??"

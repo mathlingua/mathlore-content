@@ -1,4 +1,10 @@
 
+::
+\title{Resources}
+
+\section{Analysis}
+::
+
 [BassRealAnalysisForGraduateStudents]
 Resource:
 . type: "Book"
@@ -16,6 +22,11 @@ Resource:
 . author: "William F. Trench"
 . url: "https://digitalcommons.trinity.edu/cgi/viewcontent.cgi?article=1006&context=mono"
 . offset: "10"
+
+
+::
+\section{Algebra}
+::
 
 
 [JudsonAbstractAlgebraTheoryAndApplications]

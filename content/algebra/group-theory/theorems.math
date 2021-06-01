@@ -1,4 +1,9 @@
 
+::
+\title{Group Theory Theorems}
+This documents outlines the core theorems of group theory.
+::
+
 Theorem:
 given: G := (X, *, e), u
 where:

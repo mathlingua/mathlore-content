@@ -1,0 +1,131 @@
+
+::
+\title{Functions}
+Functions are a fundamental aspect of mathematics that describes mappings from
+a set to anther set.
+::
+
+
+[\function:on{A}:to{B}]
+Defines: f(x)
+when: 'A, B is \set'
+maps: 
+. from: 'A'
+  to: 'B'
+written: "A?? \mapsto B??"
+
+
+[\injective.function:on{A}:to{B}]
+Defines: f(x)
+when: 'A, B is \set'
+means:
+. 'f is \function:on{A}:to{B}'
+satisfying:
+. forAll: x1, x2
+  where: 'x1, x2 in A'
+  then:
+  . if: 'f(x1) = f(x2)'
+    then: 'x1 = x2'
+written: "\textrm{injective function on } A? \text{ to } B?"
+
+
+[\surjective.function:on{A}:to{B}]
+Defines: f(x)
+when: 'A, B is \set'
+means: 'f is \function:on{A}:to{B}'
+satisfying:
+. forAll: b
+  where: 'b in B'
+  then:
+  . exists: a
+    where: 'a in A'
+    suchThat: 'f(a) = b'
+written: "\textrm{surjective function on } A? \text{ to } B?"
+
+
+::
+The inverse of a function is a function that "undoes" the function.
+::
+
+
+[\function.inverse:of{f}]
+Defines: g(x)
+requiring: A, B
+when: 'f is \function:on{A}:to{B}'
+means: 'g is \function:on{B}:to{A}'
+satisfying: 
+. forAll: a
+  where: 'a in A'
+  then: 'g(f(a)) = a'
+. forAll: b
+  where: 'b in B'
+  then: 'f(g(b)) = b'
+written: "f??^{-1}"
+
+
+[\bijective.function:on{A}:to{B}]
+Defines: f(x)
+when: 'A, B is \set'
+means: 'f is \function:on{A}:to{B}'
+satisfying:
+. 'f is \injective.function:on{A}:to{B}'
+. 'f is \surjective.function:on{A}:to{B}'
+written: "\textrm{bijective function on } A? \text{ to } B?"
+
+
+::
+Operations such as multiplication or addition are binary operations and
+must be formally defined.
+::
+
+
+[\binary.operation:on{X}]
+Defines: f(x, y)
+when: 'X is \set'
+means: 'f is \function:on{X \set.times/ X}:to{X}'
+written: "\textrm{binary operation on } X?"
+
+
+[\binary.operation:on{X}:restrictedTo{Y}]
+Defines: f(x, y)
+when:
+. 'X is \set'
+. 'Y \subset/ X'
+means: 'f is \binary.operation:on{X}'
+satisfying:
+. forAll: y1, y2
+  where: 'y1, y2 in Y'
+  then: 'f(y1, y2) in Y'
+written: "\textrm{binary operation on } X? \textrm{ restricted to } Y?"
+
+
+::
+Function composition is a basic method for building functions out of other
+functions.
+::
+
+
+[f \function.compose/ g]
+Defines: h(x)
+requiring: A, B, C
+when:
+. 'g is \function:on{A}:to{B}'
+. 'f is \function:on{B}:to{C}'
+means: 'h is \function:on{A}:to{C}'
+evaluated: 'h(x) := f(g(x))'
+written: "f?? \circ g??"
+
+
+::
+Some types of functions need more structure, such as a group or ring structure,
+to define, but the identify function on a set $A$ does not need any such
+structure.
+::
+
+
+[\identity.function:on{A}]
+Defines: f(x)
+when: 'A is \set'
+means: 'f is \function:on{A}:to{A}'
+evaluated: 'f(x) := x'
+written: "\textrm{id}_{A?}"

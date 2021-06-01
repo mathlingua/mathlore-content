@@ -1,4 +1,10 @@
 
+::
+\title{Group Theory}
+This document outlines the core definitions used in group theory.
+::
+
+
 [\magma]
 Defines: M := (X, *)
 means:
