@@ -1,6 +1,6 @@
 
 ::
-\title{Zermelo-Fraenkel Set Theory}
+# Zermelo-Fraenkel Set Theory
 ::
 
 
@@ -68,9 +68,9 @@ Metadata:
 
 
 ::
-\textbf{Zermelo-Fraekel Set Theory} builds sets as collections of things that
+**Zermelo-Fraekel Set Theory** builds sets as collections of things that
 satisfy a specified propery.  The following definition explicitly calls a
-property of that type a \emph{\set.property}.
+property of that type a *\set.property*.
 ::
 
 
