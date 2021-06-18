@@ -2,10 +2,10 @@
 ::
 # Functions
 
-Functions are a fundamental aspect of mathematics that describes mappings from
-a set to anther set.
+Functions are a fundamental concept of mathematics that describe mappings
+between mathematical structures.  The distinctive characteristic of a function
+is that it maps an input to a *unique* output.
 ::
-
 
 [\function:on{A}:to{B}]
 Defines: f(x)
@@ -13,7 +13,21 @@ when: 'A, B is \set'
 maps: 
 . from: 'A'
   to: 'B'
+satisfying:
+. forAll: a
+  where: 'a in A'
+  then:
+  . existsUnique: b
+    where: 'b in B'
+    suchThat: 'f(a) = b'
 written: "A?? \mapsto B??"
+
+
+::
+In general, a function can map two distinct inputs to the same output.  If a
+particular function always maps distinct inputs to distinct outputs it is
+called an *injective function*.
+::
 
 
 [\injective.function:on{A}:to{B}]
@@ -27,7 +41,23 @@ satisfying:
   then:
   . if: 'f(x1) = f(x2)'
     then: 'x1 = x2'
-written: "\textrm{injective function on } A? \text{ to } B?"
+written:
+. "\textrm{injective function on } A? \textrm{ to } B?"
+. "\textrm{one-to-one function on } A? \textrm{ to } B?"
+Metadata:
+. overview: "
+    A injective function maps distinct inputs to distinct outputs.  Note that
+    these types of functions are also said to be *one-to-one*."
+
+
+::
+Similarly, in general, for the function $f$ where $'f is \function:on{A}to{B}'$
+it is possible for there to be an element $b \in B$ such that there doesn't
+exist any $a \in A$ that maps to $b$, i.e. $f(a) = b$.
+
+If a particular function has the property that every output is mapped to by
+at least one input, it is called a **surjective function**.
+::
 
 
 [\surjective.function:on{A}:to{B}]
@@ -41,7 +71,17 @@ satisfying:
   . exists: a
     where: 'a in A'
     suchThat: 'f(a) = b'
-written: "\textrm{surjective function on } A? \text{ to } B?"
+written:
+. "\textrm{surjective function on } A? \textrm{ to } B?"
+. "\textrm{onto function on } A? \textrm{ to } B? "
+Metadata:
+. overview: "
+    A surjective function 'f is \function:on{A}to{B}' satisfies the property
+    that for every element 'b \in/ B' there exists at least one element in $A$
+    that maps to $b$.  Note, though, that there may be more than one element.
+
+    Surjective functions are also said to be *onto*.
+    "
 
 
 ::
@@ -130,3 +170,4 @@ when: 'A is \set'
 means: 'f is \function:on{A}:to{A}'
 evaluated: 'f(x) := x'
 written: "\textrm{id}_{A?}"
+
