@@ -26,17 +26,17 @@ Metadata:
 . tag: "algebra"
 
 
-[\magma.morphism:on{M}:to{N}]
+[\magma.morphism:on{M_1}:to{M_2}]
 Defines: f(?)
 when:
-. 'M := (X, *) is \magma'
-. 'N := (Y, **) is \magma'
-means: 'f is \function:on{M}:to{N}'
+. 'M_1 := (X_1, *_1) is \magma'
+. 'M_2 := (X_2, *_2) is \magma'
+means: 'f is \function:on{M_1}:to{M_2}'
 satisfying:
 . forAll: x1, x2
-  where: 'x1, x2 in X'
-  then: 'f(x1 * x2) = f(x1) ** f(x2)'
-written: "\textrm{magma morphism on } M?? \textrm{ to } N??"
+  where: 'x1, x2 in X_1'
+  then: 'f(x1 *_1 x2) = f(x1) *_2 f(x2)'
+written: "\textrm{magma morphism on } M_1?? \textrm{ to } M_2??"
 
 
 [\semigroup]
@@ -52,7 +52,6 @@ viewing:
 . membership:
   through: 'X'
 written: "\textrm{semigroup}"
-
 
 
 [\semigroup.morphism:on{M}:to{N}]
