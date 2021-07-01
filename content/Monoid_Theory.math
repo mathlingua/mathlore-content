@@ -1,0 +1,20 @@
+
+::
+# Monoid Theory
+::
+
+[\monoid]
+Defines: M := (X, *, e)
+means: '(X, *) is \semigroup'
+satisfying:
+. forAll: x
+  where: 'x in X'
+  then:
+  . 'x * e = x'
+  . 'e * x = x'
+viewing:
+. as: '\set'
+  via: 'X'
+. membership:
+  through: 'X'
+written: "\textrm{monoid}"
