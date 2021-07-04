@@ -25,6 +25,12 @@ viewing:
 written: "\textrm{group}"
 
 
+::
+A key property of a Group is that every element of a group has an *inverse
+element* defined below.
+::
+
+
 [\group.inverse:of{x}:within{G}]
 Defines: y
 when: 'G := (X, *, e) is \group'
@@ -37,6 +43,13 @@ Metadata:
 . resources:
   . source: "@JudsonAbstractAlgebraTheoryAndApplications"
     page: "43"
+
+
+::
+Subgroups are important in group theory as they are subsets of a group that are
+themselves a group with respect to the group operation restricted to that
+subset.
+::
 
 
 [\subgroup:of{G}]
@@ -61,6 +74,11 @@ Metadata:
     page: "49"
 
 
+::
+The following states that the identity element of a group is unique.
+::
+
+
 Theorem:
 given: G := (X, *, e), u
 where:
@@ -79,6 +97,12 @@ Metadata:
     page: "46"
 
 
+::
+Further, the following states that the inverse of an element of a group is
+unique.
+::
+
+
 Theorem:
 given: G := (X, *, e), a, x, y
 where: 'G is \group'
@@ -88,6 +112,12 @@ Metadata:
 . resources:
   . source: "@JudsonAbstractAlgebraTheoryAndApplications"
     page: "47"
+
+
+::
+The following shows how to compute the inverse of a product of elements in a
+group.
+::
 
 
 Theorem:
@@ -105,6 +135,12 @@ Metadata:
     page: "47"
 
 
+::
+The following shows that the inverse of the inverse of an element in a group
+is the element itself.
+::
+
+
 Theorem:
 given: G := (X, *, e), a
 where:
@@ -118,6 +154,11 @@ Metadata:
 . resources:
   . source: "@JudsonAbstractAlgebraTheoryAndApplications"
     page: "47"
+
+
+::
+The following shows that cancellation laws hold in groups.
+::
 
 
 Theorem:
@@ -136,6 +177,12 @@ Metadata:
 . resources:
   . source: "@JudsonAbstractAlgebraTheoryAndApplications"
     page: "48"
+
+
+::
+The following result shows hows to to demonstrate that a subset of a group
+is itself a group.
+::
 
 
 Theorem:
