@@ -323,3 +323,19 @@ collects:
   all: '(a, b)'
 written: "A?? \times B??"
 
+
+Theorem:
+given: A, B, C
+where: 'A, B, C is \set'
+then:
+. 'A \set.union/ A = A'
+. 'A \set.intersect/ A = A'
+. 'A \set.minus/ A = \empty.set'
+. 'A \set.union/ \empty.set = A'
+. 'A \set.intersect/ \empty.set = \empty.set'
+. 'A \set.union/ (B \set.union/ C) =
+    (A \set.union/ B) \set.union/ C'
+. 'A \set.intersect/ (B \set.intersect/ C) =
+    (A \set.intersect/ B) \set.intersect/ C'
+. 'A \set.union/ B = B \set.union/ A'
+. 'A \set.intersect/ B = B \set.intersect/ A'
