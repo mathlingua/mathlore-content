@@ -42,12 +42,46 @@ Foundation:
   written: "\mathbb{R}"
 
 
+[\real.set]
+Defines: X
+means: 'X is \set'
+collects:
+. given: x
+  where: 'x is \real'
+  all: 'x'
+written: "\textrm{real set}"
+
+
 Foundation:
 . [x \real.geq/ y]
   States:
   when: 'x, y is \real'
   that: "x? is greater than or equal to y?"
   written: "x? \geq y?"
+
+
+Foundation:
+. [x \real.>/ y]
+  States:
+  when: 'x, y is \real'
+  that: "x? is greater than y?"
+  written: "x? > y?"
+
+
+Foundation:
+. [x \real.leq/ y]
+  States:
+  when: 'x, y is \real'
+  that: "x? is less than or equal to y?"
+  written: "x? \leq y?"
+
+
+Foundation:
+. [x \real.</ y]
+  States:
+  when: 'x, y is \real'
+  that: "x? is less than y?"
+  written: "x? < y?"
 
 
 Foundation:
@@ -76,3 +110,77 @@ evaluated:
   else: 'f(x) := -x'
 using: '-y := \negative.real(y)'
 written: "\left | x? \right |"
+
+
+Foundation:
+. [x \real.+/ y]
+  Defines: f(x?, y?)
+  means: 'f is \binary.operation:on{\reals}'
+  written: "x? + y?"
+
+
+Foundation:
+. [x \real.-/ y]
+  Defines: f(x?, y?)
+  means: 'f is \binary.operation:on{\reals}'
+  written: "x? - y?"
+
+
+Foundation:
+. [x \real.*/ y]
+  Defines: f(x?, y?)
+  means: 'f is \binary.operation:on{\reals}'
+  written: "x? y?"
+
+
+Foundation:
+. [x \real.// y]
+  Defines: f(x?, y?)
+  means: 'f is \binary.operation:on{\reals}'
+  written: "\frac{x?}{y?}"
+
+
+[\triangle.inequality]
+Theorem: "Triangle Inequality"
+given: a, b
+where: 'a, b is \real'
+then: '\real.abs(a + b) \real.leq/ \real.abs(a) + \real.abs(b)'
+using:
+. 'x + y := x \real.+/ y'
+
+
+Theorem:
+given: a, b
+where: 'a, b is \real'
+then:
+. '\real.abs(a - b) \real.geq/
+        \real.abs(\real.abs(a) - \real.abs(b))'
+. '\real.abs(a + b) \real.geq/
+        \real.abs(\real.abs(a) - \real.abs(b))'
+using:
+. 'x + y := x \real.+/ y'
+. 'x - y := x \real.-/ y'
+
+
+[\real.sup{S}]
+Defines: beta
+when:
+. 'S is \real.set'
+. 'S is \nonempty.set'
+means: 'beta is \real'
+satisfying:
+. forAll: x
+  where: 'x in S'
+  then: 'x \real.leq/ beta'
+. forAll: epsilon
+  where: 'epsilon is \real'
+  suchThat:
+  . 'epsilon > 0'
+  then:
+  . exists: x0
+    where: 'x0 in S'
+    suchThat: 'x0 > beta - epsilon'
+using:
+. 'a > b := a \real.>/ b'
+. 'a - b := a \real.-/ b'
+written: "\textrm{sup } S?"

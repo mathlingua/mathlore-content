@@ -82,6 +82,14 @@ Metadata:
 . related: "\empty.set"
 
 
+[\nonempty.set]
+Defines: X
+means: 'X is \set'
+satisfying:
+. not: 'X is \empty.set'
+written: "\textrm{nonempty set}"
+
+
 ::
 **Zermelo-Fraekel Set Theory** builds sets as collections of things that
 satisfy a specified propery.  The following definition explicitly calls a
