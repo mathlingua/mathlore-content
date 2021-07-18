@@ -29,6 +29,7 @@ Foundation:
   Defines: r
   means: "A real number"
   written: "\textrm{real}"
+  called: "real"
 
 
 Foundation:
@@ -40,6 +41,7 @@ Foundation:
     where: 'x is \real'
     all: 'x'
   written: "\mathbb{R}"
+  called: "reals"
 
 
 [\real.set]
@@ -50,6 +52,7 @@ collects:
   where: 'x is \real'
   all: 'x'
 written: "\textrm{real set}"
+called: "real set"
 
 
 Foundation:
@@ -58,6 +61,7 @@ Foundation:
   when: 'x, y is \real'
   that: "x? is greater than or equal to y?"
   written: "x? \geq y?"
+  called: "$x?$ is greater than or equal to $y?$"
 
 
 Foundation:
@@ -66,6 +70,7 @@ Foundation:
   when: 'x, y is \real'
   that: "x? is greater than y?"
   written: "x? > y?"
+  called: "$x?$ is greater than $y?$"
 
 
 Foundation:
@@ -74,6 +79,7 @@ Foundation:
   when: 'x, y is \real'
   that: "x? is less than or equal to y?"
   written: "x? \leq y?"
+  called: "$x?$ is less than or equal to $y?$"
 
 
 Foundation:
@@ -82,6 +88,7 @@ Foundation:
   when: 'x, y is \real'
   that: "x? is less than y?"
   written: "x? < y?"
+  called: "$x?$ is less than $y?$"
 
 
 Foundation:
@@ -90,6 +97,7 @@ Foundation:
   means: 'f is \function:on{\reals}:to{\reals}'
   evaluated: "The negative of the given real value."
   written: "-x?"
+  called: "negative of $x?$"
 
 
 Foundation:
@@ -98,6 +106,7 @@ Foundation:
   means: 'f is \function:on{\reals}:to{\reals}'
   evaluated: "f(x) evaluates to the negative of x"
   written: "-x?"
+  called: "negative of $x?$"
 
 
 [\real.abs(x)]
@@ -110,6 +119,7 @@ evaluated:
   else: 'f(x) := -x'
 using: '-y := \negative.real(y)'
 written: "\left | x? \right |"
+called: "the absolute value of $x?$"
 
 
 Foundation:
@@ -117,6 +127,7 @@ Foundation:
   Defines: f(x?, y?)
   means: 'f is \binary.operation:on{\reals}'
   written: "x? + y?"
+  called: "real addition"
 
 
 Foundation:
@@ -124,6 +135,7 @@ Foundation:
   Defines: f(x?, y?)
   means: 'f is \binary.operation:on{\reals}'
   written: "x? - y?"
+  called: "real subtraction"
 
 
 Foundation:
@@ -131,6 +143,7 @@ Foundation:
   Defines: f(x?, y?)
   means: 'f is \binary.operation:on{\reals}'
   written: "x? y?"
+  called: "real multiplication"
 
 
 Foundation:
@@ -138,9 +151,9 @@ Foundation:
   Defines: f(x?, y?)
   means: 'f is \binary.operation:on{\reals}'
   written: "\frac{x?}{y?}"
+  called: "real division"
 
 
-[\triangle.inequality]
 Theorem: "Triangle Inequality"
 given: a, b
 where: 'a, b is \real'
@@ -184,3 +197,4 @@ using:
 . 'a > b := a \real.>/ b'
 . 'a - b := a \real.-/ b'
 written: "\textrm{sup } S?"
+called: "supremum of $S?$"

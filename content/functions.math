@@ -22,6 +22,7 @@ satisfying:
     where: 'b in B'
     suchThat: 'f(a) = b'
 written: "A?? \mapsto B??"
+called: "function on A? to B?"
 
 
 ::
@@ -45,6 +46,7 @@ satisfying:
 written:
 . "\textrm{injective function on } A? \textrm{ to } B?"
 . "\textrm{one-to-one function on } A? \textrm{ to } B?"
+called: "injective function on $A?$ to $B?$"
 Metadata:
 . overview: "
     A injective function maps distinct inputs to distinct outputs.  Note that
@@ -75,6 +77,8 @@ satisfying:
 written:
 . "\textrm{surjective function on } A? \textrm{ to } B?"
 . "\textrm{onto function on } A? \textrm{ to } B? "
+called:
+. "surjective function on $A?$ to $A?$"
 Metadata:
 . overview: "
     A surjective function $'\function:on{A}:to{B}'$ satisfies the property
@@ -100,6 +104,7 @@ satisfying:
 . 'f is \injective.function:on{A}:to{B}'
 . 'f is \surjective.function:on{A}:to{B}'
 written: "\textrm{bijective function on } A? \text{ to } B?"
+called: "bijective function on $A?$ to $B?$"
 
 
 ::
@@ -120,6 +125,7 @@ satisfying:
   where: 'b in B'
   then: 'f(g(b)) = b'
 written: "f??^{-1}"
+called: "inverse of $f?$"
 
 
 ::
@@ -134,6 +140,7 @@ Defines: f(x, y)
 when: 'X is \set'
 means: 'f is \function:on{X \set.times/ X}:to{X}'
 written: "\textrm{binary operation on } X?"
+called: "f"
 
 
 ::
@@ -153,6 +160,7 @@ satisfying:
   where: 'y1, y2 in Y'
   then: 'f(y1, y2) in Y'
 written: "\textrm{binary operation on } X? \textrm{ restricted to } Y?"
+called: "binary operation on $X?$ restricted to $Y?$"
 
 
 ::
@@ -170,6 +178,7 @@ when:
 means: 'h is \function:on{A}:to{C}'
 evaluated: 'h(x) := f(g(x))'
 written: "f?? \circ g??"
+called: "function composition"
 
 
 ::
@@ -185,4 +194,5 @@ when: 'A is \set'
 means: 'f is \function:on{A}:to{A}'
 evaluated: 'f(x) := x'
 written: "\textrm{id}_{A?}"
+called: "identify function on $A?$"
 

@@ -50,6 +50,7 @@ that:
   where: 'z in y'
   then: 'z in x'
 written: "x? = y?"
+called: "set equality"
 
 
 [x \set.neq/ y]
@@ -58,6 +59,7 @@ when: 'x, y is \set'
 that:
 . not: 'x \set.=/ y'
 written: "x? \neq y?"
+called: "set non-equality"
 
 
 ::
@@ -75,6 +77,7 @@ satisfying:
     where: 'x is \set'
     suchThat: 'x in X'
 written: "\emptyset"
+called: "empty set"
 Metadata:
 . overview: "An empty set is a set that doesn't
              contain any elements."
@@ -88,6 +91,7 @@ means: 'X is \set'
 satisfying:
 . not: 'X is \empty.set'
 written: "\textrm{nonempty set}"
+called: "non-empty set"
 
 
 ::
@@ -102,6 +106,7 @@ Foundation:
   Defines: P(x)
   means: "A condition that $x?$ must satisfy to be in a set."
   written: "P(x?)"
+  called: "set property"
 
 
 ::
@@ -184,6 +189,7 @@ Foundation:
     between: x, y
     provided: 'x \set.=/ y'
   written: "\textrm{set}"
+  called: "set"
 Metadata:
 . topics: "#zermelo.fraenkel.set.theory"
 . related: "\empty.set"
@@ -207,6 +213,7 @@ collects:
 written: "\left \{ within? \: | \:
               cond{... \textrm{ and } ...}?
           \right \}"
+called: "set of $x?$ where $within?$ such that $cond?$"
 
 
 ::
@@ -220,6 +227,7 @@ States:
 when: 'X is \set'
 that: 'x in X'
 written: "x?? \in X??"
+called: "set inclusion"
 
 
 [x \notin/ X]
@@ -229,6 +237,7 @@ that:
 . not:
   . 'x in X'
 written: "x? \notin X?"
+called: "set non-inclusion"
 
 
 ::
@@ -247,6 +256,7 @@ that:
   where: 'a in A'
   then: 'a in B'
 written: "A?? \subseteq B??"
+called: "$A?$ is a subset of $B?$"
 
 
 [A \strict.subset/ B]
@@ -256,6 +266,7 @@ that:
 . 'A \subset/ B'
 . 'A \neq/ B'
 written: "A?? \subsetneq B??"
+called: "$A?$ is a strict subset of $B?$"
 
 
 [A \set.intersect:within{U}/ B]
@@ -263,6 +274,7 @@ Defines: C
 when: 'A, B, U is \set'
 means: 'C := \set[c]:where{c \in/ U}:suchThat{c \in/ A}{c \in/ B}'
 written: "A?? \cap_{U??} B??"
+called: "set intersection of $A?$ and $B?$ within $U?$"
 
 
 [A \set.intersect/ B]
@@ -274,6 +286,7 @@ when:
 . 'B \subset/ U'
 means: 'C := A \set.intersect:within{U}/ B'
 written: "A?? \cap B??"
+called: "set intersection of $A?$ or $B?$"
 
 
 [A \set.union:within{U}/ B]
@@ -288,6 +301,7 @@ means: 'C := \set[c]:where{c \in/ U}
                       {c \in/ B}
                     }'
 written: "A?? \cup_{U??} B??"
+called: "set union of $A?$ and $B?$ within $U?$"
 
 
 [A \set.union/ B]
@@ -295,6 +309,7 @@ Defines: C
 requiring: U
 means: 'C := A \set.union:within{U}/ B'
 written: "A?? \cup B??"
+called: "set union of $A?$ and $B?$"
 
 
 [A \set.minus/ B]
@@ -302,6 +317,7 @@ Defines: C
 when: 'A, B is \set'
 means: 'C := \set[c]:where{c \in/ A}:suchThat{c \notin/ B}'
 written: "A?? \backslash B??"
+called: "$A?$ set minus $B?$"
 
 
 [A \symmetric.difference/ B]
@@ -310,6 +326,7 @@ when: 'A, B is \set'
 means: 'C := {A \set.minus/ B} \set.union/
                 {B \set.minus/ A}'
 written: "A?? \Delta B??"
+called: "symmetric difference of $A?$ and $B?$"
 
 
 [\set.complement{A}:within{U}]
@@ -317,6 +334,7 @@ Defines: B
 when: 'A, U is \set'
 means: 'B := \set[b]:where{b \in/ U}:suchThat{b \notin/ A}'
 written: "A??^C"
+called: "set complement of $A?$ within $U?$"
 
 
 [A \set.times/ B]
@@ -330,6 +348,7 @@ collects:
   . 'b in B'
   all: '(a, b)'
 written: "A?? \times B??"
+called: "cartesian product of $A?$ and $B?$"
 
 
 Theorem:

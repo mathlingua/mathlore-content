@@ -16,6 +16,7 @@ viewing:
 . membership:
   through: 'X'
 written: "\textrm{semigroup}"
+called: "semigroup"
 
 
 [\semigroup.morphism:on{M}:to{N}]
@@ -29,3 +30,4 @@ satisfying:
   where: 'x1, x2 in X'
   then: 'f(x1 * x2) = f(x1) ** f(x2)'
 written: "\textrm{semigroup morphism on } M?? \textrm{ to } N??"
+called: "semigroup morphism on $M?$ to $N?$"

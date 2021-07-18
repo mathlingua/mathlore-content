@@ -23,6 +23,7 @@ Foundation:
   Defines: P
   means: "A logical statement that is either true or false"
   written: "\textrm{Proposition}"
+  called: "proposition"
 
 
 ::
@@ -36,6 +37,11 @@ when: 'A, B is \proposition'
 that:
 . not: 'A = B'
 written: "A? \neq B?"
+called: "$A?$ not equal to $B?$"
+Metadata:
+. resources:
+  . source: "@JudsonAbstractAlgebraTheoryAndApplications"
+    page: "51"
 
 
 ::
@@ -49,6 +55,7 @@ when: 'P is \proposition'
 that:
 . not: 'P'
 written: "\neg P??"
+called: "not $P?$"
 
 
 ::
@@ -64,6 +71,7 @@ that:
   . 'P'
   . 'Q'
 written: "P? \vee Q?"
+called: "$P?$ or $Q?$"
 
 
 
@@ -74,6 +82,7 @@ that:
 . 'P'
 . 'Q'
 written: "P? \wedge Q?"
+called: "$P?$ and $Q?$"
 
 
 [P \nor/ Q]
@@ -81,6 +90,7 @@ States:
 when: 'P, Q is \proposition'
 that: '\not{P \or/ Q}'
 written: "P? \textrm{ nor } Q?"
+called: "$P?$ nor $Q?$"
 
 
 [P \nand/ Q]
@@ -88,6 +98,7 @@ States:
 when: 'P, Q is \proposition'
 that: '\not{P \and/ Q}'
 written: "P? \textrm{ nand } Q?"
+called: "$P?$ nand $Q?$"
 
 
 [P \xor/ Q]
@@ -95,4 +106,5 @@ States:
 when: 'P, Q is \proposition'
 that: '(P \or/ Q) \and/ \not{P \and/ Q}'
 written: "P? \textrm{ xor } Q?"
+called: "$P?$ xor $Q?$"
 

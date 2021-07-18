@@ -18,3 +18,4 @@ viewing:
 . membership:
   through: 'X'
 written: "\textrm{monoid}"
+called: "monoid"
