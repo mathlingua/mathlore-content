@@ -154,6 +154,7 @@ Foundation:
   called: "real division"
 
 
+[\triangle.inequality]
 Theorem: "Triangle Inequality"
 given: a, b
 where: 'a, b is \real'
