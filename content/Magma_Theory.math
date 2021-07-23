@@ -25,7 +25,7 @@ Metadata:
 
 
 [\magma.morphism:on{M_1}:to{M_2}]
-Defines: f(?)
+Defines: f(x)
 when:
 . 'M_1 := (X_1, *_1) is \magma'
 . 'M_2 := (X_2, *_2) is \magma'

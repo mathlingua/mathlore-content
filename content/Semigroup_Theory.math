@@ -20,7 +20,7 @@ called: "semigroup"
 
 
 [\semigroup.morphism:on{M}:to{N}]
-Defines: f(?)
+Defines: f(x)
 when:
 . 'M := (X, *) is \semigroup'
 . 'N := (Y, **) is \semigroup'

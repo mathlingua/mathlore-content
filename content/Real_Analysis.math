@@ -126,7 +126,7 @@ Foundation:
 . [x \real.+/ y]
   Defines: f(x?, y?)
   means: 'f is \binary.operation:on{\reals}'
-  written: "x? + y?"
+  written: "x? \leq y?"
   called: "real addition"
 
 
@@ -158,9 +158,11 @@ Foundation:
 Theorem: "Triangle Inequality"
 given: a, b
 where: 'a, b is \real'
-then: '\real.abs(a + b) \real.leq/ \real.abs(a) + \real.abs(b)'
+then:
+. '\abs(a + b) \real.leq/ {\abs(a) + \abs(b)}'
 using:
 . 'x + y := x \real.+/ y'
+. '\abs(z) := \real.abs(z)'
 
 
 Theorem:
