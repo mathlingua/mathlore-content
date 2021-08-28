@@ -18,12 +18,11 @@ either true or false.
 ::
 
 
-Foundation:
-. [\proposition]
-  Defines: P
-  means: "A logical statement that is either true or false"
-  written: "\textrm{Proposition}"
-  called: "proposition"
+[\proposition]
+Defines: P
+means: "A logical statement that is either true or false"
+written: "\textrm{Proposition}"
+called: "proposition"
 
 
 ::

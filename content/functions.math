@@ -11,16 +11,14 @@ is that it maps an input to a *unique* output.
 [\function:on{A}:to{B}]
 Defines: f(x)
 when: 'A, B is \set'
-maps: 
-. from: 'A'
-  to: 'B'
-satisfying:
+means:
 . forAll: a
-  where: 'a in A'
+  suchThat: 'a in A'
   then:
   . existsUnique: b
-    where: 'b in B'
-    suchThat: 'f(a) = b'
+    suchThat:
+    . 'b in B'
+    . 'f(a) = b'
 written: "A?? \mapsto B??"
 called: "function on A? to B?"
 
@@ -37,9 +35,8 @@ Defines: f(x)
 when: 'A, B is \set'
 means:
 . 'f is \function:on{A}:to{B}'
-satisfying:
 . forAll: x1, x2
-  where: 'x1, x2 in A'
+  suchThat: 'x1, x2 in A'
   then:
   . if: 'f(x1) = f(x2)'
     then: 'x1 = x2'
@@ -66,14 +63,15 @@ at least one input, it is called a **surjective function**.
 [\surjective.function:on{A}:to{B}]
 Defines: f(x)
 when: 'A, B is \set'
-means: 'f is \function:on{A}:to{B}'
-satisfying:
+means:
+. 'f is \function:on{A}:to{B}'
 . forAll: b
-  where: 'b in B'
+  suchThat: 'b in B'
   then:
   . exists: a
-    where: 'a in A'
-    suchThat: 'f(a) = b'
+    suchThat:
+    . 'a in A'
+    . 'f(a) = b'
 written:
 . "\textrm{surjective function on } A? \textrm{ to } B?"
 . "\textrm{onto function on } A? \textrm{ to } B? "
@@ -99,8 +97,8 @@ Functions that are both one-to-one and onto are special because they can be
 [\bijective.function:on{A}:to{B}]
 Defines: f(x)
 when: 'A, B is \set'
-means: 'f is \function:on{A}:to{B}'
-satisfying:
+means:
+. 'f is \function:on{A}:to{B}'
 . 'f is \injective.function:on{A}:to{B}'
 . 'f is \surjective.function:on{A}:to{B}'
 written: "\textrm{bijective function on } A? \text{ to } B?"
@@ -116,13 +114,13 @@ The inverse of a function is a function that "undoes" that function.
 Defines: g(x)
 requiring: A, B
 when: 'f is \function:on{A}:to{B}'
-means: 'g is \function:on{B}:to{A}'
-satisfying: 
+means:
+. 'g is \function:on{B}:to{A}'
 . forAll: a
-  where: 'a in A'
+  suchThat: 'a in A'
   then: 'g(f(a)) = a'
 . forAll: b
-  where: 'b in B'
+  suchThat: 'b in B'
   then: 'f(g(b)) = b'
 written: "f??^{-1}"
 called: "inverse of $f?$"
@@ -154,10 +152,10 @@ Defines: f(x, y)
 when:
 . 'X is \set'
 . 'Y \subset/ X'
-means: 'f is \binary.operation:on{X}'
-satisfying:
+means:
+. 'f is \binary.operation:on{X}'
 . forAll: y1, y2
-  where: 'y1, y2 in Y'
+  suchThat: 'y1, y2 in Y'
   then: 'f(y1, y2) in Y'
 written: "\textrm{binary operation on } X? \textrm{ restricted to } Y?"
 called: "binary operation on $X?$ restricted to $Y?$"

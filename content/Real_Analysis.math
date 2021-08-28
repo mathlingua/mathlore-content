@@ -24,89 +24,77 @@ content: "
 "
 
 
-Foundation:
-. [\real]
-  Defines: r
-  means: "A real number"
-  written: "\textrm{real}"
-  called: "real"
+[\real]
+Defines: r
+means: "A real number"
+written: "\textrm{real}"
+called: "real"
 
 
-Foundation:
-. [\reals]
-  Defines: R
-  means: 'R is \set'
-  collects:
-  . given: x
-    where: 'x is \real'
-    all: 'x'
-  written: "\mathbb{R}"
-  called: "reals"
+[\reals]
+Defines: R := {r}
+means:
+. 'R is \set'
+. 'r is \real'
+written: "\mathbb{R}"
+called: "reals"
 
 
 [\real.set]
-Defines: X
-means: 'X is \set'
-collects:
-. given: x
-  where: 'x is \real'
-  all: 'x'
+Defines: X := {x}
+means:
+. 'X is \set'
+. 'x is \real'
 written: "\textrm{real set}"
 called: "real set"
 
 
-Foundation:
-. [x \real.geq/ y]
-  States:
-  when: 'x, y is \real'
-  that: "x? is greater than or equal to y?"
-  written: "x? \geq y?"
-  called: "$x?$ is greater than or equal to $y?$"
+[x \real.geq/ y]
+States:
+when: 'x, y is \real'
+that: "x? is greater than or equal to y?"
+written: "x? \geq y?"
+called: "$x?$ is greater than or equal to $y?$"
 
 
-Foundation:
-. [x \real.>/ y]
-  States:
-  when: 'x, y is \real'
-  that: "x? is greater than y?"
-  written: "x? > y?"
-  called: "$x?$ is greater than $y?$"
+[x \real.>/ y]
+States:
+when: 'x, y is \real'
+that: "x? is greater than y?"
+written: "x? > y?"
+called: "$x?$ is greater than $y?$"
 
 
-Foundation:
-. [x \real.leq/ y]
-  States:
-  when: 'x, y is \real'
-  that: "x? is less than or equal to y?"
-  written: "x? \leq y?"
-  called: "$x?$ is less than or equal to $y?$"
+[x \real.leq/ y]
+States:
+when: 'x, y is \real'
+that: "x? is less than or equal to y?"
+written: "x? \leq y?"
+called: "$x?$ is less than or equal to $y?$"
 
 
-Foundation:
-. [x \real.</ y]
-  States:
-  when: 'x, y is \real'
-  that: "x? is less than y?"
-  written: "x? < y?"
-  called: "$x?$ is less than $y?$"
+[x \real.</ y]
+States:
+when: 'x, y is \real'
+that: "x? is less than y?"
+written: "x? < y?"
+called: "$x?$ is less than $y?$"
 
 
-Foundation:
-. [\real.negative(x)]
-  Defines: f(x)
-  means: 'f is \function:on{\reals}:to{\reals}'
-  evaluated: "The negative of the given real value."
-  written: "-x?"
-  called: "negative of $x?$"
+[\real.negative(x)]
+Defines: f(x)
+means: 'f is \function:on{\reals}:to{\reals}'
+evaluated: "The negative of the given real value."
+written: "-x?"
+called: "negative of $x?$"
 
 
-Foundation:
-. [\negative.real(x)]
-  Defines: f(x)
-  means: 'f is \function:on{\reals}:to{\reals}'
-  evaluated: "f(x) evaluates to the negative of x"
-  written: "-x?"
-  called: "negative of $x?$"
+[\negative.real(x)]
+Defines: f(x)
+means: 'f is \function:on{\reals}:to{\reals}'
+evaluated: "f(x) evaluates to the negative of x"
+written: "-x?"
+called: "negative of $x?$"
 
 
 [\real.abs(x)]
@@ -122,42 +110,38 @@ written: "\left | x? \right |"
 called: "the absolute value of $x?$"
 
 
-Foundation:
-. [x \real.+/ y]
-  Defines: f(x?, y?)
-  means: 'f is \binary.operation:on{\reals}'
-  written: "x? \leq y?"
-  called: "real addition"
+[x \real.+/ y]
+Defines: f(x?, y?)
+means: 'f is \binary.operation:on{\reals}'
+written: "x? \leq y?"
+called: "real addition"
 
 
-Foundation:
-. [x \real.-/ y]
-  Defines: f(x?, y?)
-  means: 'f is \binary.operation:on{\reals}'
-  written: "x? - y?"
-  called: "real subtraction"
+[x \real.-/ y]
+Defines: f(x?, y?)
+means: 'f is \binary.operation:on{\reals}'
+written: "x? - y?"
+called: "real subtraction"
 
 
-Foundation:
-. [x \real.*/ y]
-  Defines: f(x?, y?)
-  means: 'f is \binary.operation:on{\reals}'
-  written: "x? y?"
-  called: "real multiplication"
+[x \real.*/ y]
+Defines: f(x?, y?)
+means: 'f is \binary.operation:on{\reals}'
+written: "x? y?"
+called: "real multiplication"
 
 
-Foundation:
-. [x \real.// y]
-  Defines: f(x?, y?)
-  means: 'f is \binary.operation:on{\reals}'
-  written: "\frac{x?}{y?}"
-  called: "real division"
+[x \real.// y]
+Defines: f(x?, y?)
+means: 'f is \binary.operation:on{\reals}'
+written: "\frac{x?}{y?}"
+called: "real division"
 
 
 [\triangle.inequality]
 Theorem: "Triangle Inequality"
 given: a, b
-where: 'a, b is \real'
+if: 'a, b is \real'
 then:
 . '\abs(a + b) \real.leq/ {\abs(a) + \abs(b)}'
 using:
@@ -167,7 +151,7 @@ using:
 
 Theorem:
 given: a, b
-where: 'a, b is \real'
+if: 'a, b is \real'
 then:
 . '\real.abs(a - b) \real.geq/
         \real.abs(\real.abs(a) - \real.abs(b))'
@@ -183,19 +167,20 @@ Defines: beta
 when:
 . 'S is \real.set'
 . 'S is \nonempty.set'
-means: 'beta is \real'
-satisfying:
+means:
+. 'beta is \real'
 . forAll: x
-  where: 'x in S'
+  suchThat: 'x in S'
   then: 'x \real.leq/ beta'
 . forAll: epsilon
-  where: 'epsilon is \real'
   suchThat:
+  . 'epsilon is \real'
   . 'epsilon > 0'
   then:
   . exists: x0
-    where: 'x0 in S'
-    suchThat: 'x0 > beta - epsilon'
+    suchThat:
+    . 'x0 in S'
+    . 'x0 > beta - epsilon'
 using:
 . 'a > b := a \real.>/ b'
 . 'a - b := a \real.-/ b'

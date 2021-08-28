@@ -5,10 +5,10 @@
 
 [\monoid]
 Defines: M := (X, *, e)
-means: '(X, *) is \semigroup'
-satisfying:
+means:
+. '(X, *) is \semigroup'
 . forAll: x
-  where: 'x in X'
+  suchThat: 'x in X'
   then:
   . 'x * e = x'
   . 'e * x = x'

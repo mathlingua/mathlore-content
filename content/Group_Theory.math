@@ -7,14 +7,14 @@ This document outlines the core definitions used in group theory.
 
 [\group]
 Defines: G := (X, *, e)
-means: '(X, *, e) is \semigroup'
-satisfying:
+means:
+. '(X, *, e) is \semigroup'
 . forAll: x
-  where: 'x in X'
+  suchThat: 'x in X'
   then:
   . exists: y
-    where: 'y in X'
     suchThat:
+    . 'y in X'
     . 'x * y = e'
     . 'y * x = e'
 viewing:
@@ -35,8 +35,8 @@ element* defined below.
 [\group.inverse:of{x}:within{G}]
 Defines: y
 when: 'G := (X, *, e) is \group'
-means: 'y in X'
-satisfying:
+means:
+. 'y in X'
 . 'x * y = e'
 . 'y * x = e'
 written: "{x??^{-1}}"
@@ -61,13 +61,12 @@ means:
 . 'Y \subset/ X'
 . '+ is \binary.operation:on{X}:restrictedTo{Y}'
 . 'u in X'
-satisfying:
 . 'u = e'
 . forAll: h1, h2
-  where: 'h1, h2 in Y'
+  suchThat: 'h1, h2 in Y'
   then: 'h1 + h2 in Y'
 . forAll: h
-  where: 'h in Y'
+  suchThat: 'h in Y'
   then: '\group.inverse:of{h}:within{G} in Y'
 written: "H? \leqslant G?"
 called: "subgroup of $G?$"
@@ -84,12 +83,11 @@ The following states that the identity element of a group is unique.
 
 Theorem:
 given: G := (X, *, e), u
-where:
+if:
 . 'G is \group'
 . 'u in X'
-if:
 . forAll: x
-  where: 'x in X'
+  suchThat: 'x in X'
   then:
   . 'u * x = x'
   . 'x * u = x'
@@ -108,8 +106,9 @@ unique.
 
 Theorem:
 given: G := (X, *, e), a, x, y
-where: 'G is \group'
-if: 'x, y is \group.inverse:of{a}:within{G}'
+if:
+. 'G is \group'
+. 'x, y is \group.inverse:of{a}:within{G}'
 then: 'x = y'
 Metadata:
 . resources:
@@ -125,7 +124,7 @@ group.
 
 Theorem:
 given: G := (X, *, e), a, b
-where:
+if:
 . 'G is \group'
 . 'a, b in G'
 then:
@@ -146,7 +145,7 @@ is the element itself.
 
 Theorem:
 given: G := (X, *, e), a
-where:
+if:
 . 'G is \group'
 . 'a in G'
 then:
@@ -166,16 +165,18 @@ The following shows that cancellation laws hold in groups.
 
 Theorem:
 given: G := (X, *, e), a, b
-where:
+if:
 . 'G is \group'
 . 'a, b in G'
 then:
 . exists: x
-  where: 'x in G'
-  suchThat: 'a * x = b'
+  suchThat:
+  . 'x in G'
+  . 'a * x = b'
 . exists: y
-  where: 'y in G'
-  suchThat: 'y * a = b'
+  suchThat:
+  . 'y in G'
+  . 'y * a = b'
 Metadata:
 . resources:
   . source: "@JudsonAbstractAlgebraTheoryAndApplications"
@@ -190,18 +191,19 @@ is itself a group.
 
 Theorem:
 given: G := (X, *, e), H
-where:
+if:
 . 'G is \group'
 . 'H \subset/ X'
-iff: 'H is \subgroup:of{G}'
 then:
-. 'H \neq/ \empty.set'
-. forAll: g, h
-  where:
-  . 'g in G'
-  . 'h in H'
+. iff: 'H is \subgroup:of{G}'
   then:
-  . 'g * \group.inverse:of{h}:within{G} in H'
+  . 'H \neq/ \empty.set'
+  . forAll: g, h
+    suchThat:
+    . 'g in G'
+    . 'h in H'
+    then:
+    . 'g * \group.inverse:of{h}:within{G} in H'
 Metadata:
 . resources:
   . source: "@JudsonAbstractAlgebraTheoryAndApplications"

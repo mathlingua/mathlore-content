@@ -5,10 +5,10 @@
 
 [\semigroup]
 Defines: S := (X, *)
-means: 'S is \magma'
-satisfying:
+means:
+. 'S is \magma'
 . forAll: x, y, z
-  where: 'x, y, z in X'
+  suchThat: 'x, y, z in X'
   then: '(x * y) * z = x * (y * z)'
 viewing:
 . as: '\set'
@@ -24,10 +24,10 @@ Defines: f(x)
 when:
 . 'M := (X, *) is \semigroup'
 . 'N := (Y, **) is \semigroup'
-means: 'f is \function:on{M}:to{N}'
-satisfying:
+means:
+. 'f is \function:on{M}:to{N}'
 . forAll: x1, x2
-  where: 'x1, x2 in X'
+  suchThat: 'x1, x2 in X'
   then: 'f(x1 * x2) = f(x1) ** f(x2)'
 written: "\textrm{semigroup morphism on } M?? \textrm{ to } N??"
 called: "semigroup morphism on $M?$ to $N?$"
