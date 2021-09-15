@@ -19,7 +19,7 @@ means:
     suchThat:
     . 'b in B'
     . 'f(a) = b'
-written: "A?? \mapsto B??"
+written: "f? : A?? \mapsto B??"
 called: "function on A? to B?"
 
 
