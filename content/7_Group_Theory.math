@@ -34,6 +34,7 @@ element* defined below.
 
 [\group.inverse:of{x}:within{G}]
 Defines: y
+given: X, *, e
 when: 'G := (X, *, e) is \group'
 means:
 . 'y in X'
@@ -56,6 +57,7 @@ subset.
 
 [\subgroup:of{G}]
 Defines: H := (Y, +, u)
+given: X, *, e
 when: 'G := (X, *, e) is \group'
 means:
 . 'Y \subset/ X'
@@ -83,7 +85,7 @@ The following states that the identity element of a group is unique.
 
 Theorem:
 given: G := (X, *, e), u
-if:
+when:
 . 'G is \group'
 . 'u in X'
 . forAll: x
@@ -106,7 +108,7 @@ unique.
 
 Theorem:
 given: G := (X, *, e), a, x, y
-if:
+when:
 . 'G is \group'
 . 'x, y is \group.inverse:of{a}:within{G}'
 then: 'x = y'
@@ -124,7 +126,7 @@ group.
 
 Theorem:
 given: G := (X, *, e), a, b
-if:
+when:
 . 'G is \group'
 . 'a, b in G'
 then:
@@ -145,7 +147,7 @@ is the element itself.
 
 Theorem:
 given: G := (X, *, e), a
-if:
+when:
 . 'G is \group'
 . 'a in G'
 then:
@@ -165,7 +167,7 @@ The following shows that cancellation laws hold in groups.
 
 Theorem:
 given: G := (X, *, e), a, b
-if:
+when:
 . 'G is \group'
 . 'a, b in G'
 then:
@@ -191,7 +193,7 @@ is itself a group.
 
 Theorem:
 given: G := (X, *, e), H
-if:
+when:
 . 'G is \group'
 . 'H \subset/ X'
 then:

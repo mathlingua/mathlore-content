@@ -141,7 +141,7 @@ called: "real division"
 [\triangle.inequality]
 Theorem: "Triangle Inequality"
 given: a, b
-if: 'a, b is \real'
+when: 'a, b is \real'
 then:
 . '\abs(a + b) \real.leq/ {\abs(a) + \abs(b)}'
 using:
@@ -151,7 +151,7 @@ using:
 
 Theorem:
 given: a, b
-if: 'a, b is \real'
+when: 'a, b is \real'
 then:
 . '\real.abs(a - b) \real.geq/
         \real.abs(\real.abs(a) - \real.abs(b))'

@@ -112,7 +112,7 @@ The inverse of a function is a function that "undoes" that function.
 
 [\function.inverse:of{f}]
 Defines: g(x)
-requiring: A, B
+given: A, B
 when: 'f is \function:on{A}:to{B}'
 means:
 . 'g is \function:on{B}:to{A}'
@@ -169,7 +169,7 @@ functions.
 
 [f \function.compose/ g]
 Defines: h(x)
-requiring: A, B, C
+given: A, B, C
 when:
 . 'g is \function:on{A}:to{B}'
 . 'f is \function:on{B}:to{C}'

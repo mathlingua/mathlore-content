@@ -120,7 +120,7 @@ to avoid paradoxes forming.
 [\set.axiom.of.extensionality]
 Axiom: "Axiom of Extensionality"
 given: x, y
-if: 'x, y is \set'
+when: 'x, y is \set'
 then:
 . if:
   . forAll: z
@@ -144,7 +144,7 @@ then:
 [\set.axiom.of.regularity]
 Axiom: "Axiom of Regularity"
 given: x
-if: 'x is \set'
+when: 'x is \set'
 then:
 . if: 'x \set.neq/ \empty.set'
   then:
@@ -159,7 +159,7 @@ then:
 [\set.axiom.of.unordered.pair]
 Axiom: "Axiom of Unordered Pair"
 given: x, y
-if: 'x, y is \set'
+when: 'x, y is \set'
 then:
 . exists: z
   suchThat:
@@ -276,7 +276,7 @@ called: "set intersection of $A?$ and $B?$ within $U?$"
 
 [A \set.intersect/ B]
 Defines: C
-requiring: U
+given: U
 when:
 . 'A, B, U is \set'
 . 'A \subset/ U'
@@ -303,7 +303,7 @@ called: "set union of $A?$ and $B?$ within $U?$"
 
 [A \set.union/ B]
 Defines: C
-requiring: U
+given: U
 means: 'C := A \set.union:within{U}/ B'
 written: "A?? \cup B??"
 called: "set union of $A?$ and $B?$"
@@ -346,7 +346,7 @@ called: "cartesian product of $A?$ and $B?$"
 
 Theorem:
 given: A, B, C
-if: 'A, B, C is \set'
+when: 'A, B, C is \set'
 then:
 . 'A \set.union/ A = A'
 . 'A \set.intersect/ A = A'

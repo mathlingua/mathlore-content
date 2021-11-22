@@ -26,13 +26,14 @@ Metadata:
 
 [\magma.morphism:on{M_1}:to{M_2}]
 Defines: f(x)
+given: X1, *, X2, **
 when:
-. 'M_1 := (X_1, *_1) is \magma'
-. 'M_2 := (X_2, *_2) is \magma'
+. 'M_1 := (X1, *) is \magma'
+. 'M_2 := (X2, **) is \magma'
 means:
 . 'f is \function:on{M_1}:to{M_2}'
 . forAll: x1, x2
-  suchThat: 'x1, x2 in X_1'
-  then: 'f(x1 *_1 x2) = f(x1) *_2 f(x2)'
+  suchThat: 'x1, x2 in X1'
+  then: 'f(x1 * x2) = f(x1) ** f(x2)'
 written: "\textrm{magma morphism on } M_1?? \textrm{ to } M_2??"
 called: "magma morphism on $M_1?$ to $M_2?$"

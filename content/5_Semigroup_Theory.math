@@ -21,6 +21,7 @@ called: "semigroup"
 
 [\semigroup.morphism:on{M}:to{N}]
 Defines: f(x)
+given: X, *, Y, **
 when:
 . 'M := (X, *) is \semigroup'
 . 'N := (Y, **) is \semigroup'
