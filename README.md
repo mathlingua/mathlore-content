@@ -1,8 +1,11 @@
 # Math Codex
 
-The Math Codex is a free and open repository of mathematical knowledge encoded
-in the [MathLingua](https://www.mathlingua.org) language that allows
-mathematical concepts to be describe precisely and rendered beautifully.
+This repository is the The Math Codex, a free and open repository of
+mathematical knowledge encoded in the [MathLingua](https://www.mathlingua.org)
+language that allows mathematical concepts to be describe precisely and
+rendered beautifully.
+
+You can view the Math Codex at [www.mathcodex.org](https://www.mathcodex.org).
 
 It is intended to be a starting point for writing your own MathLingua documents
 and its source code can be found at the
