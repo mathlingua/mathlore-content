@@ -15,6 +15,9 @@ and its source code can be found at the
 You can learn about the MathLingua language and how to get started
 using it at [www.mathlingua.org](https://www.mathlingua.org).
 
+In particular, from there you can learn how to install and use the MathLingua
+command line tool `mlg`, that is required to use this repository.
+
 ## Creating Your Own Documents
 
 To create your own MathLingua documents using the the Math Codex,
