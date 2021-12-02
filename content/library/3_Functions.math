@@ -136,7 +136,7 @@ $x \: op \: y$ instead of $op(x, y)$.
 [\binary.operation:on{X}]
 Defines: f(x, y)
 when: 'X is \set'
-means: 'f is \function:on{X \set.times/ X}:to{X}'
+means: 'f is \function:on{X \set.product/ X}:to{X}'
 written: "\textrm{binary operation on } X?"
 called: "f"
 

@@ -27,6 +27,25 @@ called: "group"
 
 
 ::
+A group $G$ with the property that $x * y = y * x$ for any
+$x, y \in G$ is called an *Abelain Group* as defined below:
+::
+
+
+[\abelian.group]
+Defines: G := (X, *, e)
+means:
+. 'G is \group'
+. forAll: x, y
+  suchThat: 'x, y in X'
+  then: 'x * y = y * x'
+viewing:
+. as: '\group'
+  via: 'G'
+written: "\textrm{Abelian group}"
+
+
+::
 A key property of a Group is that every element of a group has an *inverse
 element* defined below.
 ::

@@ -334,12 +334,12 @@ written: "A??^C"
 called: "set complement of $A?$ within $U?$"
 
 
-[A \set.times/ B]
-Defines: C := {a, b}
+[A \set.product/ B]
+Defines: X := {x, y}
 when: 'A, B is \set'
-means: 'C is \set'
-. 'a in A'
-. 'b in B'
+means:
+. 'x in A'
+. 'y in B'
 written: "A?? \times B??"
 called: "cartesian product of $A?$ and $B?$"
 

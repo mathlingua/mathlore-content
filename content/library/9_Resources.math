@@ -24,6 +24,15 @@ Resource:
 . offset: "10"
 
 
+[@basic.analysis.I]
+Resource:
+. type: "book"
+. name: "Basic Analysis I: Introduction to Real Analysis, Volume I"
+. author: "Jiří Lebl"
+. url: "https://www.jirka.org/ra/realanal.pdf"
+. offset: "0"
+
+
 ::
 ## Algebra
 ::

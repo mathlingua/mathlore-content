@@ -1,0 +1,24 @@
+
+::
+# Real Analysis
+::
+
+
+[#real.analysis]
+Topic: "Real Analysis"
+content: "
+  Analysis forms one of the major areas of mathematics.  Whereas algebra deals
+  with discrete structures, analysis deals with continuous structures.
+  Informally, these are structures with elements that can be arbitrarily close
+  by some definition of 'closeness'.
+  <br/><br/>
+  Real analysis focuses on the real number line that has a key characteristic
+  that it 'does not contain any holes or gaps'.  There are different ways to
+  formalize what that means, but the approach that generalizes well to more
+  abstract spaces is the concept of whether or not a Cauchy Sequence in a
+  space necessarily converges.
+  <br/><br/>
+  In the real numbers, all Cauchy Sequences converge, and this is a defining
+  characteristic that allows concepts such as limits, derivatives, integrals,
+  series, and others to be defined.
+"
