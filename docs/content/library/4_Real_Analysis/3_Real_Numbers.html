@@ -1,0 +1,708 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta name="description" content="A codex of mathematical knowledge">
+    <meta name="keywords" content="math, maths, mathematics, knowledge, database, repository, codex, encyclopedia">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+          integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq"
+          crossorigin="anonymous">
+    <script defer
+            src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+            integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz"
+            crossorigin="anonymous">
+    </script>
+    <script defer
+            src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js">
+    </script>
+
+        <script>
+            
+    function buildMathFragment(rawText) {
+        let text = rawText;
+        if (text[0] === '"') {
+            text = text.substring(1);
+        }
+        if (text[text.length - 1] === '"') {
+            text = text.substring(0, text.length - 1);
+        }
+        text = text.replace(/([a-zA-Z0-9])\?\??/g, '$1');
+        const fragment = document.createDocumentFragment();
+        let buffer = '';
+        let i = 0;
+        while (i < text.length) {
+            if (text[i] === '$' && text[i+1] === '$' && text[i+2] === '$') {
+                i += 3; // skip over the $s
+                fragment.appendChild(document.createTextNode(buffer));
+                buffer = '';
+
+                const span = document.createElement('span');
+                let math = '';
+                while (i < text.length &&
+                    !(text[i] === '$' && text[i+1] === '$' && text[i+2] === '$')) {
+                    math += text[i++];
+                }
+                if (text[i] === '$') {
+                    i++; // move past the $
+                }
+                if (text[i] === '$') {
+                    i++; // move past the second $
+                }
+                if (text[i] === '$') {
+                    i++; // move past the third $
+                }
+                try {
+                    katex.render(math, span, {
+                        throwOnError: true,
+                        displayMode: false
+                    });
+                } catch {
+                    span.appendChild(document.createTextNode(math));
+                }
+                fragment.appendChild(span);
+            } else if (text[i] === '\\' && text[i+1] === '[') {
+                i += 2; // skip over \ and [
+                fragment.appendChild(document.createTextNode(buffer));
+                buffer = '';
+
+                const span = document.createElement('span');
+                span.className = 'display-mode';
+                let math = '';
+                while (i < text.length &&
+                    !(text[i] === '\\' && text[i+1] === ']')) {
+                    math += text[i++];
+                }
+                if (text[i] === '\\') {
+                    i++; // move past the \
+                }
+                if (text[i] === ']') {
+                    i++; // move past the ]
+                }
+                try {
+                    katex.render(math, span, {
+                        throwOnError: true,
+                        displayMode: true
+                    });
+                } catch {
+                    span.appendChild(document.createTextNode(math));
+                }
+                fragment.appendChild(span);
+            } else if (text[i] === '\\' && text[i+1] === '(') {
+                i += 2; // skip over \ and ()
+                fragment.appendChild(document.createTextNode(buffer));
+                buffer = '';
+
+                const span = document.createElement('span');
+                let math = '';
+                while (i < text.length &&
+                    !(text[i] === '\\' && text[i+1] === ')')) {
+                    math += text[i++];
+                }
+                if (text[i] === '\\') {
+                    i++; // move past the \
+                }
+                if (text[i] === ')') {
+                    i++; // move past the )
+                }
+                try {
+                    katex.render(math, span, {
+                        throwOnError: true,
+                        displayMode: false
+                    });
+                } catch {
+                    span.appendChild(document.createTextNode(math));
+                }
+                fragment.appendChild(span);
+            } else if (text[i] === '$' && text[i+1] === '$') {
+                i += 2; // skip over $ and $
+                fragment.appendChild(document.createTextNode(buffer));
+                buffer = '';
+
+                const span = document.createElement('span');
+                span.className = 'display-mode';
+                let math = '';
+                while (i < text.length &&
+                    !(text[i] === '$' && text[i+1] === '$')) {
+                    math += text[i++];
+                }
+                if (text[i] === '$') {
+                    i++; // move past the $
+                }
+                if (text[i] === '$') {
+                    i++; // move past the $
+                }
+                try {
+                    katex.render(math, span, {
+                        throwOnError: true,
+                        displayMode: true
+                    });
+                } catch {
+                    span.appendChild(document.createTextNode(math));
+                }
+                fragment.appendChild(span);
+            } else if (text[i] === '$') {
+                i++; // skip over the $
+                fragment.appendChild(document.createTextNode(buffer));
+                buffer = '';
+
+                const span = document.createElement('span');
+                let math = '';
+                while (i < text.length &&
+                     text[i] !== '$') {
+                    math += text[i++];
+                }
+                if (text[i] === '$') {
+                    i++; // move past the $
+                }
+                try {
+                    katex.render(math, span, {
+                        throwOnError: true,
+                        displayMode: false
+                    });
+                } catch {
+                    span.appendChild(document.createTextNode(math));
+                }
+                fragment.appendChild(span);
+            } else {
+                buffer += text[i++];
+            }
+        }
+
+        if (buffer.length > 0) {
+            fragment.appendChild(document.createTextNode(buffer));
+        }
+
+        return fragment;
+    }
+
+    function render(node) {
+        if (node.className && node.className.indexOf && node.className.indexOf('no-render') >= 0) {
+            return;
+        }
+
+        let isInWritten = false;
+        const parent = node.parentNode;
+        if (node.className === 'mathlingua') {
+            for (let i=0; i<node.childNodes.length; i++) {
+                const n = node.childNodes[i];
+                if (n && n.className === 'mathlingua-header' &&
+                    n.textContent === 'written:') {
+                    isInWritten = true;
+                    break;
+                }
+            }
+        }
+
+        for (let i = 0; i < node.childNodes.length; i++) {
+            const child = node.childNodes[i];
+
+            // node is an element node => nodeType === 1
+            // node is an attribute node => nodeType === 2
+            // node is a text node => nodeType === 3
+            // node is a comment node => nodeType === 8
+            if (child.nodeType === 3) {
+                let text = child.textContent;
+                if (text.trim()) {
+                    if (isInWritten) {
+                        // if the text is in a written: section
+                        // turn "some text" to $$$some text$$$
+                        // so the text is in math mode
+                        if (text[0] === '"') {
+                            text = text.substring(1);
+                        }
+                        if (text[text.length - 1] === '"') {
+                            text = text.substring(0, text.length - 1);
+                        }
+                        text = '$$$' + text + '$$$';
+                    }
+                    const fragment = buildMathFragment(text);
+                    i += fragment.childNodes.length - 1;
+                    node.replaceChild(fragment, child);
+                }
+            } else if (child.nodeType === 1) {
+                render(child);
+            }
+        }
+    }
+
+
+            
+    function flipEntity(id) {
+        const renEl = document.getElementById('rendered-' + id);
+        const litEl = document.getElementById('literal-' + id);
+        if (renEl && litEl) {
+            if (renEl.className === 'mathlingua-rendered-visible') {
+                renEl.className = 'mathlingua-rendered-hidden';
+                litEl.className = 'mathlingua-literal-visible';
+            } else {
+                renEl.className = 'mathlingua-rendered-visible';
+                litEl.className = 'mathlingua-literal-hidden';
+            }
+        }
+    }
+
+    function toggleProof(id) {
+        const proofEl = document.getElementById('proof-' + id);
+        const iconEl = document.getElementById('icon-' + id);
+        if (proofEl) {
+            if (proofEl.className === 'mathlingua-proof-hidden') {
+                proofEl.className = 'mathlingua-proof-shown';
+                if (iconEl) {
+                    iconEl.innerHTML = '&#9652;';
+                }
+            } else {
+                proofEl.className = 'mathlingua-proof-hidden';
+                if (iconEl) {
+                    iconEl.innerHTML = '&#9662;';
+                }
+            }
+        }
+    }
+
+
+            function initPage() {
+                const el = document.getElementById('__main_content__');
+                if (el) {
+                    render(el);
+                }
+            }
+        </script>
+        <style>
+            
+    .content {
+        padding-top: 1.5em;
+        padding-bottom: 1em;
+        margin-top: 2.5em;
+        margin-bottom: 1em;
+        margin-left: auto; /* for centering content */
+        margin-right: auto; /* for centering content */
+        font-size: 1em;
+        width: 50em;
+        background-color: white;
+        border: solid;
+        border-width: 1px;
+        border-color: rgba(210, 210, 210);
+        border-radius: 2px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 10px,
+                    inset 0  0 0 0 rgba(240, 240, 240, 0.5);
+    }
+
+    @media screen and (max-width: 500px) {
+        .content {
+            width: 99%;
+            margin-top: 2.5vh;
+            margin-bottom: 0;
+        }
+    }
+
+    body {
+        background-color: #f0f0f3;
+        padding-bottom: 1em;
+    }
+
+    hr {
+        border: 0.5px solid #efefef;
+    }
+
+    h1, h2, h3, h4 {
+        color: #0055bb;
+        text-align: center;
+    }
+
+    p {
+        text-align: left;
+        text-indent: 0;
+    }
+
+    .mathlingua-flip-icon {
+        position: sticky;
+        top: 1em;
+        left: 100%;
+        border: none;
+        color: #aaaaaa;
+        background: #ffffff;
+        margin: 0;
+        padding: 0;
+        padding-right: 2em;
+        font-size: 110%;
+    }
+
+    .mathlingua-rendered-visible {
+        display: block;
+    }
+
+    .mathlingua-rendered-hidden {
+        display: none;
+    }
+
+    .mathlingua-literal-visible {
+        display: block;
+    }
+
+    .mathlingua-literal-hidden {
+        display: none;
+    }
+
+    .mathlingua-home {
+        width: 80%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .mathlingua-dir-item-hidden {
+        display: none;
+    }
+
+    .mathlingua-dir-item-shown {
+        display: block;
+    }
+
+    .mathlingua-home-item {
+        font-weight: bold;
+        display: block;
+        margin-top: -1.25ex;
+        margin-bottom: -1ex;
+    }
+
+    .mathlingua-list-dir-item {
+        font-weight: bold;
+        display: block;
+        margin-top: -0.5ex;
+        margin-bottom: -0.5ex;
+    }
+
+    .mathlingua-list-file-item {
+        display: block;
+        margin-top: -0.5ex;
+        margin-bottom: -0.5ex;
+    }
+
+    .mathlingua-top-level {
+        overflow-y: hidden;
+        overflow-x: auto;
+        background-color: white;
+        border: solid;
+        border-width: 1px;
+        border-radius: 2px;
+        padding-top: 2em;
+        padding-bottom: 1em;
+        padding-left: 2em;
+        padding-right: 2em;
+        max-width: 75%;
+        width: max-content;
+        margin-left: auto; /* for centering content */
+        margin-right: auto; /* for centering content */
+        margin-top: 2.25em;
+        margin-bottom: 2.25em;
+        border-color: rgba(230, 230, 230);
+        border-radius: 2px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 10px,
+                    inset 0  0 0 0 rgba(240, 240, 240, 0.5);
+    }
+
+    .mathlingua-block-comment {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    .mathlingua-block-comment-top-level {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        line-height: 1.3;
+        text-align: left;
+        text-indent: 0;
+        background-color: #ffffff;
+        max-width: 80%;
+        width: 80%;
+        margin-left: auto; /* for centering content */
+        margin-right: auto; /* for centering content */
+    }
+
+    .end-mathlingua-top-level {
+        padding-top: 0.5em;
+        margin: 0;
+    }
+
+    .mathlingua-topic-group-id {
+        display: block;
+        padding: 0 0 1em 0;
+        font-family: monospace;
+        text-align: center;
+        color: #5500aa;
+    }
+
+    .mathlingua-topic-name {
+        display: block;
+        padding: 0 0 0.2em 0;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-weight: bold;
+        text-align: center;
+        color: #0055bb;
+    }
+
+    .mathlingua-topic-content {
+        display: block;
+        padding: 0 0 1.2em 0;
+        margin: 0.2em 0 -1.2em 0;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        line-height: 1.3;
+        color: #000000;
+    }
+
+    .mathlingua-overview {
+        display: block;
+        padding: 0.5em 0 0.5em 0;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        line-height: 1.3;
+        color: #000000;
+        margin-top: -2ex;
+        margin-bottom: -2ex;
+    }
+
+    .mathlingua-resources-header {
+        display: block;
+        color: #0055bb;
+        text-shadow: 0px 1px 0px rgba(255,255,255,0), 0px 0.4px 0px rgba(0,0,0,0.2);
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        padding-top: 0.25em;
+    }
+
+    .mathlingua-resources-item {
+        display: block;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        padding: 0.1em 0 0.1em 0;
+    }
+    
+    .mathlingua-topics-header {
+        display: block;
+        color: #0055bb;
+        text-shadow: 0px 1px 0px rgba(255,255,255,0), 0px 0.4px 0px rgba(0,0,0,0.2);
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        padding-top: 0.5em;
+    }
+
+    .mathlingua-topic-item {
+        display: block;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        padding: 0.1em 0 0.1em 0;
+    }
+
+    .mathlingua-related-header {
+        display: block;
+        color: #0055bb;
+        text-shadow: 0px 1px 0px rgba(255,255,255,0), 0px 0.4px 0px rgba(0,0,0,0.2);
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        padding-top: 0.5em;
+    }
+
+    .mathlingua-related-item {
+        display: block;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        padding: 0.1em 0 0.1em 0;
+    }
+
+    .mathlingua-foundation-header {
+        display: block;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        text-align: center;
+        font-weight: normal;
+        padding-bottom: 1ex;
+        color: #777777;
+    }
+
+    .mathlingua {
+        font-family: monospace;
+    }
+
+    .mathlingua-proof-icon {
+        float:right;
+        color: #aaaaaa;
+        cursor: default;
+    }
+
+    .mathlingua-proof-shown {
+        display: block;
+        margin-top: -0.6ex;
+    }
+
+    .mathlingua-proof-hidden {
+        display: none;
+        margin-top: -0.6ex;
+    }
+
+    .mathlingua-proof-header {
+        display: block;
+        color: #0055bb;
+        text-shadow: 0px 1px 0px rgba(255,255,255,0), 0px 0.4px 0px rgba(0,0,0,0.2);
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    .mathlingua-header {
+        color: #0055bb;
+        text-shadow: 0px 1px 0px rgba(255,255,255,0), 0px 0.4px 0px rgba(0,0,0,0.2);
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    .mathlingua-header-literal {
+        color: #0055bb;
+        text-shadow: 0px 1px 0px rgba(255,255,255,0), 0px 0.4px 0px rgba(0,0,0,0.2);
+        font-family: monospace;
+    }
+
+    .mathlingua-whitespace {
+        padding: 0;
+        margin: 0;
+        margin-left: 1ex;
+    }
+
+    .mathlingua-id {
+        color: #5500aa;
+        overflow-x: scroll;
+    }
+
+    .mathlingua-text {
+        color: #000000;
+        display: inline-block;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        margin-top: -1.6ex;
+        margin-bottom: -1.6ex;
+    }
+
+    .mathlingua-text-no-render {
+        color: #000000;
+        display: inline-block;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        margin-top: -1.6ex;
+        margin-bottom: -1.6ex;
+    }
+
+    .literal-mathlingua-text {
+        color: #386930;
+        display: inline;
+        font-family: monospace;
+        line-height: 1.3;
+    }
+
+    .literal-mathlingua-text-no-render {
+        color: #386930;
+        display: inline;
+        font-family: monospace;
+        line-height: 1.3;
+    }
+
+    .mathlingua-url {
+        color: #0000aa;
+        text-decoration: none;
+        display: inline-block;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    .mathlingua-link {
+        color: #0000aa;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .mathlingua-statement-no-render {
+        color: #007377;
+    }
+
+    .mathlingua-statement-container {
+        display: inline;
+    }
+
+    .literal-mathlingua-statement {
+        color: #007377;
+    }
+
+    .mathlingua-dropdown-menu-shown {
+        position: absolute;
+        display: block;
+        z-index: 1;
+        background-color: #ffffff;
+        box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 10px,
+                    inset 0  0 10px 0 rgba(200, 200, 200, 0.25);
+        border: solid;
+        border-width: 1px;
+        border-radius: 0px;
+        border-color: rgba(200, 200, 200);
+    }
+
+    .mathlingua-dropdown-menu-hidden {
+        display: none;
+    }
+
+    .mathlingua-dropdown-menu-item {
+        display: block;
+        margin: 0.75ex;
+    }
+
+    .mathlingua-dropdown-menu-item:hover {
+        font-style: italic;
+    }
+
+    .mathlingua-called {
+        font-weight: bold;
+        display: table;
+        margin-top: -1em;
+        margin-left: auto;
+        margin-bottom: -2em;
+        margin-right: auto;
+    }
+
+    .display-mode {
+        margin-left: auto;
+        margin-right: auto;
+        width: max-content;
+        display: block;
+        padding-top: 2ex;
+        padding-bottom: 3ex;
+    }
+
+    .katex {
+        font-size: 1em;
+    }
+
+    .katex-display {
+        display: contents;
+    }
+
+    .katex-display > .katex {
+        display: contents;
+    }
+
+    .katex-display > .katex > .katex-html {
+        display: contents;
+    }
+
+        </style>
+    </head>
+    <body onload="initPage()">
+        <div class="content" id="__main_content__">
+            <div class='mathlingua-block-comment-top-level'><span class='mathlingua'><span class='mathlingua-block-comment'>  <h1>The Real Numbers</h1><p>At this point we have the tooling needed to
+describe the real numbers.  Here we just state
+their existence by describing their key characteristics
+instead of building them from scratch from Cauchy sequences
+or Dedekind cuts of rational numbers.</p><p>In particular, the real numbers are characterized by the
+fact that they are an <em>ordered field</em> and contain the
+rational numbers.</p> 
+ </span></span></div><div><button class='mathlingua-flip-icon' onclick="flipEntity('28b0a83c-3139-4daf-96ee-59dcf618ad68')">&#8226;</button><div id='rendered-28b0a83c-3139-4daf-96ee-59dcf618ad68' class='mathlingua-rendered-visible'><span class='mathlingua-data'><span class='mathlingua-called'> <p>The real Numbers</p> </span><span class='mathlingua'><div id='12d9c74a-235b-4a39-82d1-959e11dbd993-CUSTOM_SUFFIX'><div class='mathlingua-top-level'><span class='mathlingua-id'>[\real.numbers]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>$$$R := (X, +, *, 0, 1, <)$$$</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>means:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-7138162795128175785-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='R is \ordered.field'>$$$R$$$<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>$$$\textrm{ordered field}$$$</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement-7138162795128175785-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\ordered.field', 'statement-7138162795128175785-CUSTOM_SUFFIX')">\ordered.field</a></div></span><br/><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--6811640642189035120-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='\rationals.set \subset/ X'>$$$\mathbb{Q} \subseteq X$$$</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--6811640642189035120-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\rationals.set', 'statement--6811640642189035120-CUSTOM_SUFFIX')">\rationals.set</a><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\subset', 'statement--6811640642189035120-CUSTOM_SUFFIX')">\subset</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>viewing:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>as:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-5463682738510728144-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='\set'>$$$\textrm{set}$$$</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement-5463682738510728144-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\set', 'statement-5463682738510728144-CUSTOM_SUFFIX')">\set</a></div></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>via:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--2349948579119217216-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='X'>$$$X$$$</span></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>membership:</span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>through:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-4667196504874974512-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='X'>$$$X$$$</span></div></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"\mathbb{R}"</span><br/><span class='mathlingua'></span><div class='end-mathlingua-top-level'></div></div></div></span></span></div><div id='literal-28b0a83c-3139-4daf-96ee-59dcf618ad68' class='mathlingua-literal-hidden'><span class='mathlingua'><div id='f180877f-03ce-46d7-9a83-0d28eeaf124c-CUSTOM_SUFFIX'><div class='mathlingua-top-level'><span class='mathlingua-id'>[\real.numbers]</span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument-no-render'>R := (X, +, *, 0, 1, <)</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>means:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--320852867972239876-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'R is \ordered.field'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--320852867972239876-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\ordered.field', 'statement--320852867972239876-CUSTOM_SUFFIX')">\ordered.field</a></div></span><br/><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--5355365923704307625-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'\rationals.set \subset/ X'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--5355365923704307625-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\rationals.set', 'statement--5355365923704307625-CUSTOM_SUFFIX')">\rationals.set</a><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\subset', 'statement--5355365923704307625-CUSTOM_SUFFIX')">\subset</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>viewing:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header-literal'>as:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--150444520720901761-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'\set'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--150444520720901761-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\set', 'statement--150444520720901761-CUSTOM_SUFFIX')">\set</a></div></span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header-literal'>via:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-6024672414185093245-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'X'</span></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header-literal'>membership:</span></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-header-literal'>through:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--3080951848092024864-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'X'</span></div></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class="literal-mathlingua-text-no-render"> "\mathbb{R}" </span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>called:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class="literal-mathlingua-text-no-render"> "the real numbers" </span></span><div class='end-mathlingua-top-level'></div></div></div></span></div></div><div class='mathlingua-block-comment-top-level'><span class='mathlingua'><span class='mathlingua-block-comment'>  <p>Now we define what it means for a number to be <em>real</em>.  It
+just means that the number is an element of the real numbers.</p> 
+ </span></span></div><div><button class='mathlingua-flip-icon' onclick="flipEntity('65517208-0de4-44e6-9428-18dc61395c2e')">&#8226;</button><div id='rendered-65517208-0de4-44e6-9428-18dc61395c2e' class='mathlingua-rendered-visible'><span class='mathlingua-data'><span class='mathlingua-called'> <p>Real Number</p> </span><span class='mathlingua'><div id='29a184a1-c9c0-4e89-bd9d-478fad59aad5-CUSTOM_SUFFIX'><div class='mathlingua-top-level'><span class='mathlingua-id'>[\real]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>$$$x$$$</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>given:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>$$$R := (X, +, *, 0, 1, <)$$$</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--6808739343808371377-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='R is \real.numbers'>$$$R$$$<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>$$$\mathbb{R}$$$</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--6808739343808371377-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\real.numbers', 'statement--6808739343808371377-CUSTOM_SUFFIX')">\real.numbers</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>means:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--407237686651676645-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='x in X'>$$$x \in X$$$</span></div></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"\textrm{real}"</span><br/><span class='mathlingua'></span><div class='end-mathlingua-top-level'></div></div></div></span></span></div><div id='literal-65517208-0de4-44e6-9428-18dc61395c2e' class='mathlingua-literal-hidden'><span class='mathlingua'><div id='7f0402b1-7e4d-4fa9-bda5-f863743776bd-CUSTOM_SUFFIX'><div class='mathlingua-top-level'><span class='mathlingua-id'>[\real]</span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument-no-render'>x</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>given:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument-no-render'>R := (X, +, *, 0, 1, <)</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-3098444336588493555-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'R is \real.numbers'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement-3098444336588493555-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\real.numbers', 'statement-3098444336588493555-CUSTOM_SUFFIX')">\real.numbers</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>means:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-6713547811654173170-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'x in X'</span></div></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class="literal-mathlingua-text-no-render"> "\textrm{real}" </span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>called:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class="literal-mathlingua-text-no-render"> "real number" </span></span><div class='end-mathlingua-top-level'></div></div></div></span></div></div><div class='mathlingua-block-comment-top-level'><span class='mathlingua'><span class='mathlingua-block-comment'>  <p>The real numbers is a field with operations $+$ and
+$*$ for addition and mutiplication that are used below to
+define the sum of or product of two real numbers.</p><p>Further, since the real numbers is a field, the notions
+of subtraction and division in a general field is used
+to define those concepts in the real numbers.</p> 
+ </span></span></div><div><button class='mathlingua-flip-icon' onclick="flipEntity('d3dec81c-4b42-4add-93a8-b9f5ec0542aa')">&#8226;</button><div id='rendered-d3dec81c-4b42-4add-93a8-b9f5ec0542aa' class='mathlingua-rendered-visible'><span class='mathlingua-data'><span class='mathlingua-called'> <p>Real Addition of $x?$ and $y?$</p> </span><span class='mathlingua'><div id='7e69a6c5-1c85-4831-805d-c5d5b6759be9-CUSTOM_SUFFIX'><div class='mathlingua-top-level'><span class='mathlingua-id'>[x \real.+/ y]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>$$$f(x, y)$$$</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>given:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>$$$R := (X, +, *, 0, 1, <)$$$</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--3858725571947233963-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='R is \real.numbers'>$$$R$$$<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>$$$\mathbb{R}$$$</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--3858725571947233963-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\real.numbers', 'statement--3858725571947233963-CUSTOM_SUFFIX')">\real.numbers</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>means:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--8510687323497198946-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='f(x, y) := x + y'>$$$f(x, y) := x + y$$$</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--8510687323497198946-CUSTOM_SUFFIX'></div></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"x?? + y??"</span><br/><span class='mathlingua'></span><div class='end-mathlingua-top-level'></div></div></div></span></span></div><div id='literal-d3dec81c-4b42-4add-93a8-b9f5ec0542aa' class='mathlingua-literal-hidden'><span class='mathlingua'><div id='9a230cf5-6e8a-4f7b-871a-1f61ab427502-CUSTOM_SUFFIX'><div class='mathlingua-top-level'><span class='mathlingua-id'>[x \real.+/ y]</span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument-no-render'>f(x, y)</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>given:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument-no-render'>R := (X, +, *, 0, 1, <)</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--4052676259396411126-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'R is \real.numbers'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--4052676259396411126-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\real.numbers', 'statement--4052676259396411126-CUSTOM_SUFFIX')">\real.numbers</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>means:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--5141203450220958983-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'f(x, y) := x + y'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--5141203450220958983-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('+', 'statement--5141203450220958983-CUSTOM_SUFFIX')">+</a></div></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class="literal-mathlingua-text-no-render"> "x?? + y??" </span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>called:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class="literal-mathlingua-text-no-render"> "real addition of $x?$ and $y?$" </span></span><div class='end-mathlingua-top-level'></div></div></div></span></div></div><div><button class='mathlingua-flip-icon' onclick="flipEntity('e6769b8d-6382-4743-8538-4caec332558e')">&#8226;</button><div id='rendered-e6769b8d-6382-4743-8538-4caec332558e' class='mathlingua-rendered-visible'><span class='mathlingua-data'><span class='mathlingua-called'> <p>Real Difference of $x?$ and $y?$</p> </span><span class='mathlingua'><div id='a35198fc-de25-4483-95d5-5e5e359e2e0a-CUSTOM_SUFFIX'><div class='mathlingua-top-level'><span class='mathlingua-id'>[x \real.-/ y]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>$$$f(x, y)$$$</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>given:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>$$$R := (X, +, *, 0, 1, <)$$$</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--349791044308438229-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='R is \real.numbers'>$$$R$$$<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>$$$\mathbb{R}$$$</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--349791044308438229-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\real.numbers', 'statement--349791044308438229-CUSTOM_SUFFIX')">\real.numbers</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>means:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-7270408428859728410-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='f(x, y) := x + inv(y)'>$$$f(x, y) := x + inv(y)$$$</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement-7270408428859728410-CUSTOM_SUFFIX'></div></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>using:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-1703401830505039400-CUSTOM_SUFFIX')"><span class="mathlingua-direct-statement">inv(a) := \additive.inverse:of{a}:inField{R}</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement-1703401830505039400-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\additive.inverse:of:inField', 'statement-1703401830505039400-CUSTOM_SUFFIX')">\additive.inverse:of:inField</a></div></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"x? - y?"</span><br/><span class='mathlingua'></span><div class='end-mathlingua-top-level'></div></div></div></span></span></div><div id='literal-e6769b8d-6382-4743-8538-4caec332558e' class='mathlingua-literal-hidden'><span class='mathlingua'><div id='c0eecaef-df51-4161-9c32-0c8458d9b6b9-CUSTOM_SUFFIX'><div class='mathlingua-top-level'><span class='mathlingua-id'>[x \real.-/ y]</span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument-no-render'>f(x, y)</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>given:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument-no-render'>R := (X, +, *, 0, 1, <)</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-4763735281733700095-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'R is \real.numbers'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement-4763735281733700095-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\real.numbers', 'statement-4763735281733700095-CUSTOM_SUFFIX')">\real.numbers</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>means:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--7336100650902100718-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'f(x, y) := x + inv(y)'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--7336100650902100718-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('+', 'statement--7336100650902100718-CUSTOM_SUFFIX')">+</a></div></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>using:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--6668347629687073027-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'inv(a) := \additive.inverse:of{a}:inField{R}'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--6668347629687073027-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\additive.inverse:of:inField', 'statement--6668347629687073027-CUSTOM_SUFFIX')">\additive.inverse:of:inField</a></div></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class="literal-mathlingua-text-no-render"> "x? - y?" </span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>called:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class="literal-mathlingua-text-no-render"> "real difference of $x?$ and $y?$" </span></span><div class='end-mathlingua-top-level'></div></div></div></span></div></div><div><button class='mathlingua-flip-icon' onclick="flipEntity('ef489da9-b7d4-4901-a142-da9c0a8dbe54')">&#8226;</button><div id='rendered-ef489da9-b7d4-4901-a142-da9c0a8dbe54' class='mathlingua-rendered-visible'><span class='mathlingua-data'><span class='mathlingua-called'> <p>Real Multiplication of $x?$ and $y?$</p> </span><span class='mathlingua'><div id='60a2f505-16af-4931-b2a4-935de1c181ab-CUSTOM_SUFFIX'><div class='mathlingua-top-level'><span class='mathlingua-id'>[x \real.*/ y]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>$$$f(x, y)$$$</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>given:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>$$$R := (X, +, *, 0, 1, <)$$$</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--6003463949799371650-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='R is \real.numbers'>$$$R$$$<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>$$$\mathbb{R}$$$</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--6003463949799371650-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\real.numbers', 'statement--6003463949799371650-CUSTOM_SUFFIX')">\real.numbers</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>means:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--6239839662660934366-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='f(x, y) := x * y'>$$$f(x, y) := x * y$$$</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--6239839662660934366-CUSTOM_SUFFIX'></div></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"x?? y??"</span><br/><span class='mathlingua'></span><div class='end-mathlingua-top-level'></div></div></div></span></span></div><div id='literal-ef489da9-b7d4-4901-a142-da9c0a8dbe54' class='mathlingua-literal-hidden'><span class='mathlingua'><div id='13de7444-ab2b-4fb0-85c4-db989f4ec32a-CUSTOM_SUFFIX'><div class='mathlingua-top-level'><span class='mathlingua-id'>[x \real.*/ y]</span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument-no-render'>f(x, y)</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>given:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument-no-render'>R := (X, +, *, 0, 1, <)</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-7615331215264437797-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'R is \real.numbers'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement-7615331215264437797-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\real.numbers', 'statement-7615331215264437797-CUSTOM_SUFFIX')">\real.numbers</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>means:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-8707216194911831187-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'f(x, y) := x * y'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement-8707216194911831187-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('*', 'statement-8707216194911831187-CUSTOM_SUFFIX')">*</a></div></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class="literal-mathlingua-text-no-render"> "x?? y??" </span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>called:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class="literal-mathlingua-text-no-render"> "real multiplication of $x?$ and $y?$" </span></span><div class='end-mathlingua-top-level'></div></div></div></span></div></div><div><button class='mathlingua-flip-icon' onclick="flipEntity('d0156220-8643-4bc8-845f-68ade902ecbd')">&#8226;</button><div id='rendered-d0156220-8643-4bc8-845f-68ade902ecbd' class='mathlingua-rendered-visible'><span class='mathlingua-data'><span class='mathlingua-called'> <p>Real Division of $x?$ by $y?$</p> </span><span class='mathlingua'><div id='ef33fa63-4cb1-4ec7-8250-67b7f7162f49-CUSTOM_SUFFIX'><div class='mathlingua-top-level'><span class='mathlingua-id'>[x \real.div/ y]</span><br/><span class='mathlingua'><span class='mathlingua-header'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>$$$f(x, y)$$$</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>given:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>$$$R := (X, +, *, 0, 1, <)$$$</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-4177585867187299059-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='R is \real.numbers'>$$$R$$$<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>$$$\mathbb{R}$$$</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement-4177585867187299059-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\real.numbers', 'statement-4177585867187299059-CUSTOM_SUFFIX')">\real.numbers</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>means:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--3219572984843237865-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='f(x, y) := x * inv(y)'>$$$f(x, y) := x * inv(y)$$$</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--3219572984843237865-CUSTOM_SUFFIX'></div></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>using:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-3521744869982945680-CUSTOM_SUFFIX')"><span class="mathlingua-direct-statement">inv(a) := \multiplicative.inverse:of{a}:inField{R}</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement-3521744869982945680-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\multiplicative.inverse:of:inField', 'statement-3521744869982945680-CUSTOM_SUFFIX')">\multiplicative.inverse:of:inField</a></div></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"\frac{x??}{y??}"</span><br/><span class='mathlingua'></span><div class='end-mathlingua-top-level'></div></div></div></span></span></div><div id='literal-d0156220-8643-4bc8-845f-68ade902ecbd' class='mathlingua-literal-hidden'><span class='mathlingua'><div id='c845fd63-1fff-4bed-842a-bac2450ae48b-CUSTOM_SUFFIX'><div class='mathlingua-top-level'><span class='mathlingua-id'>[x \real.div/ y]</span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>Defines:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument-no-render'>f(x, y)</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>given:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument-no-render'>R := (X, +, *, 0, 1, <)</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-6281861073946856156-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'R is \real.numbers'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement-6281861073946856156-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\real.numbers', 'statement-6281861073946856156-CUSTOM_SUFFIX')">\real.numbers</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>means:</span><span class='mathlingua'><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--1301571671598344114-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'f(x, y) := x * inv(y)'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--1301571671598344114-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('*', 'statement--1301571671598344114-CUSTOM_SUFFIX')">*</a></div></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>using:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-3900466420981750241-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'inv(a) := \multiplicative.inverse:of{a}:inField{R}'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement-3900466420981750241-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\multiplicative.inverse:of:inField', 'statement-3900466420981750241-CUSTOM_SUFFIX')">\multiplicative.inverse:of:inField</a></div></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class="literal-mathlingua-text-no-render"> "\frac{x??}{y??}" </span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>called:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class="literal-mathlingua-text-no-render"> "real division of $x?$ by $y?$" </span></span><div class='end-mathlingua-top-level'></div></div></div></span></div></div><div class='mathlingua-block-comment-top-level'><span class='mathlingua'><span class='mathlingua-block-comment'>  <p>Next we define a familiar notation for the product of a
+real number $x$ and the multiplicative inverse of another
+real number $y$, namely $\frac{x}{y}$.</p> 
+ </span></span></div><div><button class='mathlingua-flip-icon' onclick="flipEntity('07d52769-4b67-41cf-88d8-b8f40a1728a6')">&#8226;</button><div id='rendered-07d52769-4b67-41cf-88d8-b8f40a1728a6' class='mathlingua-rendered-visible'><span class='mathlingua-data'><span class='mathlingua-called'> <p>Real Division of $x?$ by $y?$</p> </span><span class='mathlingua'><div id='e2c84437-92f5-40e1-a006-14b843573bab-CUSTOM_SUFFIX'><div class='mathlingua-top-level'><span class='mathlingua-id'>[\real.frac{x}{y}]</span><br/><span class='mathlingua'><span class='mathlingua-header'>States:</span></span><br/><span class='mathlingua'><span class='mathlingua-header'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--6895944575176981233-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='x, y is \real'>$$$x, y$$$<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>$$$\textrm{real}$$$</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--6895944575176981233-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\real', 'statement--6895944575176981233-CUSTOM_SUFFIX')">\real</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>that:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-8567696369575366572-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='x \real.div/ y'>$$$\frac{x}{y}$$$</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement-8567696369575366572-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\real.div', 'statement-8567696369575366572-CUSTOM_SUFFIX')">\real.div</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"\frac{x??}{y??}"</span><br/><span class='mathlingua'></span><div class='end-mathlingua-top-level'></div></div></div></span></span></div><div id='literal-07d52769-4b67-41cf-88d8-b8f40a1728a6' class='mathlingua-literal-hidden'><span class='mathlingua'><div id='65dfb79e-25b1-4b4e-ab7a-042f9091d4f7-CUSTOM_SUFFIX'><div class='mathlingua-top-level'><span class='mathlingua-id'>[\real.frac{x}{y}]</span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>States:</span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-3418558806770521561-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'x, y is \real'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement-3418558806770521561-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\real', 'statement-3418558806770521561-CUSTOM_SUFFIX')">\real</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>that:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-876306999745704926-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'x \real.div/ y'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement-876306999745704926-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\real.div', 'statement-876306999745704926-CUSTOM_SUFFIX')">\real.div</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class="literal-mathlingua-text-no-render"> "\frac{x??}{y??}" </span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>called:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class="literal-mathlingua-text-no-render"> "real division of $x?$ by $y?$" </span></span><div class='end-mathlingua-top-level'></div></div></div></span></div></div><div class='mathlingua-block-comment-top-level'><span class='mathlingua'><span class='mathlingua-block-comment'>  <p>Last, since the real numbers are an <em>ordered</em> field,
+with ordering $&lt;$, the operations of $\leq$, $&gt;$, and
+$\geq$ for real numbers are defined from $&lt;$ below.</p> 
+ </span></span></div><div><button class='mathlingua-flip-icon' onclick="flipEntity('e5cac600-9abf-4bed-9f2b-09d8c19961e0')">&#8226;</button><div id='rendered-e5cac600-9abf-4bed-9f2b-09d8c19961e0' class='mathlingua-rendered-visible'><span class='mathlingua-data'><span class='mathlingua-called'> <p>$x?$ is less than $y?$</p> </span><span class='mathlingua'><div id='97aad40d-ee6f-4395-8003-80e2193857c6-CUSTOM_SUFFIX'><div class='mathlingua-top-level'><span class='mathlingua-id'>[x \real.lt/ y]</span><br/><span class='mathlingua'><span class='mathlingua-header'>States:</span></span><br/><span class='mathlingua'><span class='mathlingua-header'>given:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>$$$R := (X, +, *, 0, 1, <)$$$</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-528461347368962607-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='R is \real.numbers'>$$$R$$$<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>$$$\mathbb{R}$$$</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement-528461347368962607-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\real.numbers', 'statement-528461347368962607-CUSTOM_SUFFIX')">\real.numbers</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>that:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--4558802366002909338-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='x < y'>$$$x < y$$$</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--4558802366002909338-CUSTOM_SUFFIX'></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"x? < y?"</span><br/><span class='mathlingua'></span><div class='end-mathlingua-top-level'></div></div></div></span></span></div><div id='literal-e5cac600-9abf-4bed-9f2b-09d8c19961e0' class='mathlingua-literal-hidden'><span class='mathlingua'><div id='1df08e9a-176c-4ffc-a55f-61c41c036a53-CUSTOM_SUFFIX'><div class='mathlingua-top-level'><span class='mathlingua-id'>[x \real.lt/ y]</span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>States:</span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>given:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument-no-render'>R := (X, +, *, 0, 1, <)</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-3821919369708236359-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'R is \real.numbers'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement-3821919369708236359-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\real.numbers', 'statement-3821919369708236359-CUSTOM_SUFFIX')">\real.numbers</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>that:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--6846428746653516207-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'x < y'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--6846428746653516207-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('<', 'statement--6846428746653516207-CUSTOM_SUFFIX')"><</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class="literal-mathlingua-text-no-render"> "x? < y?" </span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>called:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class="literal-mathlingua-text-no-render"> "$x?$ is less than $y?$" </span></span><div class='end-mathlingua-top-level'></div></div></div></span></div></div><div><button class='mathlingua-flip-icon' onclick="flipEntity('d1621187-3d39-4241-b0bb-ae18a9866455')">&#8226;</button><div id='rendered-d1621187-3d39-4241-b0bb-ae18a9866455' class='mathlingua-rendered-visible'><span class='mathlingua-data'><span class='mathlingua-called'> <p>$x?$ is Greater than $y?$</p> </span><span class='mathlingua'><div id='9f78c7c7-6a59-478b-b86e-472dd49f2756-CUSTOM_SUFFIX'><div class='mathlingua-top-level'><span class='mathlingua-id'>[x \real.gt/ y]</span><br/><span class='mathlingua'><span class='mathlingua-header'>States:</span></span><br/><span class='mathlingua'><span class='mathlingua-header'>given:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>$$$R := (X, +, *, 0, 1, <)$$$</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--8063250867563525505-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='R is \real.numbers'>$$$R$$$<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>$$$\mathbb{R}$$$</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--8063250867563525505-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\real.numbers', 'statement--8063250867563525505-CUSTOM_SUFFIX')">\real.numbers</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>that:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-2162907630791205893-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='y < x'>$$$y < x$$$</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement-2162907630791205893-CUSTOM_SUFFIX'></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"x? > y?"</span><br/><span class='mathlingua'></span><div class='end-mathlingua-top-level'></div></div></div></span></span></div><div id='literal-d1621187-3d39-4241-b0bb-ae18a9866455' class='mathlingua-literal-hidden'><span class='mathlingua'><div id='48aebd2a-7a6d-450f-b150-5c44588c19ec-CUSTOM_SUFFIX'><div class='mathlingua-top-level'><span class='mathlingua-id'>[x \real.gt/ y]</span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>States:</span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>given:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument-no-render'>R := (X, +, *, 0, 1, <)</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--4600359957928611225-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'R is \real.numbers'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--4600359957928611225-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\real.numbers', 'statement--4600359957928611225-CUSTOM_SUFFIX')">\real.numbers</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>that:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--6264128784544960993-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'y < x'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--6264128784544960993-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('<', 'statement--6264128784544960993-CUSTOM_SUFFIX')"><</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class="literal-mathlingua-text-no-render"> "x? > y?" </span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>called:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class="literal-mathlingua-text-no-render"> "$x?$ is greater than $y?$" </span></span><div class='end-mathlingua-top-level'></div></div></div></span></div></div><div><button class='mathlingua-flip-icon' onclick="flipEntity('1853ac21-779b-4adb-8b21-14d673fc86f3')">&#8226;</button><div id='rendered-1853ac21-779b-4adb-8b21-14d673fc86f3' class='mathlingua-rendered-visible'><span class='mathlingua-data'><span class='mathlingua-called'> <p>$x?$ is less than or Equal to $y?$</p> </span><span class='mathlingua'><div id='1fa64898-47d4-4172-84b7-ebfadf0720fe-CUSTOM_SUFFIX'><div class='mathlingua-top-level'><span class='mathlingua-id'>[x \real.leq/ y]</span><br/><span class='mathlingua'><span class='mathlingua-header'>States:</span></span><br/><span class='mathlingua'><span class='mathlingua-header'>given:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>$$$R := (X, +, *, 0, 1, <)$$$</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--5895780600298531448-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='R is \real.numbers'>$$$R$$$<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>$$$\mathbb{R}$$$</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--5895780600298531448-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\real.numbers', 'statement--5895780600298531448-CUSTOM_SUFFIX')">\real.numbers</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>that:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>or:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--1675428054618964160-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='x < y'>$$$x < y$$$</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--1675428054618964160-CUSTOM_SUFFIX'></div></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--3879098384795030155-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='x = y'>$$$x = y$$$</span></div></span></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"x? \leq y?"</span><br/><span class='mathlingua'></span><div class='end-mathlingua-top-level'></div></div></div></span></span></div><div id='literal-1853ac21-779b-4adb-8b21-14d673fc86f3' class='mathlingua-literal-hidden'><span class='mathlingua'><div id='99eee8e2-651e-47f8-a90d-5e72797d6d82-CUSTOM_SUFFIX'><div class='mathlingua-top-level'><span class='mathlingua-id'>[x \real.leq/ y]</span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>States:</span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>given:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument-no-render'>R := (X, +, *, 0, 1, <)</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--48548461850568639-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'R is \real.numbers'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--48548461850568639-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\real.numbers', 'statement--48548461850568639-CUSTOM_SUFFIX')">\real.numbers</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>that:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header-literal'>or:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-2707117138961875967-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'x < y'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement-2707117138961875967-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('<', 'statement-2707117138961875967-CUSTOM_SUFFIX')"><</a></div></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-3658947851615737072-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'x = y'</span></div></span></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class="literal-mathlingua-text-no-render"> "x? \leq y?" </span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>called:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class="literal-mathlingua-text-no-render"> "$x?$ is less than or equal to $y?$" </span></span><div class='end-mathlingua-top-level'></div></div></div></span></div></div><div><button class='mathlingua-flip-icon' onclick="flipEntity('3aa87902-ee69-4b53-b4b8-313651f3c2a4')">&#8226;</button><div id='rendered-3aa87902-ee69-4b53-b4b8-313651f3c2a4' class='mathlingua-rendered-visible'><span class='mathlingua-data'><span class='mathlingua-called'> <p>$x?$ is Greater than or Equal to $y?$</p> </span><span class='mathlingua'><div id='fe82e25c-50c5-4a2f-b92b-88ff5d7bdd98-CUSTOM_SUFFIX'><div class='mathlingua-top-level'><span class='mathlingua-id'>[x \real.geq/ y]</span><br/><span class='mathlingua'><span class='mathlingua-header'>States:</span></span><br/><span class='mathlingua'><span class='mathlingua-header'>given:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument'>$$$R := (X, +, *, 0, 1, <)$$$</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-701273334159186988-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='R is \real.numbers'>$$$R$$$<span class='mathlingua-whitespace'></span><span class='mathlingua-is'>is</span><span class='mathlingua-whitespace'></span>$$$\mathbb{R}$$$</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement-701273334159186988-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\real.numbers', 'statement-701273334159186988-CUSTOM_SUFFIX')">\real.numbers</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>that:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header'>or:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--6428678544797619543-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='y < x'>$$$y < x$$$</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--6428678544797619543-CUSTOM_SUFFIX'></div></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-4964386552692328369-CUSTOM_SUFFIX')"><span class='mathlingua-statement' title='x = y'>$$$x = y$$$</span></div></span></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span>"x? \geq y?"</span><br/><span class='mathlingua'></span><div class='end-mathlingua-top-level'></div></div></div></span></span></div><div id='literal-3aa87902-ee69-4b53-b4b8-313651f3c2a4' class='mathlingua-literal-hidden'><span class='mathlingua'><div id='46ffd214-f86e-48d0-9e16-481d26876929-CUSTOM_SUFFIX'><div class='mathlingua-top-level'><span class='mathlingua-id'>[x \real.geq/ y]</span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>States:</span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>given:</span><span class='mathlingua-whitespace'></span><span class='mathlingua'><span class='mathlingua-argument-no-render'>R := (X, +, *, 0, 1, <)</span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>when:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-7467202857612981387-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'R is \real.numbers'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement-7467202857612981387-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('\\real.numbers', 'statement-7467202857612981387-CUSTOM_SUFFIX')">\real.numbers</a></div></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>that:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class='mathlingua-header-literal'>or:</span><br/><span class='mathlingua'><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement--1661549184981362774-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'y < x'</span></div><div class='mathlingua-dropdown-menu-hidden' id='statement--1661549184981362774-CUSTOM_SUFFIX'><a class='mathlingua-dropdown-menu-item' onclick="mathlinguaViewSignature('<', 'statement--1661549184981362774-CUSTOM_SUFFIX')"><</a></div></span><br/><span class='mathlingua'><span class='mathlingua-whitespace'></span><span class='mathlingua-whitespace'></span><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><div class='mathlingua-statement-container' onclick="mathlinguaToggleDropdown('statement-1780559169550797732-CUSTOM_SUFFIX')"><span class="mathlingua-statement-no-render">'x = y'</span></div></span></span></span></span></span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>written:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class="literal-mathlingua-text-no-render"> "x? \geq y?" </span></span><br/><span class='mathlingua'><span class='mathlingua-header-literal'>called:</span><br/><span class='mathlingua-dot'>.</span><span class='mathlingua-whitespace'></span><span class="literal-mathlingua-text-no-render"> "$x?$ is greater than or equal to $y?$" </span></span><div class='end-mathlingua-top-level'></div></div></div></span></div></div>
+        </div>
+    </body>
