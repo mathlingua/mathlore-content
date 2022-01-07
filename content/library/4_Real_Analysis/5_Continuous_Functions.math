@@ -18,7 +18,7 @@ close two real numbers are.
 Defines: f(x)
 given: R
 when: 'R is \real.numbers'
-evaluated:
+expresses:
 . piecewise:
   when: 'x is \positive:within{R}'
   then: 'f(x) := x'

@@ -188,7 +188,7 @@ the maximum of a set.
 [\supremum:of{X}]
 Defines: beta
 when: 'X is \bounded.above.set'
-means:
+expresses:
 . 'beta is \upper.bound:of{X}'
 . forAll: b
   suchThat: 'b is \upper.bound:of{X}'
@@ -246,7 +246,7 @@ the minimum of a set.
 [\infimum:of{X}]
 Defines: alpha
 when: 'X is \bounded.above.set'
-means:
+expresses:
 . 'alpha is \lower.bound:of{X}'
 . forAll: a
   suchThat: 'a is \lower.bound:of{X}'
@@ -273,7 +273,7 @@ means:
 . 'X is \ordered.set'
 . forAll: E
   suchThat:
-  . 'E is \nonempty.set'
+  . 'E := \nonempty.set'
   . 'E \subset/ S'
   . 'E is \bounded.above.set'
   then:

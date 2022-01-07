@@ -173,8 +173,9 @@ given: A, B, C
 when:
 . 'g is \function:on{A}:to{B}'
 . 'f is \function:on{B}:to{C}'
-means: 'h is \function:on{A}:to{C}'
-evaluated: 'h(x) := f(g(x))'
+expresses:
+. 'h is \function:on{A}:to{C}'
+. 'h(x) := f(g(x))'
 written: "f?? \circ g??"
 called: "function composition"
 
@@ -189,8 +190,9 @@ structure.
 [\identity.function:on{A}]
 Defines: f(x)
 when: 'A is \set'
-means: 'f is \function:on{A}:to{A}'
-evaluated: 'f(x) := x'
+expresses:
+. 'f is \function:on{A}:to{A}'
+. 'f(x) := x'
 written: "\textrm{id}_{A?}"
 called: "identify function on $A?$"
 

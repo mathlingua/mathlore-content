@@ -41,7 +41,7 @@ given: (X, +, *, 0, 1)
 when:
 . 'F := (X, +, *, 0, 1) is \field'
 . 'x in X'
-means:
+expresses:
 . 'x + y = 0'
 written: "-x?"
 called: "additive inverse of $x?$"
@@ -73,7 +73,7 @@ when:
 . 'F := (X, +, *, 0, 1) is \field'
 . 'x in X'
 . 'x \neq/ 0'
-means:
+expresses:
 . 'x * y = 1'
 written: "x??^{-1}"
 called: "multiplicative inverse of $x?$"

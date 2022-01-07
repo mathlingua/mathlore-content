@@ -55,7 +55,7 @@ element* defined below.
 Defines: y
 given: X, *, e
 when: 'G := (X, *, e) is \group'
-means:
+expresses:
 . 'y in X'
 . 'x * y = e'
 . 'y * x = e'
@@ -129,7 +129,7 @@ Theorem:
 given: G := (X, *, e), a, x, y
 when:
 . 'G is \group'
-. 'x, y is \group.inverse:of{a}:within{G}'
+. 'x, y := \group.inverse:of{a}:within{G}'
 then: 'x = y'
 Metadata:
 . resources:

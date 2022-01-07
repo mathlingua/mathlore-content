@@ -70,7 +70,7 @@ a set itself is.
 
 [\empty.set]
 Defines: X
-means:
+expresses:
 . 'X is \set'
 . not:
   . exists: x
@@ -88,10 +88,10 @@ Metadata:
 
 [\nonempty.set]
 Defines: X
-means:
+expresses:
 . 'X is \set'
 . not:
-  . 'X is \empty.set'
+  . 'X := \empty.set'
 written: "\textrm{nonempty set}"
 called: "non-empty set"
 
@@ -204,7 +204,7 @@ condition or conditions.
 
 [\set[x...]:where{within}:suchThat{cond}...]
 Defines: Y := {y...}
-means:
+expresses:
 . 'Y is \set'
 . 'y... := x...'
 written: "\left \{ within? \: | \:
@@ -269,7 +269,7 @@ called: "$A?$ is a strict subset of $B?$"
 [A \set.intersect:within{U}/ B]
 Defines: C
 when: 'A, B, U is \set'
-means: 'C := \set[c]:where{c \in/ U}:suchThat{c \in/ A}{c \in/ B}'
+expresses: 'C := \set[c]:where{c \in/ U}:suchThat{c \in/ A}{c \in/ B}'
 written: "A?? \cap_{U??} B??"
 called: "set intersection of $A?$ and $B?$ within $U?$"
 
@@ -281,7 +281,7 @@ when:
 . 'A, B, U is \set'
 . 'A \subset/ U'
 . 'B \subset/ U'
-means: 'C := A \set.intersect:within{U}/ B'
+expresses: 'C := A \set.intersect:within{U}/ B'
 written: "A?? \cap B??"
 called: "set intersection of $A?$ or $B?$"
 
@@ -292,11 +292,11 @@ when:
 . 'A, B, U is \set'
 . 'A \subset/ U'
 . 'B \subset/ U'
-means: 'C := \set[c]:where{c \in/ U}
-                    :suchThat{
-                      {c \in/ A} \or/
-                      {c \in/ B}
-                    }'
+expresses: 'C := \set[c]:where{c \in/ U}
+                        :suchThat{
+                          {c \in/ A} \or/
+                          {c \in/ B}
+                        }'
 written: "A?? \cup_{U??} B??"
 called: "set union of $A?$ and $B?$ within $U?$"
 
@@ -304,7 +304,7 @@ called: "set union of $A?$ and $B?$ within $U?$"
 [A \set.union/ B]
 Defines: C
 given: U
-means: 'C := A \set.union:within{U}/ B'
+expresses: 'C := A \set.union:within{U}/ B'
 written: "A?? \cup B??"
 called: "set union of $A?$ and $B?$"
 
@@ -312,7 +312,7 @@ called: "set union of $A?$ and $B?$"
 [A \set.minus/ B]
 Defines: C
 when: 'A, B is \set'
-means: 'C := \set[c]:where{c \in/ A}:suchThat{c \notin/ B}'
+expresses: 'C := \set[c]:where{c \in/ A}:suchThat{c \notin/ B}'
 written: "A?? \backslash B??"
 called: "$A?$ set minus $B?$"
 
@@ -320,8 +320,8 @@ called: "$A?$ set minus $B?$"
 [A \symmetric.difference/ B]
 Defines: C
 when: 'A, B is \set'
-means: 'C := {A \set.minus/ B} \set.union/
-                {B \set.minus/ A}'
+expresses: 'C := {A \set.minus/ B} \set.union/
+                 {B \set.minus/ A}'
 written: "A?? \Delta B??"
 called: "symmetric difference of $A?$ and $B?$"
 
@@ -329,7 +329,7 @@ called: "symmetric difference of $A?$ and $B?$"
 [\set.complement{A}:within{U}]
 Defines: B
 when: 'A, U is \set'
-means: 'B := \set[b]:where{b \in/ U}:suchThat{b \notin/ A}'
+expresses: 'B := \set[b]:where{b \in/ U}:suchThat{b \notin/ A}'
 written: "A??^C"
 called: "set complement of $A?$ within $U?$"
 
@@ -337,7 +337,7 @@ called: "set complement of $A?$ within $U?$"
 [A \set.product/ B]
 Defines: X := {x, y}
 when: 'A, B is \set'
-means:
+expresses:
 . 'x in A'
 . 'y in B'
 written: "A?? \times B??"
