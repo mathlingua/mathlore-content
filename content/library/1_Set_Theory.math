@@ -223,7 +223,7 @@ a set.
 States:
 when: 'X is \set'
 that: 'x in X'
-written: "x?? \in X??"
+written: "x+? \in X+?"
 called: "set inclusion"
 
 
@@ -252,7 +252,7 @@ that:
 . forAll: a
   suchThat: 'a in A'
   then: 'a in B'
-written: "A?? \subseteq B??"
+written: "A+? \subseteq B+?"
 called: "$A?$ is a subset of $B?$"
 
 
@@ -262,7 +262,7 @@ when: 'A, B is \set'
 that:
 . 'A \subset/ B'
 . 'A \neq/ B'
-written: "A?? \subsetneq B??"
+written: "A+? \subsetneq B+?"
 called: "$A?$ is a strict subset of $B?$"
 
 
@@ -270,7 +270,7 @@ called: "$A?$ is a strict subset of $B?$"
 Defines: C
 when: 'A, B, U is \set'
 expresses: 'C := \set[c]:where{c \in/ U}:suchThat{c \in/ A}{c \in/ B}'
-written: "A?? \cap_{U??} B??"
+written: "A+? \cap_{U+?} B+?"
 called: "set intersection of $A?$ and $B?$ within $U?$"
 
 
@@ -282,7 +282,7 @@ when:
 . 'A \subset/ U'
 . 'B \subset/ U'
 expresses: 'C := A \set.intersect:within{U}/ B'
-written: "A?? \cap B??"
+written: "A+? \cap B+?"
 called: "set intersection of $A?$ or $B?$"
 
 
@@ -297,7 +297,7 @@ expresses: 'C := \set[c]:where{c \in/ U}
                           {c \in/ A} \or/
                           {c \in/ B}
                         }'
-written: "A?? \cup_{U??} B??"
+written: "A+? \cup_{U+?} B+?"
 called: "set union of $A?$ and $B?$ within $U?$"
 
 
@@ -305,7 +305,7 @@ called: "set union of $A?$ and $B?$ within $U?$"
 Defines: C
 given: U
 expresses: 'C := A \set.union:within{U}/ B'
-written: "A?? \cup B??"
+written: "A+? \cup B+?"
 called: "set union of $A?$ and $B?$"
 
 
@@ -313,7 +313,7 @@ called: "set union of $A?$ and $B?$"
 Defines: C
 when: 'A, B is \set'
 expresses: 'C := \set[c]:where{c \in/ A}:suchThat{c \notin/ B}'
-written: "A?? \backslash B??"
+written: "A+? \backslash B+?"
 called: "$A?$ set minus $B?$"
 
 
@@ -322,7 +322,7 @@ Defines: C
 when: 'A, B is \set'
 expresses: 'C := {A \set.minus/ B} \set.union/
                  {B \set.minus/ A}'
-written: "A?? \Delta B??"
+written: "A+? \Delta B+?"
 called: "symmetric difference of $A?$ and $B?$"
 
 
@@ -330,7 +330,7 @@ called: "symmetric difference of $A?$ and $B?$"
 Defines: B
 when: 'A, U is \set'
 expresses: 'B := \set[b]:where{b \in/ U}:suchThat{b \notin/ A}'
-written: "A??^C"
+written: "A+?^C"
 called: "set complement of $A?$ within $U?$"
 
 
@@ -340,7 +340,7 @@ when: 'A, B is \set'
 expresses:
 . 'x in A'
 . 'y in B'
-written: "A?? \times B??"
+written: "A+? \times B+?"
 called: "cartesian product of $A?$ and $B?$"
 
 

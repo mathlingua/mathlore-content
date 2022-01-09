@@ -17,7 +17,7 @@ existence.  As such we describe them informally.
 
 [\integers.set]
 Defines: N
-means:
+expresses:
 . "The set of numbers {$\ldots, -2, -1, 0, 1, 2, \ldots$} "
 viewing:
 . as: '\set'
@@ -50,50 +50,50 @@ and so we simply state their existence below.
 
 [x \integers.+/ y]
 Defines: z
-means: "The addition of two integers"
-written: "x?? + y??"
+expresses: "The addition of two integers"
+written: "x+? + y+?"
 called: "integer addition"
 
 
 [x \integers.-/ y]
 Defines: z
-means: "The difference of two integers"
-written: "x?? - y??"
+expresses: "The difference of two integers"
+written: "x+? - y+?"
 called: "integer subtraction"
 
 
 [x \integers.*/ y]
 Defines: z
-means: "The product of two integers"
-written: "x?? y??"
+expresses: "The product of two integers"
+written: "x+? y+?"
 called: "integer multiplication"
 
 
 [x \integers.geq/ y]
-Defines: z
-means: "$x?$ is greater than or equal to $y?$"
-written: "x?? \geq y??"
+States:
+that: "$x?$ is greater than or equal to $y?$"
+written: "x+? \geq y+?"
 called: "$x?$ is greater than or equal to $y?$"
 
 
 [x \integers.gt/ y]
-Defines: z
-means: "$x?$ is greater than $y?$"
-written: "x?? > y??"
+States:
+that: "$x?$ is greater than $y?$"
+written: "x+? > y+?"
 called: "$x?$ is greater than $y?$"
 
 
 [x \integers.leq/ y]
-Defines: z
-means: "$x?$ is less than or equal to $y?$"
-written: "x?? \leq y??"
+States:
+that: "$x?$ is less than or equal to $y?$"
+written: "x+? \leq y+?"
 called: "$x?$ is less than or equal to $y?$"
 
 
 [x \integers.lt/ y]
-Defines: z
-means: "$x?$ is less than $y?$"
-written: "x?? < y??"
+States:
+that: "$x?$ is less than $y?$"
+written: "x+? < y+?"
 called: "$x?$ is less than $y?$"
 
 
@@ -107,7 +107,7 @@ denominator.
 
 [\rationals.set]
 Defines: Q
-means: 'Q := \set[x, p, q]:where{x := (p, q)}
+expresses: 'Q := \set[x, p, q]:where{x := (p, q)}
                           :suchThat{p in \integers.set}
                                    {q in \integers.set}'
 written: "\mathbb{Q}"
@@ -131,10 +131,10 @@ as the product of $a$ and the multiplicative inverse of $b$
 
 [\Rational{a, b}]
 Defines: x
-means:
+expresses:
 . 'x := (a, b)'
 . 'x in \rationals.set'
-written: "\frac{a?}{b?}"
+written: "\frac{a-?}{b-?}"
 called: "rational"
 
 
@@ -151,12 +151,12 @@ given: p1, q1, p2, q2
 when:
 . 'x := \Rational{p1, q1}'
 . 'y := \Rational{p2, q2}'
-means:
+expresses:
 . 'z := \Rational{p1 * q2 + p2*q1, q1 * q2}'
 using:
 . 'a * b := a \integers.*/ b'
 . 'a + b := a \integers.+/ b'
-written: "x?? + y??"
+written: "x+? + y+?"
 called: "rational addition"
 
 
@@ -166,7 +166,7 @@ given: p1, q1, p2, q2
 when:
 . 'x := \Rational{p1, q1}'
 . 'y := \Rational{p2, q2}'
-means:
+expresses:
 . 'z := \Rational{p1 * p2, q1 * q2}'
 . 'A = 0'
 . 'f(x) = 0'
@@ -174,7 +174,7 @@ using:
 . 'A := 0'
 . 'f(x) := 0'
 . 'a * b := a \integers.*/ b'
-written: "x?? y??"
+written: "x+? y+?"
 called: "rational multiplication"
 
 
@@ -192,7 +192,7 @@ above becomes a field.
 
 [\rationals.field]
 Defines: Q := (X, +, *, 0, 1)
-means:
+expresses:
 . 'Q is \field'
 . 'X := \rationals.set'
 . 'x + y := x \rational.+/ y'
@@ -212,10 +212,10 @@ means for $x < y$ for two rational numbers $x$ and $y$.
 [x \rational.lt/ y]
 States:
 given: Q
-when: 'Q is \rationals.field'
+when: 'Q := \rationals.field'
 that:
 . 'y \field{Q}.-/ x is \positive:within{Q}'
-written: "x?? < y??"
+written: "x+? < y+?"
 called: "$x?$ is less than $y?$"
 
 

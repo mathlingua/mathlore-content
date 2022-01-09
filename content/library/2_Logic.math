@@ -53,7 +53,7 @@ States:
 when: 'P is \proposition'
 that:
 . not: 'P'
-written: "\neg P??"
+written: "\neg P+?"
 called: "not $P?$"
 
 

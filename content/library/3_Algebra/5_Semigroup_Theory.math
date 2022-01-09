@@ -30,5 +30,5 @@ means:
 . forAll: x1, x2
   suchThat: 'x1, x2 in X'
   then: 'f(x1 * x2) = f(x1) ** f(x2)'
-written: "\textrm{semigroup morphism on } M?? \textrm{ to } N??"
+written: "\textrm{semigroup morphism on } M+? \textrm{ to } N+?"
 called: "semigroup morphism on $M?$ to $N?$"

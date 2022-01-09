@@ -19,7 +19,7 @@ means:
     suchThat:
     . 'b in B'
     . 'f(a) = b'
-written: "f? : A?? \mapsto B??"
+written: "f? : A+? \mapsto B+?"
 called: "function on A? to B?"
 
 
@@ -122,7 +122,7 @@ means:
 . forAll: b
   suchThat: 'b in B'
   then: 'f(g(b)) = b'
-written: "f??^{-1}"
+written: "f+?^{-1}"
 called: "inverse of $f?$"
 
 
@@ -138,7 +138,7 @@ Defines: f(x, y)
 when: 'X is \set'
 means: 'f is \function:on{X \set.product/ X}:to{X}'
 written: "\textrm{binary operation on } X?"
-called: "f"
+called: "binary operation on $X?$"
 
 
 ::
@@ -176,7 +176,7 @@ when:
 expresses:
 . 'h is \function:on{A}:to{C}'
 . 'h(x) := f(g(x))'
-written: "f?? \circ g??"
+written: "f+? \circ g+?"
 called: "function composition"
 
 

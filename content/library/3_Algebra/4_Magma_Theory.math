@@ -35,5 +35,5 @@ means:
 . forAll: x_1, x_2
   suchThat: 'x_1, x_2 in X_1'
   then: 'f(x_1 *_1 x_2) = f(x_1) *_2 f(x_2)'
-written: "\textrm{magma morphism on } M_1?? \textrm{ to } M_2??"
+written: "\textrm{magma morphism on } M_1+? \textrm{ to } M_2+?"
 called: "magma morphism on $M_1?$ to $M_2?$"

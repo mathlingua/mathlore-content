@@ -59,7 +59,7 @@ expresses:
 . 'y in X'
 . 'x * y = e'
 . 'y * x = e'
-written: "{x??^{-1}}"
+written: "{x+?^{-1}}"
 called: "group inverse of $x?$"
 Metadata:
 . resources:
