@@ -13,6 +13,8 @@ Resource:
 . homepage: "http://bass.math.uconn.edu/real.html"
 . url: "http://bass.math.uconn.edu/v41.pdf"
 . offset: "19"
+------------------------------------------
+Id: "ffe77340-d174-4c71-ba40-d5fa61bffc4b"
 
 
 [TrenchIntroToRealAnalysis]
@@ -22,6 +24,8 @@ Resource:
 . author: "William F. Trench"
 . url: "https://digitalcommons.trinity.edu/cgi/viewcontent.cgi?article=1006&context=mono"
 . offset: "10"
+------------------------------------------
+Id: "d99e48bc-647a-4d94-84d6-5a31461d7da1"
 
 
 [@basic.analysis.I]
@@ -31,6 +35,8 @@ Resource:
 . author: "Jiří Lebl"
 . url: "https://www.jirka.org/ra/realanal.pdf"
 . offset: "0"
+------------------------------------------
+Id: "71289b86-8a25-4b83-93db-4c6c83845151"
 
 
 ::
@@ -45,3 +51,5 @@ Resource:
 . author: "Thomas W. Judson"
 . url: "http://abstract.ups.edu/download/aata-20140815.pdf"
 . offset: "11"
+------------------------------------------
+Id: "786e3822-a4c1-4e5b-84dd-83bfbf8df685"

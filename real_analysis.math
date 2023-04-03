@@ -1,0 +1,46 @@
+
+[\real.sqrt(x)]
+Defines: f(x) := y
+means: 'f is \function:on{\reals}:to{\reals}'
+specifies:
+. 'y > 0'
+. 'y^2 = x'
+------------------------------------------
+Id: "19f87c85-964d-417a-b91e-a2f600259d75"
+
+
+[\uniqueness.of.positive.nth.root]
+Theorem:
+given: x, n
+where:
+. 'x is \real'
+. 'n is \positive.integer'
+then:
+. existsUnique: y
+  where: 'y is \real'
+  suchThat:
+  . 'y > 0'
+  . 'y^n = x'
+------------------------------------------
+Id: "33e40ee0-5046-4535-9a09-747f254a6c40"
+
+
+[\real.nth.root(x)]
+Defines: f(x) := y
+when: 'n is \positive.integer'
+means: 'f is \function:on{\reals}:to{\reals}'
+specifies:
+. 'y > 0'
+. 'y^n = x'
+Justified:
+. by: "\[uniqueness.of.positive.nth.root]"
+------------------------------------------
+Id: "e94770b4-62b0-4acd-8cf0-c18a26d89217"
+
+
+[\real.square(x)]
+Defines: f(x)
+means: 'f is \function:on{\reals}:to{\reals}'
+specifies: 'f(x) := x^2'
+------------------------------------------
+Id: "bd82c6f5-13de-4b95-a9fd-6ff4cda2a7ea"
