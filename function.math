@@ -1,0 +1,177 @@
+
+::
+# Functions
+
+Functions are a fundamental concept of mathematics that describe mappings
+between mathematical structures.  The distinctive characteristic of a function
+is that it maps an input to a *unique* output.
+::
+
+
+[\function:on{A}:to{B}]
+Describes: f(x)
+when: 'A, B is \set'
+extends:
+. 'x [in]: A'
+. 'f(x) [in]: B'
+satisfies:
+. forAll: a
+  where: 'a [in]: A'
+  then:
+  . existsUnique: b
+    where: 'b [in]: B'
+    suchThat: 'f(a) = b'
+Documented:
+. written: "f? : A+? \mapsto B+?"
+. called: "function on A? to B?"
+------------------------------------------
+Id: "dd66298e-4e01-400b-897b-712c4c0892a1"
+
+
+::
+In general, a function can map two distinct inputs to the same output.  If a
+particular function always maps distinct inputs to distinct outputs it is
+called an *injective function*.
+::
+
+
+[\injective.function:on{A}:to{B}]
+Describes: f(x)
+when: 'A, B is \set'
+extends: 'f is \function:on{A}:to{B}'
+satisfies:
+. forAll: x1, x2
+  where: 'x1, x2 [in]: A'
+  then:
+  . if: 'f(x1) = f(x2)'
+    then: 'x1 = x2'
+Documented:
+. written:
+  . "\textrm{injective function on } A? \textrm{ to } B?"
+  . "\textrm{one-to-one function on } A? \textrm{ to } B?"
+. called: "injective function on $A?$ to $B?$"
+. overview: "
+    A injective function maps distinct inputs to distinct outputs.  Note that
+    these types of functions are also said to be *one-to-one*."
+------------------------------------------
+Id: "84e7fd56-af43-441b-bc58-8b6093b14443"
+
+
+::
+Similarly, in general, for the function $f$ where $'f$ is a function on $A$ to
+$B$ it is possible for there to be an element $b \in B$ such that there doesn't
+exist any $a \in A$ that maps to $b$, i.e. $f(a) = b$.
+
+If a particular function has the property that every output is mapped to by
+at least one input, it is called a **surjective function**.
+::
+
+
+[\surjective.function:on{A}:to{B}]
+Describes: f(x)
+when: 'A, B is \set'
+extends: 'f is \function:on{A}:to{B}'
+satisfies:
+. forAll: b
+  where: 'b [in]: B'
+  then:
+  . exists: a
+    where: 'a [in]: A'
+    suchThat: 'f(a) = b'
+Documented:
+. written:
+  . "\textrm{surjective function on } A? \textrm{ to } B?"
+  . "\textrm{onto function on } A? \textrm{ to } B? "
+. called:
+  . "surjective function on $A?$ to $A?$"
+. overview: "
+    A surjective function $'\function:on{A}:to{B}'$ satisfies the property
+    that for every element $'b \in/ B'$ there exists at least one element in
+    $A$ that maps to $b$.  Note, though, that there may be more than one
+    element.  Surjective functions are also said to be *onto*."
+------------------------------------------
+Id: "0e38e388-ca17-482f-aec3-8c5c4ff87e12"
+
+
+::
+Functions that are both one-to-one and onto are special because they can be
+"undone", and are called bijective functions.
+::
+
+
+[\bijective.function:on{A}:to{B}]
+Describes: f(x)
+when: 'A, B is \set'
+extends:
+. 'f is \injective.function:on{A}:to{B}'
+. 'f is \surjective.function:on{A}:to{B}'
+Documented:
+. written: "\textrm{bijective function on } A? \text{ to } B?"
+. called: "bijective function on $A?$ to $B?$"
+------------------------------------------
+Id: "d7b1e64f-1769-4385-a075-fcb4ac6d90a1"
+
+
+::
+The inverse of a function is a function that "undoes" that function.
+::
+
+
+[\function.inverse:of{f}]
+Defines: g(x)
+using: A, B
+when: 'f is \function:on{A}:to{B}'
+means: 'g is \function:on{B}:to{A}'
+specifies:
+. forAll: a
+  where: 'a [in]: A'
+  then: 'g(f(a)) = a'
+. forAll: b
+  where: 'b [in]: B'
+  then: 'f(g(b)) = b'
+Documented:
+. written: "f+?^{-1}"
+. called: "inverse of $f?$"
+------------------------------------------
+Id: "bc3d179e-0d30-4a25-98f9-0a4200d68806"
+
+
+::
+Function composition is a basic method for building functions out of other
+functions.
+::
+
+
+[f \function.compose/ g]
+Defines: h(x)
+using: A, B, C
+when:
+. 'g is \function:on{A}:to{B}'
+. 'f is \function:on{B}:to{C}'
+means: 'h is \function:on{A}:to{C}'
+specifies: 'h(x) := f(g(x))'
+Documented:
+. written: "f+? \circ g+?"
+. called: "function composition"
+------------------------------------------
+Id: "85db5d32-e2a8-4951-94b3-be9093ccf3b0"
+
+
+::
+Some types of functions need more structure, such as a group or ring structure,
+to define, but the identify function on a set $A$ does not need any such
+structure.
+::
+
+
+[\identity.function:on{A}]
+Defines: f(x)
+when: 'A is \set'
+means: 'f is \function:on{A}:to{A}'
+specifies: 'f(x) := x'
+Documented:
+. written: "\textrm{id}_{A?}"
+. called: "identify function on $A?$"
+------------------------------------------
+Id: "a28941e4-23f3-44e9-bc22-eb7cd53bb819"
+
