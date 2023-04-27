@@ -1,4 +1,12 @@
 
+[\set]
+Describes: X
+Documented:
+. called: "set"
+------------------------------------------
+Id: "215276a8-31d9-44eb-84df-d646ca7dabfd"
+
+
 [X \set.cross/ Y]
 Defines: Z
 means: 'Z is \set'
@@ -7,6 +15,6 @@ Provides:
 . '(x, y) [in]: Z :-> x [in]: X \and/ y [in]: Y'
 Documented:
 . called: "cross product of X? and Y?"
-. written: "X? \cross Y?"
+. written: "X? \times Y?"
 ------------------------------------------
 Id: "f0038397-9b91-4c06-9ba4-9c14b11c52d4"
