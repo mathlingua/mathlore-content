@@ -1,4 +1,13 @@
 
+[\reals]
+Defines: R
+Documented:
+. written: "\mathbb{R}"
+. called: "reals"
+------------------------------------------
+Id: "aecb5b16-2e9a-4602-b489-1b81a5cdca0f"
+
+
 [\real.sqrt(x)]
 Defines: f(x) := y
 means: 'f is \function:on{\reals}:to{\reals}'
