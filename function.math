@@ -22,7 +22,7 @@ satisfies:
     where: 'b [in]: B'
     suchThat: 'f(a) = b'
 Documented:
-. written: "f? : A+? \mapsto B+?"
+. written: "f? : A? \rightarrow B?"
 . called: "function on A? to B?"
 ------------------------------------------
 Id: "dd66298e-4e01-400b-897b-712c4c0892a1"

@@ -14,7 +14,7 @@ Theorem:
 given: x, n
 where:
 . 'x is \real'
-. 'n is \positive.integer'
+. 'n is \positive.natural'
 then:
 . existsUnique: y
   where: 'y is \real'
@@ -27,7 +27,7 @@ Id: "33e40ee0-5046-4535-9a09-747f254a6c40"
 
 [\real.nth.root(x)]
 Defines: f(x) := y
-when: 'n is \positive.integer'
+when: 'n is \positive.natural'
 means: 'f is \function:on{\reals}:to{\reals}'
 specifies:
 . 'y > 0'

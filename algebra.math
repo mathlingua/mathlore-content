@@ -2,7 +2,7 @@
 [\binary.operation:on{G}]
 Describes: x * y
 when: 'G is \set'
-extends: '"*" is \function:on{G [cross] G}:to{G}'
+extends: '"*" is \function:on{G [times] G}:to{G}'
 Documented:
 . called: "binary operation on G?"
 ------------------------------------------
