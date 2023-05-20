@@ -32,7 +32,7 @@ satisfies:
   where: 'x, y [in]: G'
   then: 'x * y = y * x'
 Documented:
-. called: "associative binary operation on G?"
+. called: "commutative binary operation on G?"
 ------------------------------------------
 Id: "e3f3d946-9798-4059-8a01-0d6a796385b7"
 
@@ -288,7 +288,7 @@ Id: "029fa21a-8527-4a08-9035-d5a29d8014f6"
 
 [\field]
 Defines: F := (X, +, *, 0, 1)
-means: 'F is \commutative.ring, \nontrivial.ring'
+means: 'F is \commutative.ring & \nontrivial.ring'
 specifies:
 . forAll: x
   where: 'x [in]: X'
@@ -341,7 +341,7 @@ Id: "cc86372f-3d01-4a51-b89b-0db61149dc1c"
 
 [\division.ring]
 Describes: R
-extends: 'R is \commutative.ring, \nontrivial.ring'
+extends: 'R is \commutative.ring & \nontrivial.ring'
 satisfies:
 . forAll: x
   where: 'x [in]: R'
