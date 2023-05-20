@@ -7,12 +7,29 @@ Documented:
 Id: "104595cc-82ef-4c94-b60c-0b1672732718"
 
 
+[\set.element:of{X}]
+Describes: x
+when: 'X is \set'
+Documented:
+. called: "element of set $X?$"
+------------------------------------------
+Id: "ad51829a-9518-42a5-917c-f8e1fb117640"
+
+
+[\set:of[x...]{f(x...) | g(x...)...}]
+Describes: X
+Documented:
+. written: "\left \{ f? \: | \: g?{... \text{ and } ...} \right \}"
+------------------------------------------
+Id: "f11cdc54-0ffd-480a-8e87-d491522c8857"
+
+
 [X \set.cross/ Y]
 Defines: Z
 means: 'Z is \set'
-specifies: 'Z := \Set{(x,y) | x [in]: X ; y [in]: Y}'
+specifies: 'Z := \set:of[x,y]{(x,y) | x [in]: X ; y [in]: Y}'
 Provides:
-. '(x, y) [in]: Z :-> x [in]: X \and/ y [in]: Y'
+. '(x, y) [in]: Z :-> x [in]: X; y [in]: Y'
 Documented:
 . called: "cross product of X? and Y?"
 . written: "X? \times Y?"

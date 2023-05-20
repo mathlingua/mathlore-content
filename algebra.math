@@ -69,7 +69,7 @@ Describes: S := (X, *)
 extends: 'S is \magma'
 satisfies: '"*" is \associative.binary.operation:on{S}'
 Provides:
-. symbol: 'x [in]: S :-> x is \semigroup.operation:of{S}'
+. symbol: 'x [in]: S :-> x is \semigroup.element:of{S}'
   written: "x? \in S?"
 Documented:
 . called: "semigroup"
@@ -127,8 +127,10 @@ specifies:
 . 'y * x = G.e'
 Justified:
 . by: "\[group]::[existence of inverses]"
+Documented:
+. written: "x?^{-1}"
 ------------------------------------------
-Id: "06666f7a-3d9e-499f-8a08-809c148a9a90"
+Id: "2293a62b-71a4-431e-82a1-c7613a52267f"
 
 
 [\group]
@@ -263,9 +265,9 @@ Defines: R := (X, +, *, 0, 1)
 means: 'R is \ring'
 specifies:
 . '0 = 1'
-. 'x + y := \function[x, y]{0}:on{X}'
-. 'x * y := \function[x, y]{0}:on{X}'
-. 'X := \set{0}'
+. 'x + y := 0'
+. 'x * y := 0'
+. 'X := \set:of[x]{x | x = 0}'
 Documented:
 . called:
   . "the zero ring"

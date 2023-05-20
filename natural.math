@@ -57,7 +57,7 @@ Id: "6214d07e-66f8-471d-a528-3c243ccf7fc7"
 [\natural.set]
 Defines: N
 means: 'N is \set'
-specifies: 'N := \Set[n]{n | n is \natural}'
+specifies: 'N := \set:of[n]{n | n is \natural}'
 Documented:
 . written: "\mathbb{N}"
 . called: "the set of natural numbers"
@@ -70,7 +70,7 @@ Defines: N := (X, 0, succ(x))
 specifies:
 . 'X := \natural.set'
 . '0 := \natural.0'
-. 'succ := \natural.succ'
+. 'succ(x) := \natural.succ(x)'
 Provides:
 . 'n [in]: N :-> n [in]: X'
 ------------------------------------------
