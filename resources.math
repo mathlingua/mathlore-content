@@ -1,9 +1,17 @@
-
 ::
 # Resources
 
 ## Analysis
 ::
+
+[tao.analysis.I]
+Resource:
+. type: "Book"
+. name: "Analysis I"
+. author: "Terence Tao"
+------------------------------------------
+Id: "a1026873-edf6-44dc-a7c3-90a139a13c71"
+
 
 [BassRealAnalysisForGraduateStudents]
 Resource:

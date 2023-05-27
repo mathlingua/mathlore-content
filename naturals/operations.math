@@ -1,0 +1,73 @@
+
+[n \natural.+/ m]
+Defines: n + m
+specifies:
+. piecewise:
+  if: 'n = 0'
+  then: 'n + m := m'
+  if:
+  . exists: k
+    where: 'k is \natural'
+    suchThat: 'n = k++'
+  then:
+  . 'n + m := (k + m)++'
+Documented:
+. written: "n? + m?"
+. called: "natural addition of $n?$ and $m?$"
+------------------------------------------
+Id: "1c35d85a-35d0-401b-9409-f093ec8efe5f"
+
+
+Theorem:
+given: n
+where: 'n is \natural'
+then: 'n + 0 = n'
+------------------------------------------
+Id: "03846df7-fee4-4753-a283-4eeb11472d4a"
+
+
+Theorem:
+given: n, m
+where: 'n, m is \natural'
+then: 'n + (m++) = (n + m)++'
+------------------------------------------
+Id: "d36eda04-b172-45f7-831c-501cb46257bb"
+
+
+[\natural.addition.is.commutative]
+Theorem:
+given: n, m
+where: 'n, m is \natural'
+then: 'n + m = m + n'
+------------------------------------------
+Id: "3f6f571e-84a4-4e71-b71d-3517230bea4d"
+
+
+[\natural.addition.is.associative]
+Theorem:
+given: a, b, c
+where: 'a, b, c is \natural'
+then: '(a + b) + c = a + (b + c)'
+------------------------------------------
+Id: "75abcf89-8c2e-4cc7-b2dc-f270a07b97eb"
+
+
+[\natural.cancellation.law]
+Theorem:
+given: a, b, c
+where: 'a, b, c is \natural'
+if: 'a + b = a + c'
+then: 'b = c'
+------------------------------------------
+Id: "131fe768-5e7a-48d2-a93d-044b31d5152a"
+
+
+Theorem:
+given: a, b
+where: 'a, b is \natural'
+if: 'a + b = 0'
+then:
+. 'a = 0'
+. 'b = 0'
+------------------------------------------
+Id: "91369cbd-3a99-4845-8e3a-6e4fadd47c3d"

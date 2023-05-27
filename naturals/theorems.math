@@ -1,0 +1,28 @@
+
+Theorem:
+given: a, b, c
+where: 'a, b, c is \natural'
+then:
+. 'a >= a'
+. if:
+  . 'a >= b'
+  . 'b >= c'
+  then:
+  . 'a >= c'
+. if:
+  . 'a >= b'
+  . 'b >= a'
+  then:
+  . 'a = b'
+. iff: 'a >= b'
+  then: 'a + c >= b + c'
+. iff: 'a < b'
+  then: 'a++ <= b'
+. iff: 'a < b'
+  then:
+  . exists: d
+    where: 'd is \positive.natural'
+    suchThat: 'b = a + d'
+References: "$tao.analysis.I:page{31}"
+------------------------------------------
+Id: "d1f8af93-b7d5-4cfd-a79e-e200b7e300df"

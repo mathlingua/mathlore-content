@@ -1,0 +1,34 @@
+::
+# Positive Natural Numbers
+::
+
+[\positive.natural]
+Describes: n
+extends: 'n is \natural'
+satisfies: 'n != 0'
+Documented:
+. called: "positive natural number"
+------------------------------------------
+Id: "84feca17-5ccb-4c5b-b687-91ba0e40b7cc"
+
+
+Theorem:
+given: a, b
+where:
+. 'a is \positive.natural'
+. 'b is \natural'
+then:
+. 'a + b, b + a is \positive.natural'
+------------------------------------------
+Id: "a37544cb-bc09-40c7-9003-132bdd5e1911"
+
+
+Theorem:
+given: a
+where: 'a is \positive.natural'
+then:
+. existsUnique: b
+  where: 'b is \natural'
+  suchThat: 'a = b++'
+------------------------------------------
+Id: "141e40ca-34c6-42ad-ac53-2067f7c27933"
