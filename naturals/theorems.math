@@ -26,3 +26,35 @@ then:
 References: "$tao.analysis.I:page{31}"
 ------------------------------------------
 Id: "d1f8af93-b7d5-4cfd-a79e-e200b7e300df"
+
+
+[\natural.multiplication.is.commutative]
+Theorem:
+given: n, m
+where: 'n, m is \natural'
+then: 'n*m = m *n'
+------------------------------------------
+Id: "eaed75d2-4594-4598-b688-bf3fba58449f"
+
+
+Theorem:
+given: n, m
+where: 'n, m is \natural'
+iff: 'n*m = 0'
+then:
+. anyOf:
+  . 'n = 0'
+  . 'm = 0'
+------------------------------------------
+Id: "e41b1938-7477-4ed8-8960-d9c730b5bd84"
+
+
+[\natural.distributive.law]
+Theorem:
+given: a, b, c
+where: 'a, b, c is \natural'
+then:
+. 'a*(b + c) = a*b + a*c'
+. '(b + c)*a = b*a + c*a'
+------------------------------------------
+Id: "dd82994d-124a-43b1-aeb4-40f18e3e4760"

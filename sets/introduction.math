@@ -1,14 +1,154 @@
 ::
 # Set Theory
+
+Several different frameworks can serve as a foundation for mathematics
+including type theory and category theory.
+
+A common framework is *Zermelo-Fraenkel Set Theory*, that we describe here.
+In this theory, everything in mathematics can be described in terms of sets
+and care must be taken to carefully define what is, and is not, a set to avoid
+paradoxes.
+
+However, one can think of a set as a collection of things, the view of
+*naive set theory*.  The conditions that are necessary to make this informal
+definition precise are given below.
+
+## Zermelo-Fraenkel Set Theory
+
+Before continuing, we need to specify what it means for two sets to be equal.
+Later, we will get into the precise definition what a set is.
 ::
 
 
-[\set]
-Describes: X
+[x \set.=/ y]
+States:
+when: 'x, y is \set'
+that:
+. forAll: z
+  where: 'z [in]: x'
+  then: 'z [in]: y'
+. forAll: z
+  where: 'z [in]: y'
+  then: 'z [in]: x'
 Documented:
-. called: "set"
+. written: "x? = y?"
 ------------------------------------------
-Id: "104595cc-82ef-4c94-b60c-0b1672732718"
+Id: "6eb00a16-692c-493a-8845-20aa4ad8445e"
+
+
+::
+The empty set needs to be defined explicitly as it is used to define what
+a set itself is.
+::
+
+
+[\empty.set]
+Defines: X
+means: 'X is \set'
+specifies:
+. not:
+  . exists: x
+    where: 'x is \set'
+    suchThat: 'x [in]: X'
+Documented:
+. written: "\emptyset"
+. overview: "An empty set is a set that doesn't contain any elements."
+------------------------------------------
+Id: "97674113-6c06-48bc-9b90-69cb68224a41"
+
+
+::
+**Zermelo-Fraekel Set Theory** builds sets as collections of things that
+satisfy a specified propery.  The following definition explicitly calls a
+property of that type a *\set.property*.
+::
+
+
+[\set.property(x)]
+Defines: P(x)
+means: 'P is [: statement :]'
+Documented:
+. written: "P?(x?)"
+------------------------------------------
+Id: "2f4b3fb2-eb8a-4218-9f60-4854ecd7426e"
+
+
+::
+The following are axioms that form the backbone of the conditions that
+describe what a set is.  These axioms need to be carefully articulated
+to avoid paradoxes forming.
+::
+
+
+[\set.axiom.of.extensionality]
+Axiom:
+given: x, y
+where: 'x, y is \set'
+if:
+. forAll: z
+  where: 'z is \set'
+  then:
+  . iff: 'z [in]: x'
+    then: 'z [in]: y'
+then:
+. 'x = y'
+Documented:
+. called: "Axiom of Extensionality"
+------------------------------------------
+Id: "d4da335c-9a6b-49ea-a35e-1f4c1a45ce4b"
+
+
+[\set.axiom.existence.of.empty.set]
+Axiom:
+then:
+. exists: e
+  where: 'e is \set'
+  suchThat: 'e = \empty.set'
+Documented:
+. called: "Axiom of Existence of Empty Set"
+------------------------------------------
+Id: "fbcbfe6c-1790-44bf-b92f-edff8e26d71c"
+
+
+[\set.axiom.of.regularity]
+Axiom:
+given: x
+where: 'x is \set'
+if: 'x != \empty.set'
+then:
+. exists: y
+  where: 'y is \set'
+  suchThat:
+  . 'y [in]: x'
+  . not:
+    . 'x [in]: y'
+Documented:
+. called: "Axiom of Regularity"
+------------------------------------------
+Id: "42c4e559-f8f6-4d99-9175-13f5b97e1c61"
+
+
+[\set.axiom.of.unordered.pair]
+Axiom:
+given: x, y
+where: 'x, y is \set'
+then:
+. exists: z
+  where: 'z is \set'
+  suchThat:
+  . anyOf:
+    . 'x [in]: z'
+    . 'y [in]: z'
+Documented:
+. called: "Axiom of Unordered Pair"
+------------------------------------------
+Id: "e73ac546-fb9c-4915-856a-7df0bc10f751"
+
+
+::
+With all of the necessary machinery in place, the precise definition of what
+a set is can be made.
+::
 
 
 [\set.element:of{X}]
@@ -20,6 +160,29 @@ Documented:
 Id: "ad51829a-9518-42a5-917c-f8e1fb117640"
 
 
+[\set]
+Defines: X
+specifies:
+. '\set.axiom.existence.of.empty.set'
+. '\set.axiom.of.extensionality'
+. '\set.axiom.of.regularity'
+. '\set.axiom.of.unordered.pair'
+Provides:
+. 'x = y :=> x \set.=/ y'
+. 'x [in]: X :-> x is \set.element:of{X}'
+Documented:
+. called: "set"
+------------------------------------------
+Id: "b1f956e7-16a5-4991-8426-5ac478851895"
+
+
+::
+The following describes what is refered to as "set builder notation" by
+building a set of all elements within another set that satisfying a certain
+condition or conditions.
+::
+
+
 [\set:of[x...]{f(x...) | g(x...)...}]
 Describes: X
 Documented:
@@ -28,14 +191,86 @@ Documented:
 Id: "f11cdc54-0ffd-480a-8e87-d491522c8857"
 
 
-[X \set.cross/ Y]
-Defines: Z
-means: 'Z is \set'
-specifies: 'Z := \set:of[x,y]{(x,y) | x [in]: X ; y [in]: Y}'
-Provides:
-. '(x, y) [in]: Z :-> x [in]: X; y [in]: Y'
+::
+## Building Sets from Other Sets
+
+Now we have the machinery necessary to describe how to build sets from other
+sets.
+::
+
+
+[A \subset/ B]
+States:
+when: 'A, B is \set'
+that:
+. forAll: a
+  where: 'a [in]: A'
+  then: 'a [in]: B'
 Documented:
-. called: "cross product of X? and Y?"
-. written: "X? \times Y?"
+. written: "A? \subseteq B?"
 ------------------------------------------
-Id: "f0038397-9b91-4c06-9ba4-9c14b11c52d4"
+Id: "c20a5eaa-5c1b-448c-9678-cdc53a7dabcf"
+
+
+[A \strict.subset/ B]
+States:
+when: 'A, B is \set'
+that:
+. 'A \subset/ B'
+. 'A != B'
+Documented:
+. written: "A? \subsetneq B?"
+------------------------------------------
+Id: "d246567b-c4b3-411f-abee-831573e50f82"
+
+
+[A \set.intersect:within{U}/ B]
+Defines: C
+when: 'A, B, U is \set'
+suchThat:
+. 'A, B \subset/ U'
+means: 'C is \set'
+specifies: 'C := \set:of[c]{c | c [in]: A; c [in]: B}'
+Documented:
+. written: "A? \cap_{U?} B?"
+------------------------------------------
+Id: "749a8b85-798e-43cc-8bfc-d54affd4370f"
+
+
+[A \set.intersect/ B]
+Defines: C
+using: U
+when:
+. 'A, B, U is \set'
+suchThat:
+. 'A, B \subset/ U'
+means: 'C is \set'
+specifies: 'C := A \set.intersect:within{U}/ B'
+Documented:
+. written: "A? \cap B?"
+------------------------------------------
+Id: "31125a8e-e201-4b92-8f15-0d3f5cd22b4f"
+
+
+[A \set.union:within{U}/ B]
+Defines: C
+when: 'A, B, U is \set'
+suchThat: 'A, B \subset/ U'
+means: 'C is \set'
+specifies: 'C := \set:of[c]{c | (c [in]: A) \or/ (c [in]: B)}'
+Documented:
+. written: "A? \cup_{U?} B?"
+------------------------------------------
+Id: "90df9713-3d23-4c38-ba45-28f2798fb307"
+
+
+[A \set.union/ B]
+Defines: C
+using: U
+means: 'C is \set'
+specifies: 'C := A \set.union:within{U}/ B'
+Documented:
+. written: "A? \cup B?"
+------------------------------------------
+Id: "cd4cb1c8-9d90-4dd3-b3c7-a5ef554a3438"
+

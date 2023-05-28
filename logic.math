@@ -1,0 +1,38 @@
+::
+# Logical Background
+
+Second-order logic will serve as the logical foundation for
+the mathematics in this work.
+::
+
+[P \and/ Q]
+States:
+that:
+. 'P'
+. 'Q'
+Documented:
+. written: "P? \text{ and } Q?"
+------------------------------------------
+Id: "18582990-701a-40d3-8ce3-ae12bd08a561"
+
+
+[P \or/ Q]
+States:
+that:
+. anyOf:
+  . 'P'
+  . 'Q'
+Documented:
+. written: "P? \text{ or } Q?"
+------------------------------------------
+Id: "96f81da6-0660-48b3-813a-583abc89a465"
+
+
+[\not{P}]
+States:
+that:
+. not: 'P'
+Documented:
+. written: "\neg P?"
+------------------------------------------
+Id: "0f9f29f2-1495-456a-a621-3e3165c88e98"

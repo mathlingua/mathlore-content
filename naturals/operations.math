@@ -1,4 +1,24 @@
 
+[n \natural.=/ m]
+States:
+when: 'n, m is \natural'
+that:
+. anyOf:
+  . if: 'n = 0'
+    then: 'm = 0'
+  . if:
+    . exists: j, k
+      where: 'j, k is \natural'
+      suchThat:
+      . 'n = j++'
+      . 'm = k++'
+    then: 'j = k'
+Documented:
+. written: "n? = m?"
+------------------------------------------
+Id: "e4967613-c907-48cb-a459-4c2813f6250f"
+
+
 [n \natural.+/ m]
 Defines: n + m
 specifies:
@@ -71,3 +91,72 @@ then:
 . 'b = 0'
 ------------------------------------------
 Id: "91369cbd-3a99-4845-8e3a-6e4fadd47c3d"
+
+
+[n \natural.*/ m]
+Defines: n * m
+when: 'n, m is \natural'
+specifies:
+. piecewise:
+  if: 'n = 0'
+  then: 'n * m = 0'
+  if:
+  . exists: k
+    where: 'k is \natural'
+    suchThat: 'n = k++'
+  then:
+  . 'n * m := (k*m) + m'
+Documented:
+. written: "n? m?"
+. called: "product of $n?$ and $m?$"
+------------------------------------------
+Id: "c63d876a-8d92-42c8-9d3e-522c773ae693"
+
+
+[n \natural.>=/ m]
+States:
+when: 'm, n is \natural'
+that:
+. exists: a
+  where: 'a is \natural'
+  suchThat: 'n = m + a'
+Documented:
+. written: "n? \geq m?"
+. called: "$n?$ is greater than or equal to $m?$"
+------------------------------------------
+Id: "b97d807f-4e00-45a8-b7b7-56196155c70f"
+
+
+[n \natural.>/ m]
+States:
+when: 'm, n is \natural'
+that:
+. 'n >= m'
+. 'n != m'
+Documented:
+. written: "n? > m?"
+. called: "$n?$ is strictly greater than $m?$"
+------------------------------------------
+Id: "052b1a5f-fbbb-4006-a120-800dc1c8a53d"
+
+
+[n \natural.<=/ m]
+States:
+when: 'm, n is \natural'
+that: 'm >= n'
+Documented:
+. written: "n? \leq m?"
+. called: "$n?$ is less than or equal to $m?$"
+------------------------------------------
+Id: "084bc2cb-cedd-4863-b1c8-23c469aa8f65"
+
+
+[n \natural.</ m]
+States:
+when: 'm, n is \natural'
+that: 'm > n'
+Documented:
+. written: "n? < m?"
+. called: "$n?$ is strictly less than $m?$"
+------------------------------------------
+Id: "3a7ce75e-1382-4c54-b83a-cbf90257bb6c"

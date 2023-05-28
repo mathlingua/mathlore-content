@@ -8,7 +8,7 @@ specifies:
 . 'n is \natural'
 . 'f(n) is \natural'
 Documented:
-. written: "n?+\!+"
+. written: "n?+\!\!+"
 . called: "successor of $n?$"
 ------------------------------------------
 Id: "5826e12b-34e7-441f-8002-336d002e0ac5"
@@ -23,8 +23,14 @@ satisfies:
     where: 'm is \natural'
     suchThat: 'n = m++'
 Provides:
+. 'n = m :=> n \natural.=/ m'
 . 'n + m :=> n \natural.+/ m'
+. 'n * m :=> n \natural.*/ m'
 . 'n++ :=> \natural.succ(n)'
+. 'n >= m :=> n \natural.>=/ m'
+. 'n > m :=> n \natural.>/ m'
+. 'n <= m :=> n \natural.<=/ m'
+. 'n < m :=> n \natural.</ m'
 Documented:
 . called: "natural number"
 ------------------------------------------
