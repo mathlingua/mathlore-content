@@ -160,6 +160,17 @@ Documented:
 Id: "ad51829a-9518-42a5-917c-f8e1fb117640"
 
 
+[x \set.not.in/ X]
+States:
+when: 'X is \set'
+that:
+. not: 'x [in]: X'
+Documented:
+. written: "x? \notin X?"
+------------------------------------------
+Id: "55a10ba4-ba12-4ca0-9aa3-cc0351ede542"
+
+
 [\set]
 Defines: X
 specifies:
@@ -170,6 +181,12 @@ specifies:
 Provides:
 . 'x = y :=> x \set.=/ y'
 . 'x [in]: X :-> x is \set.element:of{X}'
+. 'x [notin]: X :=> x \set.not.in/ X'
+. 'x [cup] y :=> x \set.union/ y'
+. 'x [cap] y :=> x \set.intersect/ y'
+. 'x - y :=> x \set.minus/ y'
+. 'x [times] y :=> x \set.times/ y'
+. 'x [Delta] y :=> x \symmetric.difference/ y'
 Documented:
 . called: "set"
 ------------------------------------------
@@ -184,7 +201,9 @@ condition or conditions.
 
 
 [\set:of[x...]{f(x...) | g(x...)...}]
-Describes: X
+Defines: X := {u(x...) | ...}
+means: 'X is \set'
+specifies: 'u := f'
 Documented:
 . written: "\left \{ f? \: | \: g?{... \text{ and } ...} \right \}"
 ------------------------------------------
@@ -274,3 +293,63 @@ Documented:
 ------------------------------------------
 Id: "cd4cb1c8-9d90-4dd3-b3c7-a5ef554a3438"
 
+
+[A \set.minus/ B]
+Defines: C
+when: 'A, B is \set'
+means: 'C is \set'
+specifies: 'C := \set:of[c]{c | c [in]: A ; c [notin]: B}'
+Documented:
+. written: "A? \backslash B?"
+------------------------------------------
+Id: "05f452a0-9168-498f-a5fa-d119cbc9233c"
+
+
+[A \symmetric.difference/ B]
+Defines: C
+when: 'A, B is \set'
+means: 'C is \set'
+specifies: 'C := (A - B) [cup] (B - A)'
+Documented:
+. written: "A? \Delta B?"
+------------------------------------------
+Id: "3ba18db2-febc-4661-a386-ab3d988c8492"
+
+
+[\set.complement{A}:within{U}]
+Defines: B
+when: 'A, U is \set'
+means: 'C is \set'
+specifies: 'B := \set:of[b]{b | b [in]: U; b [notin]: A}'
+Documented:
+. written: "A?^C"
+------------------------------------------
+Id: "3c5d6ec5-62d7-4a24-a789-9c4088fbef13"
+
+
+[A \set.times/ B]
+Defines: C
+when: 'A, B is \set'
+means: 'C is \set'
+specifies: 'C := \set:of[a, b]{(a, b) | a [in]: A; b [in]: B}'
+Documented:
+. written: "A? \times B?"
+------------------------------------------
+Id: "688dad9f-b9cd-4211-9b81-dc37f3b6ef7d"
+
+
+Theorem:
+given: A, B, C
+where: 'A, B, C is \set'
+then:
+. 'A [cup] A = A'
+. 'A [cap] A = A'
+. 'A - A = \empty.set'
+. 'A [cup] \empty.set = A'
+. 'A [cap] \empty.set = \empty.set'
+. 'A [cup] (B [cup] C) = (A [cup] B) [cup] C'
+. 'A [cap] (B [cap] C) = (A [cap] B) [cap] C'
+. 'A [cup] B = B [cup] A'
+. 'A [cap] B = B [cap] A'
+------------------------------------------
+Id: "85e4163a-8343-4c14-893d-3352f7de380b"
