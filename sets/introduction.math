@@ -172,8 +172,8 @@ Id: "55a10ba4-ba12-4ca0-9aa3-cc0351ede542"
 
 
 [\set]
-Defines: X
-specifies:
+Describes: X
+satisfies:
 . '\set.axiom.existence.of.empty.set'
 . '\set.axiom.of.extensionality'
 . '\set.axiom.of.regularity'
