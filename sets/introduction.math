@@ -203,7 +203,7 @@ condition or conditions.
 [\set:of[x...]{f(x...) | g(x...)...}]
 Defines: X := {u(x...) | ...}
 means: 'X is \set'
-specifies: 'u := f'
+specifies: 'u(x...) := f(x...)'
 Documented:
 . written: "\left \{ f? \: | \: g?{... \text{ and } ...} \right \}"
 ------------------------------------------
