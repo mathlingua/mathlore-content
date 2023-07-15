@@ -1,38 +1,38 @@
 
-[\binary.operation:on{G}]
+[\binary.operation:on{X}]
 Describes: x * y
-when: 'G is \set'
-extends: '"*" is \function:on{G [times] G}:to{G}'
+when: 'X is \set'
+extends: '"*" is \function:on{X [times] X}:to{X}'
 Documented:
-. called: "binary operation on G?"
+. called: "binary operation on X?"
 ------------------------------------------
 Id: "0b0939af-e4a8-4c4d-b8fc-beba6a9e516c"
 
 
-[\associative.binary.operation:on{G}]
+[\associative.binary.operation:on{X}]
 Describes: x * y
-when: 'G is \set'
-extends: '"*" is \binary.operation:on{G}'
+when: 'X is \set'
+extends: '"*" is \binary.operation:on{X}'
 satisfies:
 . forAll: x, y, z
-  where: 'x, y, z [in]: G'
+  where: 'x, y, z [in]: X'
   then: 'x * (y * z) = (x * y) * z'
 Documented:
-. called: "associative binary operation on G?"
+. called: "associative binary operation on X?"
 ------------------------------------------
 Id: "4e45d31a-56d0-452c-8a94-38c09335cf2b"
 
 
-[\commutative.binary.operation:on{G}]
+[\commutative.binary.operation:on{X}]
 Describes: x * y
-when: 'G is \set'
-extends: '"*" is \binary.operation:on{G}'
+when: 'X is \set'
+extends: '"*" is \binary.operation:on{X}'
 satisfies:
 . forAll: x, y
-  where: 'x, y [in]: G'
+  where: 'x, y [in]: X'
   then: 'x * y = y * x'
 Documented:
-. called: "commutative binary operation on G?"
+. called: "commutative binary operation on X?"
 ------------------------------------------
 Id: "e3f3d946-9798-4059-8a01-0d6a796385b7"
 
@@ -55,7 +55,7 @@ Id: "a2190fa3-1a9a-4767-a727-c0061d758b39"
 
 [\magma.element:of{M}]
 Describes: x
-when: 'M is \group'
+when: 'M is \magma'
 extends: 'x is \set.element:of{M.X}'
 Provides: 'x * y :=> x [M.*] y'
 Documented:
@@ -85,6 +85,38 @@ Documented:
 . called: "element of semigroup S?"
 ------------------------------------------
 Id: "45a92acc-9936-41ec-9b6f-fecd8ef677f9"
+
+
+[\quasigroup]
+Describes: Q := (X, *)
+extends: 'Q is \magma'
+satisfies:
+. [latin.square.property]
+  forAll: a, b
+  where: 'a, b [in]: Q'
+  then:
+  . existsUnique: x, y
+    where: 'x, y [in]: Q'
+    suchThat:
+    . 'a*x = b'
+    . 'y*a = b'
+Provides:
+. symbol: 'x [in]: Q :-> x is \quasigroup.element:of{Q}'
+  written: "x? \in Q?"
+Documented:
+. called: "quasigroup"
+------------------------------------------
+Id: "4f0679ba-83db-4fbd-825e-def6edcc099e"
+
+
+[\quasigroup.element:of{Q}]
+Describes: x
+when: 'Q is \quasigroup'
+extends: 'x is \magma.element:of{Q}'
+Documented:
+. called: "element of quasigroup Q?"
+------------------------------------------
+Id: "f0b322b1-2f19-4afd-9002-a7f43c79823a"
 
 
 [\monoid]
@@ -135,7 +167,7 @@ Id: "2293a62b-71a4-431e-82a1-c7613a52267f"
 
 [\group]
 Describes: G := (X, *, e)
-extends: '(X, "*", e) is \magma'
+extends: '(X, "*", e) is \monoid'
 satisfies:
 . forAll: x
   where: 'x [in]: G'
