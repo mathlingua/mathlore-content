@@ -179,8 +179,10 @@ satisfies:
 . '\set.axiom.of.regularity'
 . '\set.axiom.of.unordered.pair'
 Provides:
-. 'x = y :=> x \set.=/ y'
 . 'x [in]: X :-> x is \set.element:of{X}'
+. 'x [subset]: X :-> x is \subset:of{X}'
+. 'x [strict.subset]: X :-> x is \strict.subset:of{X}'
+. 'x = y :=> x \set.=/ y'
 . 'x [notin]: X :=> x \set.not.in/ X'
 . 'x [cup] y :=> x \set.union/ y'
 . 'x [cap] y :=> x \set.intersect/ y'
@@ -218,10 +220,10 @@ sets.
 ::
 
 
-[A \subset/ B]
-States:
-when: 'A, B is \set'
-that:
+[\subset:of{B}]
+Describes: A
+when: 'B is \set'
+satisfies:
 . forAll: a
   where: 'a [in]: A'
   then: 'a [in]: B'
@@ -231,11 +233,11 @@ Documented:
 Id: "c20a5eaa-5c1b-448c-9678-cdc53a7dabcf"
 
 
-[A \strict.subset/ B]
-States:
-when: 'A, B is \set'
-that:
-. 'A \subset/ B'
+[\strict.subset:of{B}]
+Describes: A
+when: 'B is \set'
+satisfies:
+. 'A [subset]: B'
 . 'A != B'
 Documented:
 . written: "A? \subsetneq B?"
@@ -247,7 +249,7 @@ Id: "d246567b-c4b3-411f-abee-831573e50f82"
 Defines: C
 when: 'A, B, U is \set'
 suchThat:
-. 'A, B \subset/ U'
+. 'A, B [subset]: U'
 means: 'C is \set'
 specifies: 'C := \set:of[c]{c | c [in]: A; c [in]: B}'
 Documented:
@@ -262,7 +264,7 @@ using: U
 when:
 . 'A, B, U is \set'
 suchThat:
-. 'A, B \subset/ U'
+. 'A, B [subset]: U'
 means: 'C is \set'
 specifies: 'C := A \set.intersect:within{U}/ B'
 Documented:
@@ -274,7 +276,7 @@ Id: "31125a8e-e201-4b92-8f15-0d3f5cd22b4f"
 [A \set.union:within{U}/ B]
 Defines: C
 when: 'A, B, U is \set'
-suchThat: 'A, B \subset/ U'
+suchThat: 'A, B [subset]: U'
 means: 'C is \set'
 specifies: 'C := \set:of[c]{c | (c [in]: A) \or/ (c [in]: B)}'
 Documented:
@@ -353,3 +355,13 @@ then:
 . 'A [cap] B = B [cap] A'
 ------------------------------------------
 Id: "85e4163a-8343-4c14-893d-3352f7de380b"
+
+
+::TODO: implement this::
+[\finite.set]
+Describes: X
+extends: 'X is \set'
+Documented:
+. called: "finite set"
+------------------------------------------
+Id: "b50824a7-92fd-4d2e-8df9-ad02e1a657ee"
