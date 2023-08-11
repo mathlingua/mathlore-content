@@ -3,18 +3,8 @@
 ::
 
 [\field]
-Defines: F := (X, +, *, 0, 1)
-means: 'F is \commutative.ring & \nontrivial.ring'
-specifies:
-. forAll: x
-  where: 'x [in]: X'
-  suchThat: 'x != 0'
-  then:
-  . exists: y
-    where: 'y [in]: F'
-    suchThat:
-    . 'x * y = 1'
-    . 'y * x = 1'
+Defines: F
+means: 'F is \commutative.ring.with.identity & \division.ring'
 Provides:
 . symbol: 'x [in]: F :-> x is \field.element:of{F}'
 Documented:

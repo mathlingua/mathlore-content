@@ -2,41 +2,11 @@
 # Rings
 ::
 
-[\rng]
-Describes: R := (X, +, *, 0)
-extends:
-. '(X, "+", 0) is \abelian.group'
-. '(X, "*") is \semigroup'
-satisfies:
-. forAll: x, y, z
-  where: 'x, y, z [in]: R'
-  then:
-  . 'x * (y + z) = (x * y) + (x * z)'
-  . '(x + y) * z = (x * z) + (y * z)'
-Provides:
-. 'x [in]: R :-> x is \rng.element:of{G}'
-Documented:
-. called: "rng"
-------------------------------------------
-Id: "f3807860-4fda-44fd-ba39-bee2c224f045"
-
-
-[\rng.element:of{R}]
-Describes: x
-when: 'R is \rng'
-extends:
-. 'x is \group.element:of{R}'
-. 'x is \semigroup.element:of{R}'
-Documented:
-. called: "rng element of R?"
-------------------------------------------
-Id: "79a0237f-b678-4d6a-ba1f-aadc40283828"
-
 
 [\ring]
 Describes: R := (X, +, *, 0)
 extends:
-. 'R is \rng'
+. '(X, "+", 0) is \abelian.group'
 . '(X, "*") is \semigroup'
 satisfies:
 . [distributive.law]
@@ -57,7 +27,7 @@ Id: "bd519191-1c37-426d-8fda-e5855407e6cd"
 Describes: x
 when: 'R is \ring'
 extends:
-. 'x is \rng.element:of{R}'
+. 'x is \group.element:of{R}'
 . 'x is \semigroup.element:of{R}'
 Documented:
 . called: "ring element of R?"
@@ -99,6 +69,15 @@ Documented:
 . called: "commutative ring"
 ------------------------------------------
 Id: "3352fddf-6cce-4a0d-93b7-9f79c493f942"
+
+
+[\commutative.ring.with.identity]
+Describes: R
+extends: 'R is \ring.with.identity & \commutative.ring'
+Documented:
+. called: "commutative ring with identity"
+------------------------------------------
+Id: "57d40c75-7b95-4680-ac65-414efa306beb"
 
 
 [\trivial.ring]
