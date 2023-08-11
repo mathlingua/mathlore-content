@@ -1,0 +1,113 @@
+::
+# Modules
+::
+
+[\left.module:over{R0}]
+Describes: M := (R, G, **)
+when: 'R0 is \ring'
+extends: 'G is \group'
+satisfies:
+. 'R := R0'
+. '"**" is \function:on{R, G}:to{G}'
+. [scalar.multiplication]
+  forAll: r, s, x, y
+  where:
+  . 'r, s [in]: R'
+  . 'x, y [in]: G'
+  then:
+  . 'r ** (x + y) = r ** x + r ** y'
+  . '(r + s) ** x = r ** x + s ** x'
+  . '(r * s) ** x = r ** (s ** x)'
+  . 'R.1 ** x = x'
+Provides:
+. 'x [in]: M :-> x is \left.module.element:of{M}:over{R0}'
+Documented:
+. called: "left-module over $R0?$"
+------------------------------------------
+Id: "6cdb3862-594f-439f-b57a-3a09b0b10232"
+
+
+[\left.module.element:of{M}:over{R0}]
+Describes: x
+when:
+. 'R0 is \ring'
+. 'M is \left.module:over{R0}'
+extends: 'x is \group.element:of{M.G}'
+Documented:
+. called: "element of left-module $M?$"
+------------------------------------------
+Id: "16fcb4da-dd89-4c0f-a6a9-2cbbde4db34d"
+
+
+[\right.module:over{R0}]
+Describes: M := (R, G, **)
+when: 'R0 is \ring'
+extends: 'G is \group'
+satisfies:
+. 'R := R0'
+. '"**" is \function:on{G, R}:to{G}'
+. [scalar.multiplication]
+  forAll: r, s, x, y
+  where:
+  . 'r, s [in]: R'
+  . 'x, y [in]: G'
+  then:
+  . '(x + y) ** r = x ** r + y ** r'
+  . 'x ** (r + s) = x ** r + x ** s'
+  . 'x ** (r * s) = (x ** r) ** s'
+  . 'x ** R.1 = x'
+Provides:
+. 'x [in]: M :-> x is \right.module.element:of{M}:over{R0}'
+Documented:
+. called: "right-module over $R0?$"
+------------------------------------------
+Id: "3fa76c17-fd25-45f8-a70f-ce702fa57886"
+
+
+[\right.module.element:of{M}:over{R0}]
+Describes: x
+when:
+. 'R0 is \ring'
+. 'M is \right.module:over{R0}'
+extends: 'x is \group.element:of{M.G}'
+Documented:
+. called: "element of right-module $M?$"
+------------------------------------------
+Id: "6cf2b484-f3e4-426a-9429-14443fa6c1d4"
+
+
+[\bi.module:over{R0, S0}]
+Describes: M := (R, S, G, **_R, **_S)
+when: 'R0, S0 is \ring'
+extends:
+. '(R, G, "**_R") is \left.module:over{R0}'
+. '(R, G, "**_S") is \right.module:over{S0}'
+Documented:
+. called: "$(R0?, S0?)$ bi-module"
+------------------------------------------
+Id: "14f4a63b-7668-413a-a16c-c975a252ed22"
+
+
+[\bi.module.element:of{M}:over{R0, S0}]
+Describes: x
+when:
+. 'R0, S0 is \ring'
+. 'M is \bi.module:over{R0, S0}'
+extends:
+. 'x is \left.module.element:of{M}:over{R0}'
+. 'x is \right.module.element:of{M}:over{S0}'
+Documented:
+. called: "element of bi-module over $(R0?, S0?)$"
+------------------------------------------
+Id: "dae7a056-c405-43ac-ab29-3dead7c9e9d9"
+
+
+[\module.over:over{R0}]
+Describes: M := (R, G, **)
+when: 'R is \commutative.ring'
+extends:
+. '(R, R, G, "**", "**") is \bi.module:over{R0, S0}'
+Documented:
+. called: "$R0?$-module"
+------------------------------------------
+Id: "515e7510-65e6-4a22-8a7f-59486bd16d6c"

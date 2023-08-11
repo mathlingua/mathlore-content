@@ -1,0 +1,55 @@
+::
+# Operations
+::
+
+[\binary.operation:on{X}]
+Describes: x * y
+when: 'X is \set'
+extends: '"*" is \function:on{X [times] X}:to{X}'
+Documented:
+. called: "binary operation on X?"
+------------------------------------------
+Id: "0b0939af-e4a8-4c4d-b8fc-beba6a9e516c"
+
+
+[\associative.binary.operation:on{X}]
+Describes: x * y
+when: 'X is \set'
+extends: '"*" is \binary.operation:on{X}'
+satisfies:
+. forAll: x, y, z
+  where: 'x, y, z [in]: X'
+  then: 'x * (y * z) = (x * y) * z'
+Documented:
+. called: "associative binary operation on X?"
+------------------------------------------
+Id: "4e45d31a-56d0-452c-8a94-38c09335cf2b"
+
+
+[\commutative.binary.operation:on{X}]
+Describes: x * y
+when: 'X is \set'
+extends: '"*" is \binary.operation:on{X}'
+satisfies:
+. forAll: x, y
+  where: 'x, y [in]: X'
+  then: 'x * y = y * x'
+Documented:
+. called: "commutative binary operation on X?"
+------------------------------------------
+Id: "e3f3d946-9798-4059-8a01-0d6a796385b7"
+
+
+[\closed.binary.operation:on{Y}]
+Describes: x * y
+using: X
+when: 'Y [subset]: X'
+extends: '"*" is \binary.operation:on{X}'
+satisfies:
+. forAll: a, b
+  where: 'a, b [in]: Y'
+  then: 'a * b [in]: Y'
+Documented:
+. called: "closed operation on Y?"
+------------------------------------------
+Id: "b8a2786d-641a-43ee-8767-e31f825a5d49"

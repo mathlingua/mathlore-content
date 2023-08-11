@@ -1,0 +1,55 @@
+::
+# Fields
+::
+
+[\field]
+Defines: F := (X, +, *, 0, 1)
+means: 'F is \commutative.ring & \nontrivial.ring'
+specifies:
+. forAll: x
+  where: 'x [in]: X'
+  suchThat: 'x != 0'
+  then:
+  . exists: y
+    where: 'y [in]: F'
+    suchThat:
+    . 'x * y = 1'
+    . 'y * x = 1'
+Provides:
+. symbol: 'x [in]: F :-> x is \field.element:of{F}'
+Documented:
+. called: "field"
+------------------------------------------
+Id: "d735a144-a432-428c-a53a-26948a89ab35"
+
+
+[\field.multiplicative.inverse:of{x}:in{F}]
+Defines: y
+when:
+. 'F is \field'
+. 'x [in]: F'
+means: 'y [in]: F'
+specifies:
+. 'x * y = F.1'
+. 'y * x = F.1'
+Documented:
+. called: "multiplicative inverse of x? in F?"
+------------------------------------------
+Id: "594614bc-fde5-4b06-8697-f8cc921c1fc0"
+
+
+[\field.element:of{F}]
+Describes: x
+when: 'F is \field'
+extends: 'x is \ring.element:of{R}'
+Provides:
+. symbol: 'x.inv :=> \field.multiplicative.inverse:of{x}:in{F}'
+  written: "{x+}?^{-1}"
+. '-x :=> (F as \[abelian.group]).inv(x)'
+. 'x + y :=> x [F.+] y'
+. 'x * y :=> x [F.*] y'
+. 'x - y :=> x + (-y)'
+Documented:
+. called: "element of the field F?"
+------------------------------------------
+Id: "cc86372f-3d01-4a51-b89b-0db61149dc1c"

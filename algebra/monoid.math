@@ -1,0 +1,31 @@
+::
+# Monoids
+::
+
+[\monoid]
+Describes: M := (X, *, e)
+extends: '(X, "*") is \semigroup'
+satisfies:
+. 'e [in]: M'
+. forAll: x
+  where: 'x [in]: M'
+  then:
+  . 'x * e = x'
+  . 'e * x = x'
+Provides:
+. symbol: 'x [in]: M :-> x is \monoid.element:of{M}'
+  written: "x? \in M?"
+Documented:
+. called: "monoid"
+------------------------------------------
+Id: "e0bb42b4-c789-42bd-9c1a-b184260f845c"
+
+
+[\monoid.element:of{M}]
+Describes: x
+when: 'M is \monoid'
+extends: 'x is \semigroup.element:of{M}'
+Documented:
+. called: "element of monoid S?"
+------------------------------------------
+Id: "074b8e2d-2f65-4262-88db-2a6ed234ee46"

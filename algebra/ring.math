@@ -1,0 +1,148 @@
+::
+# Rings
+::
+
+[\rng]
+Describes: R := (X, +, *, 0)
+extends:
+. '(X, "+", 0) is \abelian.group'
+. '(X, "*") is \semigroup'
+satisfies:
+. forAll: x, y, z
+  where: 'x, y, z [in]: R'
+  then:
+  . 'x * (y + z) = (x * y) + (x * z)'
+  . '(x + y) * z = (x * z) + (y * z)'
+Provides:
+. 'x [in]: R :-> x is \rng.element:of{G}'
+Documented:
+. called: "rng"
+------------------------------------------
+Id: "f3807860-4fda-44fd-ba39-bee2c224f045"
+
+
+[\rng.element:of{R}]
+Describes: x
+when: 'R is \rng'
+extends:
+. 'x is \group.element:of{R}'
+. 'x is \semigroup.element:of{R}'
+Documented:
+. called: "rng element of R?"
+------------------------------------------
+Id: "79a0237f-b678-4d6a-ba1f-aadc40283828"
+
+
+[\ring]
+Describes: R := (X, +, *, 0)
+extends:
+. 'R is \rng'
+. '(X, "*") is \semigroup'
+satisfies:
+. [distributive.law]
+  forAll: x, y, z
+  where: 'x, y, z [in]: R'
+  then:
+  . '(x + y)*z = x*z + y*z'
+  . 'x*(y + z) = x*y + x*z'
+Provides:
+. 'x [in]: R :-> x is \ring.element:of{G}'
+Documented:
+. called: "ring"
+------------------------------------------
+Id: "bd519191-1c37-426d-8fda-e5855407e6cd"
+
+
+[\ring.element:of{R}]
+Describes: x
+when: 'R is \ring'
+extends:
+. 'x is \rng.element:of{R}'
+. 'x is \semigroup.element:of{R}'
+Documented:
+. called: "ring element of R?"
+------------------------------------------
+Id: "d655615a-9ca3-48a6-9257-14e5504ce917"
+
+
+[\ring.with.identity]
+Describes: R := (X, +, *, 0, 1)
+extends:
+. '(X, "+", "*", 0) is \ring'
+. '(X, "*", 1) is \monoid'
+Documented:
+. called: "ring with identity"
+------------------------------------------
+Id: "b81dcd83-c8f9-4a7b-b68a-bf825cc8b342"
+
+
+[\ring.with.identity.element:of{R}]
+Describes: x
+when: 'R is \ring'
+extends:
+. 'x is \ring.element:of{R}'
+. 'x is \monoid.element:of{R}'
+Documented:
+. called: "ring element of R?"
+------------------------------------------
+Id: "7e9002e6-4aa3-4312-b113-798474c70e0f"
+
+
+[\commutative.ring]
+Describes: R
+extends: 'R is \ring'
+satisfies:
+. forAll: x, y
+  where: 'x, y [in]: R'
+  then: 'x * y = y * x'
+Documented:
+. called: "commutative ring"
+------------------------------------------
+Id: "3352fddf-6cce-4a0d-93b7-9f79c493f942"
+
+
+[\trivial.ring]
+Defines: R := (X, +, *, 0)
+means: 'R is \ring'
+specifies:
+. 'x + y := 0'
+. 'x * y := 0'
+. 'X := \set:of[x]{x | x = 0}'
+Documented:
+. called:
+  . "the zero ring"
+  . "the trivial ring"
+------------------------------------------
+Id: "bcff7894-7ec2-44eb-ae00-6e445ef19c9a"
+
+
+[\nontrivial.ring]
+Describes: R
+extends: 'R is \ring'
+satisfies: 'R != \trivial.ring'
+Documented:
+. called: "non-trivial ring"
+------------------------------------------
+Id: "029fa21a-8527-4a08-9035-d5a29d8014f6"
+
+
+[\division.ring]
+Describes: R
+extends: 'R is \ring.with.identity'
+satisfies:
+. 'R.0 != R.1'
+. forAll: x
+  where: 'x [in]: R'
+  suchThat: 'x != R.0'
+  then:
+  . exists: y
+    where: 'y [in]: R'
+    suchThat:
+    . 'x * y = R.1'
+    . 'y * x = R.1'
+Documented:
+. called:
+  . "division ring"
+  . "skew field"
+------------------------------------------
+Id: "15c7b3f3-7fbb-4746-b6a9-e5e374fff494"

@@ -1,0 +1,24 @@
+::
+# Vector Spaces
+::
+
+[\vector.space:over{F0}]
+Describes: V
+when: 'F0 is \field'
+extends: 'V is \module.over:over{F}'
+Documented:
+. called: "vector space over $F0?$"
+------------------------------------------
+Id: "20ed885f-67b5-406f-a8f1-50739781633e"
+
+
+[\vector.space.element:of{V}:over{F}]
+Describes: x
+when:
+. 'F is \field'
+. 'V is \vector.space:over{F}'
+extends: 'x is \module.over:over{V}'
+Documented:
+. called: "element of vector space $V?$ over $F?$"
+------------------------------------------
+Id: "484cdbae-4f1c-4d6d-8c9e-6e3f180366a8"

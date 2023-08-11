@@ -1,0 +1,39 @@
+::
+# Metric Spaces
+::
+
+[\metric:on{X}]
+Describes: d(x, y)
+when: 'X is \set'
+extends: 'd is \function:on{X, X}:to{\reals}'
+satisfies:
+. forAll: x
+  where: 'x [in]: X'
+  then: 'd(x, x) = 0'
+. [positivity]
+  forAll: x, y
+  where: 'x, y [in]: X'
+  suchThat: 'x != y'
+  then: 'd(x, y) > 0'
+. [symmetry]
+  forAll: x, y
+  where: 'x, y [in]: X'
+  then: 'd(x, y) = d(y, x)'
+. [triangle.inequality]
+  forAll: x, y, z
+  where: 'x, y, z [in]: X'
+  then: 'd(x, z) <= d(x, y) + d(y, z)'
+Documented:
+. called: "metric on $X?$"
+------------------------------------------
+Id: "be627b13-bda3-4e72-955e-4b960f2b123c"
+
+
+[\metric.space]
+Describes: M := (X, d)
+extends: 'X is \set'
+satisfies: 'd is \metric:on{X}'
+Documented:
+. called: "metric space"
+------------------------------------------
+Id: "65ff44e7-0a36-4268-9ead-dadc3bf7622e"

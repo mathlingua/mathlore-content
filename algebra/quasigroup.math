@@ -1,0 +1,34 @@
+::
+# Quasigroups
+::
+
+[\quasigroup]
+Describes: Q := (X, *)
+extends: 'Q is \magma'
+satisfies:
+. [latin.square.property]
+  forAll: a, b
+  where: 'a, b [in]: Q'
+  then:
+  . existsUnique: x, y
+    where: 'x, y [in]: Q'
+    suchThat:
+    . 'a*x = b'
+    . 'y*a = b'
+Provides:
+. symbol: 'x [in]: Q :-> x is \quasigroup.element:of{Q}'
+  written: "x? \in Q?"
+Documented:
+. called: "quasigroup"
+------------------------------------------
+Id: "4f0679ba-83db-4fbd-825e-def6edcc099e"
+
+
+[\quasigroup.element:of{Q}]
+Describes: x
+when: 'Q is \quasigroup'
+extends: 'x is \magma.element:of{Q}'
+Documented:
+. called: "element of quasigroup Q?"
+------------------------------------------
+Id: "f0b322b1-2f19-4afd-9002-a7f43c79823a"

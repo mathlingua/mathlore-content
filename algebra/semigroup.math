@@ -1,0 +1,25 @@
+::
+# Semigroups
+::
+
+[\semigroup]
+Describes: S := (X, *)
+extends: 'S is \magma'
+satisfies: '"*" is \associative.binary.operation:on{S}'
+Provides:
+. symbol: 'x [in]: S :-> x is \semigroup.element:of{S}'
+  written: "x? \in S?"
+Documented:
+. called: "semigroup"
+------------------------------------------
+Id: "40fe3cdd-a710-49ff-849d-f192e317cd75"
+
+
+[\semigroup.element:of{S}]
+Describes: x
+when: 'S is \semigroup'
+extends: 'x is \magma.element:of{M}'
+Documented:
+. called: "element of semigroup S?"
+------------------------------------------
+Id: "45a92acc-9936-41ec-9b6f-fecd8ef677f9"

@@ -1,0 +1,29 @@
+::
+# Magmas
+::
+
+[\magma]
+Describes: M := (X, *)
+extends: 'X is \set'
+satisfies: '"*" is \binary.operation:on{M}'
+Provides:
+. symbol: 'x [in]: M :-> x is \magma.element:of{M}'
+  written: "x? \in M?"
+Documented:
+. called:
+  . "magma"
+  . "binar"
+  . "groupoid"
+------------------------------------------
+Id: "a2190fa3-1a9a-4767-a727-c0061d758b39"
+
+
+[\magma.element:of{M}]
+Describes: x
+when: 'M is \magma'
+extends: 'x is \set.element:of{M.X}'
+Provides: 'x * y :=> x [M.*] y'
+Documented:
+. called: "element of magma M?"
+------------------------------------------
+Id: "7e82a930-74bb-46ee-8f51-6fb9dd98c0ff"

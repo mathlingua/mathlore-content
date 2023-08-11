@@ -17,6 +17,14 @@ Documented:
 Id: "81d27721-4b8e-4d6d-9b49-23b3b426ca4f"
 
 
+[\positive.real]
+Describes: x
+Documented:
+. called: "positive real"
+------------------------------------------
+Id: "8f0ed422-74b2-4bbb-873f-9e272ad4bd6f"
+
+
 [\real.sqrt(x)]
 Defines: f(x) := y
 means: 'f is \function:on{\reals}:to{\reals}'
@@ -62,3 +70,15 @@ means: 'f is \function:on{\reals}:to{\reals}'
 specifies: 'f(x) := x^2'
 ------------------------------------------
 Id: "bd82c6f5-13de-4b95-a9fd-6ff4cda2a7ea"
+
+
+[\archimedian.property]
+Theorem:
+given: a, b
+where: 'a, b is \positive.real'
+then:
+. exists: n
+  where: 'n is \natural'
+  suchThat: 'a*n > b'
+------------------------------------------
+Id: "cc499976-02ec-49b2-836c-11695ba79ca7"

@@ -1,0 +1,217 @@
+::
+# Groups
+::
+
+[\group]
+Describes: G := (X, *, e)
+extends: '(X, "*", e) is \monoid'
+satisfies:
+. [existence.of.inverses]
+  forAll: x
+  where: 'x [in]: G'
+  then:
+  . exists: y
+    where: 'y [in]: G'
+    suchThat:
+    . 'x * y = e'
+    . 'y * x = e'
+Provides:
+. symbol: 'x [in]: G :-> x is \group.element:of{G}'
+  written: "x? \in G?"
+Documented:
+. called: "group"
+------------------------------------------
+Id: "98285470-4c50-4020-914d-dec9043a8be5"
+
+
+[\group.element:of{G}]
+Describes: x
+when: 'G is \group'
+extends: 'x is \monoid.element:of{G}'
+Provides:
+. symbol: 'x.inv :=> \group.inverse:of{x}:in{G}'
+  written: "{x?}^{-1}"
+. symbol: 'x :^ n :=> x \group.power/ n'
+  written: "{x?}^{n?}"
+Documented:
+. called: "element of group G?"
+------------------------------------------
+Id: "5291b552-c380-4ac3-ad58-8d86ea8de9af"
+
+
+[\finite.group]
+Describes: G := (X, *, e)
+extends: 'X is \set'
+satisfies: 'X is \finite.set'
+Documented:
+. called: "finite group"
+------------------------------------------
+Id: "404e418f-9ab4-4080-9dfd-ff8054f3f555"
+
+
+[\group.inverse:of{x}:in{G}]
+Defines: y
+when:
+. 'G is \group'
+. 'x [in]: G'
+means: 'y [in]: G'
+specifies:
+. 'x * y = G.e'
+. 'y * x = G.e'
+Justified:
+. by: "\[group]::(existence.of.inverses)"
+Documented:
+. written: "x?^{-1}"
+------------------------------------------
+Id: "2293a62b-71a4-431e-82a1-c7613a52267f"
+
+
+[x \group.power/ n]
+Defines: y
+using: G := (X, *, e)
+when:
+. 'G is \group'
+. 'x [in]: G'
+. 'n is \natural'
+means: 'y [in]: G'
+specifies:
+. piecewise:
+  if: 'n = 0'
+  then: 'y = e'
+  if:
+  . exists: m
+    where: 'm is \natural'
+    suchThat: 'n = m++'
+  then: 'y = x * (x \group.power/ m)'
+Documented:
+. called: "x? raised to the power n?"
+. written: "{x?}^{n?}"
+------------------------------------------
+Id: "1aaf732a-1987-4ee2-860e-98adf261b5f6"
+
+
+[G1 \group.direct.product/ G2]
+Defines: H := (Y, +, u)
+using: G1 := (X1, *_1, e1), G2 := (X2, *_2, e2)
+when: 'G1, G2 is \group'
+specifies:
+. 'Y := X1 \set.times/ X2'
+. 'u := (e1, e2)'
+Documented:
+. called: "direct product of the groups G1? and G2?"
+. written: "G1? \times G2?"
+------------------------------------------
+Id: "a320680b-393d-4b3a-bdb3-b67443100602"
+
+
+Theorem:
+given: x, y, G
+where:
+. 'G is \group'
+. 'x, y [in]: G'
+then:
+. '(x * y).inv = y.inv * x.inv'
+------------------------------------------
+Id: "bba5ed08-adfd-4465-8192-d60f2998a271"
+
+
+[\abelian.group]
+Describes: G
+extends: 'G is \group'
+satisfies:
+. forAll: x, y
+  where: 'x, y [in]: G'
+  then: 'x * y = y * x'
+Documented:
+. called: "abelian group"
+------------------------------------------
+Id: "8a10ce44-410d-4cbf-a351-66702842867a"
+
+
+Theorem:
+given: G := (X, *, e), e1, e2
+where:
+. 'G is \group'
+. 'e1, e2 [in]: G'
+if:
+. forAll: x
+  where: 'x [in]: G'
+  then:
+  . 'x*e1 = x'
+  . 'e1*x = x'
+  . 'x*e2 = x'
+  . 'e2*x = x'
+then:
+. 'e1 = e'
+. 'e2 = e'
+------------------------------------------
+Id: "9b4afbf4-9142-485e-9082-61b3d2c2f633"
+
+
+Theorem:
+given: G := (X, *, e), a
+where:
+. 'G is \group'
+. 'a [in]: G'
+then: '(a.inv).inv = a'
+------------------------------------------
+Id: "d319ea35-ba5a-4809-805d-ffe1cacd62dc"
+
+
+Theorem:
+given: G := (X, *, e), a, b1, b2
+where:
+. 'G is \group'
+. 'a, b1, b2 [in]: G'
+if:
+. 'a*b1 = e'
+. 'b1*a = e'
+. 'a*b2 = e'
+. 'b2*a = e'
+then: 'b1 = b2'
+------------------------------------------
+Id: "6dcccfc0-be83-489a-9c2e-040e61bce8f7"
+
+
+[\smallest.natural:suchThat[n]{P(n)}]
+Defines: k
+when: 'P is [:statement:]'
+means: 'k is \natural'
+specifies:
+. 'P(k)'
+. not:
+  . exists: j
+    where: 'j is \natural'
+    suchThat:
+    . 'j < k'
+    . 'P(j)'
+Documented:
+. written: "\textrm{smallest natural number such that } P?"
+------------------------------------------
+Id: "ad529afe-2429-4264-b7f1-bacdf017cdcc"
+
+
+[\finite.group.order.of{x}:in{G}]
+Defines: n
+using: G := (X, *, e)
+when:
+. 'G is \group'
+. 'n is \natural'
+means: 'n is \natural'
+specifies:
+. 'n := \smallest.natural:suchThat[k]{x^k = e}'
+Documented:
+. called: "\textrm{order of } x? \textrm{ in group } G?"
+. written: "\left | x? \right |"
+------------------------------------------
+Id: "55f1b42d-fc63-46c3-a8f3-fd0dc408791f"
+
+
+Theorem:
+given: G, a, b
+where:
+. 'G is \group'
+. 'a, b [in]: G'
+then: '\finite.group.order.of{a*b}:in{G} = \finite.group.order.of{b*a}:in{G}'
+------------------------------------------
+Id: "b3a33c2d-b6fd-41bb-a8d8-98c98226cf86"
