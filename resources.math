@@ -4,7 +4,7 @@
 ## Analysis
 ::
 
-[tao.analysis.I]
+[$tao.analysis.I]
 Resource:
 . type: "Book"
 . name: "Analysis I"
@@ -13,7 +13,7 @@ Resource:
 Id: "a1026873-edf6-44dc-a7c3-90a139a13c71"
 
 
-[BassRealAnalysisForGraduateStudents]
+[$BassRealAnalysisForGraduateStudents]
 Resource:
 . type: "Book"
 . name: "Real Analysis For Graduate Students"
@@ -25,7 +25,7 @@ Resource:
 Id: "ffe77340-d174-4c71-ba40-d5fa61bffc4b"
 
 
-[TrenchIntroToRealAnalysis]
+[$TrenchIntroToRealAnalysis]
 Resource:
 . type: "Book"
 . name: "Introduction to Real Analysis"
@@ -36,7 +36,7 @@ Resource:
 Id: "d99e48bc-647a-4d94-84d6-5a31461d7da1"
 
 
-[@basic.analysis.I]
+[$basic.analysis.I]
 Resource:
 . type: "book"
 . name: "Basic Analysis I: Introduction to Real Analysis, Volume I"
@@ -52,7 +52,7 @@ Id: "71289b86-8a25-4b83-93db-4c6c83845151"
 ::
 
 
-[JudsonAbstractAlgebraTheoryAndApplications]
+[$JudsonAbstractAlgebraTheoryAndApplications]
 Resource:
 . type: "Book"
 . name: "Abstract Algebra Theory and Applications"

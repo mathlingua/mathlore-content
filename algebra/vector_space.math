@@ -2,12 +2,12 @@
 # Vector Spaces
 ::
 
-[\vector.space:over{F0}]
+[\vector.space:over{F}]
 Describes: V
-when: 'F0 is \field'
-extends: 'V is \module.over:over{F}'
+when: 'F is \field'
+extends: 'V is \left.module:over{F}'
 Documented:
-. called: "vector space over $F0?$"
+. called: "vector space over $F?$"
 ------------------------------------------
 Id: "20ed885f-67b5-406f-a8f1-50739781633e"
 
@@ -17,7 +17,7 @@ Describes: x
 when:
 . 'F is \field'
 . 'V is \vector.space:over{F}'
-extends: 'x is \module.over:over{V}'
+extends: 'x is \left.module:over{V}'
 Documented:
 . called: "element of vector space $V?$ over $F?$"
 ------------------------------------------

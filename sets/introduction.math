@@ -57,6 +57,16 @@ Documented:
 Id: "97674113-6c06-48bc-9b90-69cb68224a41"
 
 
+[\non.empty.set]
+Describes: X
+extends: 'X is \set'
+satisfies: 'X != \empty.set'
+Documented:
+. called: "non-empty set"
+------------------------------------------
+Id: "f2f5ff46-4969-4f98-b445-cc4bff8752c5"
+
+
 ::
 **Zermelo-Fraekel Set Theory** builds sets as collections of things that
 satisfy a specified propery.  The following definition explicitly calls a
@@ -182,6 +192,8 @@ Provides:
 . 'x [in]: X :-> x is \set.element:of{X}'
 . 'x [subset]: X :-> x is \subset:of{X}'
 . 'x [strict.subset]: X :-> x is \strict.subset:of{X}'
+. 'x [superset]: X :-> x is \superset:of{X}'
+. 'x [strict.superset]: X :-> x is \strict.superset:of{X}'
 . 'x = y :=> x \set.=/ y'
 . 'x [notin]: X :=> x \set.not.in/ X'
 . 'x [cup] y :=> x \set.union/ y'
@@ -205,7 +217,9 @@ condition or conditions.
 [\set:of[x...]{f(x...) | g(x...)...}]
 Defines: X := {u(x...) | ...}
 means: 'X is \set'
-specifies: 'u(x...) := f(x...)'
+specifies:
+. 'u(x...) := f(x...)'
+. 'g(x...)...'
 Documented:
 . written: "\left \{ f? \: | \: g?{... \text{ and } ...} \right \}"
 ------------------------------------------
@@ -228,9 +242,46 @@ satisfies:
   where: 'a [in]: A'
   then: 'a [in]: B'
 Documented:
-. written: "A? \subseteq B?"
+. called: "subset of $B?$"
 ------------------------------------------
 Id: "c20a5eaa-5c1b-448c-9678-cdc53a7dabcf"
+
+
+[\superset:of{B}]
+Describes: A
+when: 'B is \set'
+satisfies:
+. forAll: b
+  where: 'b [in]: B'
+  then: 'b [in]: A'
+Documented:
+. called: "superset of $B?$"
+------------------------------------------
+Id: "c20a5eaa-5c1b-448c-9678-cdc53a7dabcf"
+
+
+[A \subset/ B]
+States:
+when: 'A, B is \set'
+that:
+. 'A is \subset:of{B}'
+. 'B is \superset:of{A}'
+Documented:
+. written: "A? \subset B?"
+------------------------------------------
+Id: "32f6148f-1e08-4aca-a62d-9b0355d463d4"
+
+
+[A \superset/ B]
+States:
+when: 'A, B is \set'
+that:
+. 'A is \superset:of{B}'
+. 'B is \subset:of{A}'
+Documented:
+. written: "A? \supset B?"
+------------------------------------------
+Id: "6434eaa2-a091-42c0-adc8-b1ccb8fd3c75"
 
 
 [\strict.subset:of{B}]
@@ -240,9 +291,45 @@ satisfies:
 . 'A [subset]: B'
 . 'A != B'
 Documented:
-. written: "A? \subsetneq B?"
+. called: "strict subset of $B?$"
 ------------------------------------------
 Id: "d246567b-c4b3-411f-abee-831573e50f82"
+
+
+[\strict.superset:of{B}]
+Describes: A
+when: 'B is \set'
+satisfies:
+. 'A [superset]: B'
+. 'A != B'
+Documented:
+. called: "strict superset of $B?$"
+------------------------------------------
+Id: "6984cb35-0d5c-43fa-aeb6-abaa899bf5c1"
+
+
+[A \strict.subset/ B]
+States:
+when: 'A, B is \set'
+that:
+. 'A is \strict.subset:of{B}'
+. 'B is \strict.superset:of{A}'
+Documented:
+. written: "A? \subset B?"
+------------------------------------------
+Id: "5b2e1df5-d5d6-49b1-9f76-f9669eb51629"
+
+
+[A \strict.superset/ B]
+States:
+when: 'A, B is \set'
+that:
+. 'A is \strict.superset:of{B}'
+. 'B is \strict.subset:of{A}'
+Documented:
+. written: "A? \supset B?"
+------------------------------------------
+Id: "636b9015-649f-4f84-9272-1a92df256b59"
 
 
 [A \set.intersect:within{U}/ B]

@@ -20,10 +20,12 @@ when:
 . 'x [in]: F'
 means: 'y [in]: F'
 specifies:
-. 'x * y = F.1'
-. 'y * x = F.1'
+. 'x * y = 1'
+. 'y * x = 1'
 Documented:
 . called: "multiplicative inverse of x? in F?"
+Aliases:
+. '1 :=> F.1'
 ------------------------------------------
 Id: "594614bc-fde5-4b06-8697-f8cc921c1fc0"
 

@@ -3,22 +3,21 @@
 ::
 
 [\left.module:over{R0}]
-Describes: M := (R, G, **)
+Describes: M := (R, G, *)
 when: 'R0 is \ring'
 extends: 'G is \group'
 satisfies:
 . 'R := R0'
-. '"**" is \function:on{R, G}:to{G}'
+. '"*" is \function:on{R, G}:to{G}'
 . [scalar.multiplication]
   forAll: r, s, x, y
   where:
   . 'r, s [in]: R'
   . 'x, y [in]: G'
   then:
-  . 'r ** (x + y) = r ** x + r ** y'
-  . '(r + s) ** x = r ** x + s ** x'
-  . '(r * s) ** x = r ** (s ** x)'
-  . 'R.1 ** x = x'
+  . 'r * (x + y) = r * x + r * y'
+  . '(r + s) * x = r * x + s * x'
+  . '(r * s) * x = r * (s * x)'
 Provides:
 . 'x [in]: M :-> x is \left.module.element:of{M}:over{R0}'
 Documented:
@@ -39,23 +38,56 @@ Documented:
 Id: "16fcb4da-dd89-4c0f-a6a9-2cbbde4db34d"
 
 
+[\left.module]
+Describes: M := (R, G, *)
+extends: 'M is \left.module:over{R}'
+Documented:
+. called: "left module"
+------------------------------------------
+Id: "b31db455-e075-4e67-823e-65d76087290a"
+
+
+[\unital.left.module:over{R}]
+Describes: M
+when: 'R is \ring.with.identity'
+extends: 'M is \left.module:over{R}'
+satisfies:
+. forAll: x
+  where: 'x [in]: M'
+  then: 'R.1 * x = x'
+Provides:
+. 'M.1 :=> R.1'
+Documented:
+. called: "unital left module over $R?$"
+------------------------------------------
+Id: "a3ee62a8-9a0b-46a8-89e1-95fd1bebb379"
+
+
+[\unital.left.module]
+Describes: M := (R, G, *)
+extends: 'M is \unital.left.module:over{R}'
+Documented:
+. called: "unital left module"
+------------------------------------------
+Id: "9e4db744-9571-4952-8f91-4ccb0873d788"
+
+
 [\right.module:over{R0}]
-Describes: M := (R, G, **)
+Describes: M := (R, G, *)
 when: 'R0 is \ring'
 extends: 'G is \group'
 satisfies:
 . 'R := R0'
-. '"**" is \function:on{G, R}:to{G}'
+. '"*" is \function:on{G, R}:to{G}'
 . [scalar.multiplication]
   forAll: r, s, x, y
   where:
   . 'r, s [in]: R'
   . 'x, y [in]: G'
   then:
-  . '(x + y) ** r = x ** r + y ** r'
-  . 'x ** (r + s) = x ** r + x ** s'
-  . 'x ** (r * s) = (x ** r) ** s'
-  . 'x ** R.1 = x'
+  . '(x + y) * r = x * r + y * r'
+  . 'x * (r + s) = x * r + x * s'
+  . 'x * (r * s) = (x * r) * s'
 Provides:
 . 'x [in]: M :-> x is \right.module.element:of{M}:over{R0}'
 Documented:
@@ -76,12 +108,46 @@ Documented:
 Id: "6cf2b484-f3e4-426a-9429-14443fa6c1d4"
 
 
+[\right.module]
+Describes: M := (R, G, *)
+extends: 'M is \right.module:over{R}'
+Documented:
+. called: "right module"
+------------------------------------------
+Id: "d8a4d363-63ff-4bc4-b0d1-60336739c587"
+
+
+[\unital.right.module:over{R}]
+Describes: M
+when: 'R is \ring.with.identity'
+extends: 'M is \right.module:over{R}'
+satisfies:
+. forAll: x
+  where: 'x [in]: M'
+  then: 'x * R.1  = x'
+Provides:
+. 'M.1 :=> R.1'
+Documented:
+. called: "unital right module over $R?$"
+------------------------------------------
+Id: "28e4fc1f-2a8a-4261-acfc-39102dcb0bb3"
+
+
+[\unital.right.module]
+Describes: M := (R, G, *)
+extends: 'M is \unital.right.module:over{R}'
+Documented:
+. called: "unital right module"
+------------------------------------------
+Id: "0b048b82-51b6-4d8f-82c9-ffd7259884a7"
+
+
 [\bi.module:over{R0, S0}]
-Describes: M := (R, S, G, **_R, **_S)
+Describes: M := (R, S, G, *_R, *_S)
 when: 'R0, S0 is \ring'
 extends:
-. '(R, G, "**_R") is \left.module:over{R0}'
-. '(R, G, "**_S") is \right.module:over{S0}'
+. '(R, G, "*_R") is \left.module:over{R0}'
+. '(S, G, "*_S") is \right.module:over{S0}'
 Documented:
 . called: "$(R0?, S0?)$ bi-module"
 ------------------------------------------
@@ -102,12 +168,28 @@ Documented:
 Id: "dae7a056-c405-43ac-ab29-3dead7c9e9d9"
 
 
-[\module.over:over{R0}]
-Describes: M := (R, G, **)
-when: 'R is \commutative.ring'
-extends:
-. '(R, R, G, "**", "**") is \bi.module:over{R0, S0}'
+[\bi.module]
+Describes: M := (R, S, G, *_R, *_S)
+extends: 'M is \bi.module:over{R, S}'
 Documented:
-. called: "$R0?$-module"
+. called: "bi-module"
 ------------------------------------------
-Id: "515e7510-65e6-4a22-8a7f-59486bd16d6c"
+Id: "224597f1-649e-459d-a7c9-68fd325f2eb4"
+
+
+Theorem:
+given: M := (R, G, *), *_0
+where:
+. 'M is \left.module'
+. '"*_0" is \function:on{M, R}:to{M}'
+if:
+. forAll: m, r
+  where:
+  . 'm [in]: M'
+  . 'r [in]: R'
+  then:
+  . 'm *_0 r := r * m'
+then: '(R, G, "*_0") is \right.module'
+------------------------------------------
+Id: "df6f95f4-7552-49e0-ad02-ff9a9a123cb1"
+

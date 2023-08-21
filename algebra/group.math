@@ -49,6 +49,50 @@ Documented:
 Id: "404e418f-9ab4-4080-9dfd-ff8054f3f555"
 
 
+[\subgroup:of{G := (X, *, e)}]
+Describes: H := (Y, *_0, u)
+when: 'G is \group'
+extends: 'Y is \set'
+satisfies:
+. 'Y [subset] X'
+. 'Y is \non.empty.set'
+. forAll: x, y
+  where: 'x, y [in]: Y'
+  then: 'x *_0 y := x * y'
+. forAll: x
+  where: 'x [in]: Y'
+  then: 'x.inv [in]: Y'
+. forAll: x, y
+  where: 'x, y [in]: Y'
+  then: 'x *_0 y [in]: Y'
+Documented:
+. called: "subgroup of $G?$"
+------------------------------------------
+Id: "c12a4601-5513-42b6-97e3-19e64896b14f"
+
+
+[H := (X, *, e) \subgroup/ G]
+States:
+when:
+. 'G is \group'
+. 'X is \set'
+that: 'H is \subgroup:of{G}'
+Documented:
+. written: "H? \leq G?"
+------------------------------------------
+Id: "8b8b2238-a9bb-44e4-a4aa-b7857fbd9d51"
+
+
+Theorem:
+given: G, H
+where: 'G is \group'
+if: 'H \subgroup/ G'
+then: 'H is \group'
+------------------------------------------
+Id: "6fe2d452-6b58-442e-920b-f273fac1b3b9"
+
+
+
 [\group.inverse:of{x}:in{G}]
 Defines: y
 when:
@@ -56,12 +100,14 @@ when:
 . 'x [in]: G'
 means: 'y [in]: G'
 specifies:
-. 'x * y = G.e'
-. 'y * x = G.e'
+. 'x * y = e'
+. 'y * x = e'
 Justified:
 . by: "\[group]::(existence.of.inverses)"
 Documented:
 . written: "x?^{-1}"
+Aliases:
+. 'e :=> G.e'
 ------------------------------------------
 Id: "2293a62b-71a4-431e-82a1-c7613a52267f"
 
@@ -90,9 +136,8 @@ Documented:
 Id: "1aaf732a-1987-4ee2-860e-98adf261b5f6"
 
 
-[G1 \group.direct.product/ G2]
+[G1 := (X1, *_1, e1) \group.direct.product/ G2 := (X2, *_2, e2)]
 Defines: H := (Y, +, u)
-using: G1 := (X1, *_1, e1), G2 := (X2, *_2, e2)
 when: 'G1, G2 is \group'
 specifies:
 . 'Y := X1 \set.times/ X2'
@@ -191,9 +236,8 @@ Documented:
 Id: "ad529afe-2429-4264-b7f1-bacdf017cdcc"
 
 
-[\finite.group.order.of{x}:in{G}]
+[\finite.group.order.of{x}:in{G := (X, *, e)}]
 Defines: n
-using: G := (X, *, e)
 when:
 . 'G is \group'
 . 'n is \natural'
