@@ -1,0 +1,32 @@
+::
+# The Integers
+::
+
+[\integer]
+Describes: n
+Documented:
+. called: "integer"
+------------------------------------------
+Id: "67ba0d5c-d30c-4c1f-85e0-60b9efba44d5"
+
+
+
+[\integer.set]
+Defines: X
+means: 'X is \set'
+specifies: 'X := \set:of[x]{x | x is \integer}'
+Documented:
+. written: "\mathbb{Z}"
+------------------------------------------
+Id: "5f310f77-f89c-4094-8b39-aab057b03720"
+
+
+[\integers]
+Defines: Z := (X, +, *, 0, 1)
+means: 'X is \set'
+specifies: 'X := \integer.set'
+Provides: 'x [in]: Z :-> x [in]: X'
+Documented:
+. written: "\mathbb{Z}"
+------------------------------------------
+Id: "db0487f5-0916-4c86-ace1-d9819655a386"

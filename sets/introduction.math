@@ -226,6 +226,17 @@ Documented:
 Id: "f11cdc54-0ffd-480a-8e87-d491522c8857"
 
 
+[\set:from{a...}]
+Defines: X := {x | ...}
+means: 'X is \set'
+specifies:
+. anyOf: 'x = a...'
+Documented:
+. written: "\left \{ a?{... , ...} \right \}"
+------------------------------------------
+Id: "16266b09-35b9-4f7f-ac4c-f27e15aec31a"
+
+
 ::
 ## Building Sets from Other Sets
 

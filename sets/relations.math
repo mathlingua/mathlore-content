@@ -1,0 +1,70 @@
+::
+# Relations
+::
+
+[\relation:on{A, B}]
+Describes: R
+when: 'A, B is \set'
+extends: 'R is \set'
+satisfies: 'R \subset/ (A \set.times/ B)'
+Documented:
+. called: "relation on $A?$ and $B?$"
+------------------------------------------
+Id: "4e5e4b4e-b50c-436e-b6ae-13ef9ff2d304"
+
+
+[a \related.to:over{R}/ b]
+States:
+using: A, B
+when:
+. 'R is \relation:on{A, B}'
+. 'a [in]: A'
+. 'b [in]: B'
+that: '(a, b) [in]: R'
+Documented:
+. written: "a? \sim_{R?} b?"
+------------------------------------------
+Id: "275414f9-69f7-4cd0-81f2-56b6ee94dad2"
+
+
+[\equivalence.relation:on{A}]
+Describes: R
+when: 'A is \set'
+extends: 'A is \relation:on{A, A}'
+satisfies:
+. [reflexive]
+  forAll: a
+  where: 'a [in]: A'
+  then: 'a \related.to:over{A}/ a'
+. [symmetric]
+  forAll: a, b
+  where: 'a, b [in]: A'
+  suchThat: 'a \related.to:over{R}/ b'
+  then: 'b \related.to:over{R}/ a'
+. [transitive]
+  forAll: a, b, c
+  where: 'a, b, c [in]: A'
+  suchThat:
+  . 'a \related.to:over{R}/ b'
+  . 'b \related.to:over{R}/ c'
+  then:
+  . 'a \related.to:over{R}/ c'
+Documented:
+. called: "equivalence relation on $A?$"
+------------------------------------------
+Id: "eb877ae9-cff9-4e5f-a353-a975c773fb74"
+
+
+
+[\equivalence.class:of{x}:over{R}]
+Defines: Y
+using: A
+when:
+. 'R is \equivalence.relation:on{A}'
+. 'x [in]: A'
+means: 'Y is \set'
+specifies: 'Y := \set:of[y]{y | y [in]: A ; y \related.to:over{R}/ x}'
+Documented:
+. written: "[x?]_{R?}"
+------------------------------------------
+Id: "074b9c9d-d7df-4844-85c9-110c2c9fc266"

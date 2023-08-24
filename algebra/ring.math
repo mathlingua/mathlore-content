@@ -84,9 +84,11 @@ Id: "57d40c75-7b95-4680-ac65-414efa306beb"
 Defines: R := (X, +, *, 0)
 means: 'R is \ring'
 specifies:
-. 'x + y := 0'
-. 'x * y := 0'
-. 'X := \set:of[x]{x | x = 0}'
+. define: x + y
+  as: 'x + y := 0'
+. define: x * y
+  as: 'x * y := 0'
+. 'X := \set:from{0}'
 Documented:
 . called:
   . "the zero ring"
