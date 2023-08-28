@@ -4,7 +4,7 @@
 
 [\group]
 Describes: G := (X, *, e)
-extends: '(X, "*", e) is \monoid'
+extends: 'G is \monoid'
 satisfies:
 . [existence.of.inverses]
   forAll: x

@@ -10,10 +10,9 @@ is that it maps an input to a *unique* output.
 [\function:on{A...}:to{B}]
 Describes: f(x...)
 when: 'A..., B is \set'
-extends:
+satisfies:
 . 'x... [in]: A...'
 . 'f(x) [in]: B'
-satisfies:
 . forAll: a
   where: 'a [in]: A'
   then:
