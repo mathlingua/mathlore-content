@@ -25,7 +25,7 @@ specifies:
 . piecewise:
   if: 'n = 0'
   then: 'n + m := m'
-  if:
+  elseIf:
   . exists: k
     where: 'k is \natural'
     suchThat: 'n = k++'
@@ -100,7 +100,7 @@ specifies:
 . piecewise:
   if: 'n = 0'
   then: 'n * m = 0'
-  if:
+  elseIf:
   . exists: k
     where: 'k is \natural'
     suchThat: 'n = k++'

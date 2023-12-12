@@ -5,7 +5,7 @@
 [\binary.operation:on{X}]
 Describes: x * y
 when: 'X is \set'
-extends: '"*" is \function:on{X [times] X}:to{X}'
+extends: '"*" is \function:on{X [:times:] X}:to{X}'
 Documented:
 . called: "binary operation on X?"
 ------------------------------------------
@@ -18,7 +18,7 @@ when: 'X is \set'
 extends: '"*" is \binary.operation:on{X}'
 satisfies:
 . forAll: x, y, z
-  where: 'x, y, z [in]: X'
+  where: 'x, y, z [.in:] X'
   then: 'x * (y * z) = (x * y) * z'
 Documented:
 . called: "associative binary operation on X?"
@@ -32,7 +32,7 @@ when: 'X is \set'
 extends: '"*" is \binary.operation:on{X}'
 satisfies:
 . forAll: x, y
-  where: 'x, y [in]: X'
+  where: 'x, y [.in:] X'
   then: 'x * y = y * x'
 Documented:
 . called: "commutative binary operation on X?"
@@ -43,12 +43,12 @@ Id: "e3f3d946-9798-4059-8a01-0d6a796385b7"
 [\closed.binary.operation:on{Y}]
 Describes: x * y
 using: X
-when: 'Y [subset]: X'
+when: 'Y [.subset:] X'
 extends: '"*" is \binary.operation:on{X}'
 satisfies:
 . forAll: a, b
-  where: 'a, b [in]: Y'
-  then: 'a * b [in]: Y'
+  where: 'a, b [.in:] Y'
+  then: 'a * b [.in:] Y'
 Documented:
 . called: "closed operation on Y?"
 ------------------------------------------

@@ -18,9 +18,9 @@ States:
 using: A, B
 when:
 . 'R is \relation:on{A, B}'
-. 'a [in]: A'
-. 'b [in]: B'
-that: '(a, b) [in]: R'
+. 'a [.in:] A'
+. 'b [.in:] B'
+that: '(a, b) [.in:] R'
 Documented:
 . written: "a? \sim_{R?} b?"
 ------------------------------------------
@@ -34,16 +34,16 @@ extends: 'A is \relation:on{A, A}'
 satisfies:
 . [reflexive]
   forAll: a
-  where: 'a [in]: A'
+  where: 'a [.in:] A'
   then: 'a \related.to:over{A}/ a'
 . [symmetric]
   forAll: a, b
-  where: 'a, b [in]: A'
+  where: 'a, b [.in:] A'
   suchThat: 'a \related.to:over{R}/ b'
   then: 'b \related.to:over{R}/ a'
 . [transitive]
   forAll: a, b, c
-  where: 'a, b, c [in]: A'
+  where: 'a, b, c [.in:] A'
   suchThat:
   . 'a \related.to:over{R}/ b'
   . 'b \related.to:over{R}/ c'
@@ -61,9 +61,9 @@ Defines: Y
 using: A
 when:
 . 'R is \equivalence.relation:on{A}'
-. 'x [in]: A'
+. 'x [.in:] A'
 means: 'Y is \set'
-specifies: 'Y := \set:of[y]{y | y [in]: A ; y \related.to:over{R}/ x}'
+specifies: 'Y := \set:of[y]{y | y [.in:] A ; y \related.to:over{R}/ x}'
 Documented:
 . written: "[x?]_{R?}"
 ------------------------------------------

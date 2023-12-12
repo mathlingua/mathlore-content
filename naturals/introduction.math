@@ -81,6 +81,6 @@ specifies:
 . '0 := \natural.0'
 . 'succ(x) := \natural.succ(x)'
 Provides:
-. 'n [in]: N :-> n [in]: X'
+. 'n [.in:] N :-> n [.in:] X'
 ------------------------------------------
 Id: "be94a68c-ee2b-4509-85f4-4be04456b520"

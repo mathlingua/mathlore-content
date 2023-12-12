@@ -6,7 +6,7 @@
 Defines: F
 means: 'F is \commutative.ring.with.identity & \division.ring'
 Provides:
-. symbol: 'x [in]: F :-> x is \field.element:of{F}'
+. symbol: 'x [.in:] F :-> x is \field.element:of{F}'
 Documented:
 . called: "field"
 ------------------------------------------
@@ -17,8 +17,8 @@ Id: "d735a144-a432-428c-a53a-26948a89ab35"
 Defines: y
 when:
 . 'F is \field'
-. 'x [in]: F'
-means: 'y [in]: F'
+. 'x [.in:] F'
+means: 'y [.in:] F'
 specifies:
 . 'x * y = 1'
 . 'y * x = 1'
@@ -38,8 +38,8 @@ Provides:
 . symbol: 'x.inv :=> \field.multiplicative.inverse:of{x}:in{F}'
   written: "{x+}?^{-1}"
 . '-x :=> (F as \[abelian.group]).inv(x)'
-. 'x + y :=> x [F.+] y'
-. 'x * y :=> x [F.*] y'
+. 'x + y :=> x [:F.+:] y'
+. 'x * y :=> x [:F.*:] y'
 . 'x - y :=> x + (-y)'
 Documented:
 . called: "element of the field F?"

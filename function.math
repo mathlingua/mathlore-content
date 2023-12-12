@@ -11,13 +11,13 @@ is that it maps an input to a *unique* output.
 Describes: f(x...)
 when: 'A..., B is \set'
 satisfies:
-. 'x... [in]: A...'
-. 'f(x) [in]: B'
+. 'x... [.in:] A...'
+. 'f(x) [.in:] B'
 . forAll: a
-  where: 'a [in]: A'
+  where: 'a [.in:] A'
   then:
   . existsUnique: b
-    where: 'b [in]: B'
+    where: 'b [.in:] B'
     suchThat: 'f(a) = b'
 Documented:
 . written: "A?{... \times ...} \rightarrow B?"
@@ -44,7 +44,7 @@ when: 'A, B is \set'
 extends: 'f is \function:on{A}:to{B}'
 satisfies:
 . forAll: x1, x2
-  where: 'x1, x2 [in]: A'
+  where: 'x1, x2 [.in:] A'
   then:
   . if: 'f(x1) = f(x2)'
     then: 'x1 = x2'
@@ -79,10 +79,10 @@ when: 'A, B is \set'
 extends: 'f is \function:on{A}:to{B}'
 satisfies:
 . forAll: b
-  where: 'b [in]: B'
+  where: 'b [.in:] B'
   then:
   . exists: a
-    where: 'a [in]: A'
+    where: 'a [.in:] A'
     suchThat: 'f(a) = b'
 Documented:
 . written:
@@ -125,10 +125,10 @@ when: 'f is \function:on{A}:to{B}'
 means: 'g is \function:on{B}:to{A}'
 specifies:
 . forAll: a
-  where: 'a [in]: A'
+  where: 'a [.in:] A'
   then: 'g(f(a)) = a'
 . forAll: b
-  where: 'b [in]: B'
+  where: 'b [.in:] B'
   then: 'f(g(b)) = b'
 Documented:
 . written: "f+?^{-1}"

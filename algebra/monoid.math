@@ -6,14 +6,14 @@
 Describes: M := (X, *, e)
 extends: '(X, "*") is \semigroup'
 satisfies:
-. 'e [in]: M'
+. 'e [.in:] M'
 . forAll: x
-  where: 'x [in]: M'
+  where: 'x [.in:] M'
   then:
   . 'x * e = x'
   . 'e * x = x'
 Provides:
-. symbol: 'x [in]: M :-> x is \monoid.element:of{M}'
+. symbol: 'x [.in:] M :-> x is \monoid.element:of{M}'
   written: "x? \in M?"
 Documented:
 . called: "monoid"

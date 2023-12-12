@@ -8,15 +8,15 @@ extends: 'G is \monoid'
 satisfies:
 . [existence.of.inverses]
   forAll: x
-  where: 'x [in]: G'
+  where: 'x [.in:] G'
   then:
   . exists: y
-    where: 'y [in]: G'
+    where: 'y [.in:] G'
     suchThat:
     . 'x * y = e'
     . 'y * x = e'
 Provides:
-. symbol: 'x [in]: G :-> x is \group.element:of{G}'
+. symbol: 'x [.in:] G :-> x is \group.element:of{G}'
   written: "x? \in G?"
 Documented:
 . called: "group"
@@ -54,17 +54,17 @@ Describes: H := (Y, *_0, u)
 when: 'G is \group'
 extends: 'Y is \set'
 satisfies:
-. 'Y [subset] X'
+. 'Y [:subset:] X'
 . 'Y is \non.empty.set'
 . forAll: x, y
-  where: 'x, y [in]: Y'
+  where: 'x, y [.in:] Y'
   then: 'x *_0 y := x * y'
 . forAll: x
-  where: 'x [in]: Y'
-  then: 'x.inv [in]: Y'
+  where: 'x [.in:] Y'
+  then: 'x.inv [.in:] Y'
 . forAll: x, y
-  where: 'x, y [in]: Y'
-  then: 'x *_0 y [in]: Y'
+  where: 'x, y [.in:] Y'
+  then: 'x *_0 y [.in:] Y'
 Documented:
 . called: "subgroup of $G?$"
 ------------------------------------------
@@ -97,8 +97,8 @@ Id: "6fe2d452-6b58-442e-920b-f273fac1b3b9"
 Defines: y
 when:
 . 'G is \group'
-. 'x [in]: G'
-means: 'y [in]: G'
+. 'x [.in:] G'
+means: 'y [.in:] G'
 specifies:
 . 'x * y = e'
 . 'y * x = e'
@@ -117,14 +117,14 @@ Defines: y
 using: G := (X, *, e)
 when:
 . 'G is \group'
-. 'x [in]: G'
+. 'x [.in:] G'
 . 'n is \natural'
-means: 'y [in]: G'
+means: 'y [.in:] G'
 specifies:
 . piecewise:
   if: 'n = 0'
   then: 'y = e'
-  if:
+  elseIf:
   . exists: m
     where: 'm is \natural'
     suchThat: 'n = m++'
@@ -153,7 +153,7 @@ Theorem:
 given: x, y, G
 where:
 . 'G is \group'
-. 'x, y [in]: G'
+. 'x, y [.in:] G'
 then:
 . '(x * y).inv = y.inv * x.inv'
 ------------------------------------------
@@ -165,7 +165,7 @@ Describes: G
 extends: 'G is \group'
 satisfies:
 . forAll: x, y
-  where: 'x, y [in]: G'
+  where: 'x, y [.in:] G'
   then: 'x * y = y * x'
 Documented:
 . called: "abelian group"
@@ -177,10 +177,10 @@ Theorem:
 given: G := (X, *, e), e1, e2
 where:
 . 'G is \group'
-. 'e1, e2 [in]: G'
+. 'e1, e2 [.in:] G'
 if:
 . forAll: x
-  where: 'x [in]: G'
+  where: 'x [.in:] G'
   then:
   . 'x*e1 = x'
   . 'e1*x = x'
@@ -197,7 +197,7 @@ Theorem:
 given: G := (X, *, e), a
 where:
 . 'G is \group'
-. 'a [in]: G'
+. 'a [.in:] G'
 then: '(a.inv).inv = a'
 ------------------------------------------
 Id: "d319ea35-ba5a-4809-805d-ffe1cacd62dc"
@@ -207,7 +207,7 @@ Theorem:
 given: G := (X, *, e), a, b1, b2
 where:
 . 'G is \group'
-. 'a, b1, b2 [in]: G'
+. 'a, b1, b2 [.in:] G'
 if:
 . 'a*b1 = e'
 . 'b1*a = e'
@@ -255,7 +255,7 @@ Theorem:
 given: G, a, b
 where:
 . 'G is \group'
-. 'a, b [in]: G'
+. 'a, b [.in:] G'
 then: '\finite.group.order.of{a*b}:in{G} = \finite.group.order.of{b*a}:in{G}'
 ------------------------------------------
 Id: "b3a33c2d-b6fd-41bb-a8d8-98c98226cf86"

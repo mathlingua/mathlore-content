@@ -12,14 +12,14 @@ satisfies:
 . [scalar.multiplication]
   forAll: r, s, x, y
   where:
-  . 'r, s [in]: R'
-  . 'x, y [in]: G'
+  . 'r, s [.in:] R'
+  . 'x, y [.in:] G'
   then:
   . 'r * (x + y) = r * x + r * y'
   . '(r + s) * x = r * x + s * x'
   . '(r * s) * x = r * (s * x)'
 Provides:
-. 'x [in]: M :-> x is \left.module.element:of{M}:over{R0}'
+. 'x [.in:] M :-> x is \left.module.element:of{M}:over{R0}'
 Documented:
 . called: "left-module over $R0?$"
 ------------------------------------------
@@ -53,7 +53,7 @@ when: 'R is \ring.with.identity'
 extends: 'M is \left.module:over{R}'
 satisfies:
 . forAll: x
-  where: 'x [in]: M'
+  where: 'x [.in:] M'
   then: 'R.1 * x = x'
 Provides:
 . 'M.1 :=> R.1'
@@ -82,14 +82,14 @@ satisfies:
 . [scalar.multiplication]
   forAll: r, s, x, y
   where:
-  . 'r, s [in]: R'
-  . 'x, y [in]: G'
+  . 'r, s [.in:] R'
+  . 'x, y [.in:] G'
   then:
   . '(x + y) * r = x * r + y * r'
   . 'x * (r + s) = x * r + x * s'
   . 'x * (r * s) = (x * r) * s'
 Provides:
-. 'x [in]: M :-> x is \right.module.element:of{M}:over{R0}'
+. 'x [.in:] M :-> x is \right.module.element:of{M}:over{R0}'
 Documented:
 . called: "right-module over $R0?$"
 ------------------------------------------
@@ -123,7 +123,7 @@ when: 'R is \ring.with.identity'
 extends: 'M is \right.module:over{R}'
 satisfies:
 . forAll: x
-  where: 'x [in]: M'
+  where: 'x [.in:] M'
   then: 'x * R.1  = x'
 Provides:
 . 'M.1 :=> R.1'
@@ -185,8 +185,8 @@ where:
 if:
 . forAll: m, r
   where:
-  . 'm [in]: M'
-  . 'r [in]: R'
+  . 'm [.in:] M'
+  . 'r [.in:] R'
   then:
   . 'm *_0 r := r * m'
 then: '(R, G, "*_0") is \right.module'

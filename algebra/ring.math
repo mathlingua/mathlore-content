@@ -11,12 +11,12 @@ extends:
 satisfies:
 . [distributive.law]
   forAll: x, y, z
-  where: 'x, y, z [in]: R'
+  where: 'x, y, z [.in:] R'
   then:
   . '(x + y)*z = x*z + y*z'
   . 'x*(y + z) = x*y + x*z'
 Provides:
-. 'x [in]: R :-> x is \ring.element:of{G}'
+. 'x [.in:] R :-> x is \ring.element:of{G}'
 Documented:
 . called: "ring"
 ------------------------------------------
@@ -63,7 +63,7 @@ Describes: R
 extends: 'R is \ring'
 satisfies:
 . forAll: x, y
-  where: 'x, y [in]: R'
+  where: 'x, y [.in:] R'
   then: 'x * y = y * x'
 Documented:
 . called: "commutative ring"
@@ -113,11 +113,11 @@ extends: 'R is \ring.with.identity'
 satisfies:
 . '0 != 1'
 . forAll: x
-  where: 'x [in]: R'
+  where: 'x [.in:] R'
   suchThat: 'x != 0'
   then:
   . exists: y
-    where: 'y [in]: R'
+    where: 'y [.in:] R'
     suchThat:
     . 'x * y = 1'
     . 'y * x = 1'

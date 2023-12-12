@@ -7,7 +7,7 @@ Describes: S := (X, *)
 extends: 'S is \magma'
 satisfies: '"*" is \associative.binary.operation:on{S}'
 Provides:
-. symbol: 'x [in]: S :-> x is \semigroup.element:of{S}'
+. symbol: 'x [.in:] S :-> x is \semigroup.element:of{S}'
   written: "x? \in S?"
 Documented:
 . called: "semigroup"
