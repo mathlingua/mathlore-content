@@ -76,7 +76,7 @@ property of that type a *\set.property*.
 
 [\set.property(x)]
 Defines: P(x)
-means: 'P is [: statement :]'
+means: 'P is \\formulation{statement}'
 Documented:
 . written: "P?(x?)"
 ------------------------------------------

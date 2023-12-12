@@ -220,7 +220,7 @@ Id: "6dcccfc0-be83-489a-9c2e-040e61bce8f7"
 
 [\smallest.natural:suchThat[n]{P(n)}]
 Defines: k
-when: 'P is [:statement:]'
+when: 'P is \\formulation{statement}'
 means: 'k is \natural'
 specifies:
 . 'P(k)'
