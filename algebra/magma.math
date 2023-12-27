@@ -7,7 +7,7 @@ Describes: M := (X, *)
 extends: 'X is \set'
 satisfies: '"*" is \binary.operation:on{M}'
 Provides:
-. symbol: 'x [.in:] M :-> x is \magma.element:of{M}'
+. symbol: 'x [.in.]: M :-> x is \magma.element:of{M}'
   written: "x? \in M?"
 Documented:
 . called:
@@ -22,7 +22,7 @@ Id: "a2190fa3-1a9a-4767-a727-c0061d758b39"
 Describes: x
 when: 'M is \magma'
 extends: 'x is \set.element:of{M.X}'
-Provides: 'x * y :=> x [:M.*:] y'
+Provides: 'x * y :=> x [.M.*.]: y'
 Documented:
 . called: "element of magma M?"
 ------------------------------------------

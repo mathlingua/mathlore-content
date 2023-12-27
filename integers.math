@@ -25,7 +25,7 @@ Id: "5f310f77-f89c-4094-8b39-aab057b03720"
 Defines: Z := (X, +, *, 0, 1)
 means: 'X is \set'
 specifies: 'X := \integer.set'
-Provides: 'x [.in:] Z :-> x [.in:] X'
+Provides: 'x [.in.]: Z :-> x [.in.]: X'
 Documented:
 . written: "\mathbb{Z}"
 ------------------------------------------

@@ -8,15 +8,15 @@ extends: 'Q is \magma'
 satisfies:
 . [latin.square.property]
   forAll: a, b
-  where: 'a, b [.in:] Q'
+  where: 'a, b [.in.]: Q'
   then:
   . existsUnique: x, y
-    where: 'x, y [.in:] Q'
+    where: 'x, y [.in.]: Q'
     suchThat:
     . 'a*x = b'
     . 'y*a = b'
 Provides:
-. symbol: 'x [.in:] Q :-> x is \quasigroup.element:of{Q}'
+. symbol: 'x [.in.]: Q :-> x is \quasigroup.element:of{Q}'
   written: "x? \in Q?"
 Documented:
 . called: "quasigroup"

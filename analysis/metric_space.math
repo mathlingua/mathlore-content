@@ -8,20 +8,20 @@ when: 'X is \set'
 extends: 'd is \function:on{X, X}:to{\reals}'
 satisfies:
 . forAll: x
-  where: 'x [.in:] X'
+  where: 'x [.in.]: X'
   then: 'd(x, x) = 0'
 . [positivity]
   forAll: x, y
-  where: 'x, y [.in:] X'
+  where: 'x, y [.in.]: X'
   suchThat: 'x != y'
   then: 'd(x, y) > 0'
 . [symmetry]
   forAll: x, y
-  where: 'x, y [.in:] X'
+  where: 'x, y [.in.]: X'
   then: 'd(x, y) = d(y, x)'
 . [triangle.inequality]
   forAll: x, y, z
-  where: 'x, y, z [.in:] X'
+  where: 'x, y, z [.in.]: X'
   then: 'd(x, z) <= d(x, y) + d(y, z)'
 Documented:
 . called: "metric on $X?$"

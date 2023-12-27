@@ -25,11 +25,11 @@ States:
 when: 'x, y is \set'
 that:
 . forAll: z
-  where: 'z [.in:] x'
-  then: 'z [.in:] y'
+  where: 'z [.in.]: x'
+  then: 'z [.in.]: y'
 . forAll: z
-  where: 'z [.in:] y'
-  then: 'z [.in:] x'
+  where: 'z [.in.]: y'
+  then: 'z [.in.]: x'
 Documented:
 . written: "x? = y?"
 ------------------------------------------
@@ -49,7 +49,7 @@ specifies:
 . not:
   . exists: x
     where: 'x is \set'
-    suchThat: 'x [.in:] X'
+    suchThat: 'x [.in.]: X'
 Documented:
 . written: "\emptyset"
 . overview: "An empty set is a set that doesn't contain any elements."
@@ -98,8 +98,8 @@ if:
 . forAll: z
   where: 'z is \set'
   then:
-  . iff: 'z [.in:] x'
-    then: 'z [.in:] y'
+  . iff: 'z [.in.]: x'
+    then: 'z [.in.]: y'
 then:
 . 'x = y'
 Documented:
@@ -129,9 +129,9 @@ then:
 . exists: y
   where: 'y is \set'
   suchThat:
-  . 'y [.in:] x'
+  . 'y [.in.]: x'
   . not:
-    . 'x [.in:] y'
+    . 'x [.in.]: y'
 Documented:
 . called: "Axiom of Regularity"
 ------------------------------------------
@@ -147,8 +147,8 @@ then:
   where: 'z is \set'
   suchThat:
   . anyOf:
-    . 'x [.in:] z'
-    . 'y [.in:] z'
+    . 'x [.in.]: z'
+    . 'y [.in.]: z'
 Documented:
 . called: "Axiom of Unordered Pair"
 ------------------------------------------
@@ -174,7 +174,7 @@ Id: "ad51829a-9518-42a5-917c-f8e1fb117640"
 States:
 when: 'X is \set'
 that:
-. not: 'x [.in:] X'
+. not: 'x [.in.]: X'
 Documented:
 . written: "x? \notin X?"
 ------------------------------------------
@@ -189,18 +189,18 @@ satisfies:
 . '\set.axiom.of.regularity'
 . '\set.axiom.of.unordered.pair'
 Provides:
-. 'x [.in:] X :-> x is \set.element:of{X}'
-. 'x [.subset:] X :-> x is \subset:of{X}'
-. 'x [:strict.subset:] X :-> x is \strict.subset:of{X}'
-. 'x [:superset:] X :-> x is \superset:of{X}'
-. 'x [:strict.superset:] X :-> x is \strict.superset:of{X}'
+. 'x [.in.]: X :-> x is \set.element:of{X}'
+. 'x [.subset.]: X :-> x is \subset:of{X}'
+. 'x [.strict.subset.]: X :-> x is \strict.subset:of{X}'
+. 'x [.superset.]: X :-> x is \superset:of{X}'
+. 'x [.strict.superset.]: X :-> x is \strict.superset:of{X}'
 . 'x = y :=> x \set.=/ y'
-. 'x [.notin:] X :=> x \set.not.in/ X'
-. 'x [:cup:] y :=> x \set.union/ y'
-. 'x [:cap:] y :=> x \set.intersect/ y'
+. 'x [.notin.]: X :=> x \set.not.in/ X'
+. 'x [.cup.]: y :=> x \set.union/ y'
+. 'x [.cap.]: y :=> x \set.intersect/ y'
 . 'x - y :=> x \set.minus/ y'
-. 'x [:times:] y :=> x \set.times/ y'
-. 'x [:Delta:] y :=> x \symmetric.difference/ y'
+. 'x [.times.]: y :=> x \set.times/ y'
+. 'x [.Delta.]: y :=> x \symmetric.difference/ y'
 Documented:
 . called: "set"
 ------------------------------------------
@@ -250,8 +250,8 @@ Describes: A
 when: 'B is \set'
 satisfies:
 . forAll: a
-  where: 'a [.in:] A'
-  then: 'a [.in:] B'
+  where: 'a [.in.]: A'
+  then: 'a [.in.]: B'
 Documented:
 . called: "subset of $B?$"
 ------------------------------------------
@@ -263,8 +263,8 @@ Describes: A
 when: 'B is \set'
 satisfies:
 . forAll: b
-  where: 'b [.in:] B'
-  then: 'b [.in:] A'
+  where: 'b [.in.]: B'
+  then: 'b [.in.]: A'
 Documented:
 . called: "superset of $B?$"
 ------------------------------------------
@@ -299,7 +299,7 @@ Id: "6434eaa2-a091-42c0-adc8-b1ccb8fd3c75"
 Describes: A
 when: 'B is \set'
 satisfies:
-. 'A [.subset:] B'
+. 'A [.subset.]: B'
 . 'A != B'
 Documented:
 . called: "strict subset of $B?$"
@@ -311,7 +311,7 @@ Id: "d246567b-c4b3-411f-abee-831573e50f82"
 Describes: A
 when: 'B is \set'
 satisfies:
-. 'A [:superset:] B'
+. 'A [.superset.]: B'
 . 'A != B'
 Documented:
 . called: "strict superset of $B?$"
@@ -347,9 +347,9 @@ Id: "636b9015-649f-4f84-9272-1a92df256b59"
 Defines: C
 when: 'A, B, U is \set'
 suchThat:
-. 'A, B [.subset:] U'
+. 'A, B [.subset.]: U'
 means: 'C is \set'
-specifies: 'C := \set:of[c]{c | c [.in:] A; c [.in:] B}'
+specifies: 'C := \set:of[c]{c | c [.in.]: A; c [.in.]: B}'
 Documented:
 . written: "A? \cap_{U?} B?"
 ------------------------------------------
@@ -362,7 +362,7 @@ using: U
 when:
 . 'A, B, U is \set'
 suchThat:
-. 'A, B [.subset:] U'
+. 'A, B [.subset.]: U'
 means: 'C is \set'
 specifies: 'C := A \set.intersect:within{U}/ B'
 Documented:
@@ -374,9 +374,9 @@ Id: "31125a8e-e201-4b92-8f15-0d3f5cd22b4f"
 [A \set.union:within{U}/ B]
 Defines: C
 when: 'A, B, U is \set'
-suchThat: 'A, B [.subset:] U'
+suchThat: 'A, B [.subset.]: U'
 means: 'C is \set'
-specifies: 'C := \set:of[c]{c | (c [.in:] A) \or/ (c [.in:] B)}'
+specifies: 'C := \set:of[c]{c | (c [.in.]: A) \or/ (c [.in.]: B)}'
 Documented:
 . written: "A? \cup_{U?} B?"
 ------------------------------------------
@@ -398,7 +398,7 @@ Id: "cd4cb1c8-9d90-4dd3-b3c7-a5ef554a3438"
 Defines: C
 when: 'A, B is \set'
 means: 'C is \set'
-specifies: 'C := \set:of[c]{c | c [.in:] A ; c [.notin:] B}'
+specifies: 'C := \set:of[c]{c | c [.in.]: A ; c [.notin.]: B}'
 Documented:
 . written: "A? \backslash B?"
 ------------------------------------------
@@ -409,7 +409,7 @@ Id: "05f452a0-9168-498f-a5fa-d119cbc9233c"
 Defines: C
 when: 'A, B is \set'
 means: 'C is \set'
-specifies: 'C := (A - B) [:cup:] (B - A)'
+specifies: 'C := (A - B) [.cup.]: (B - A)'
 Documented:
 . written: "A? \Delta B?"
 ------------------------------------------
@@ -420,7 +420,7 @@ Id: "3ba18db2-febc-4661-a386-ab3d988c8492"
 Defines: B
 when: 'A, U is \set'
 means: 'C is \set'
-specifies: 'B := \set:of[b]{b | b [.in:] U; b [.notin:] A}'
+specifies: 'B := \set:of[b]{b | b [.in.]: U; b [.notin.]: A}'
 Documented:
 . written: "A?^C"
 ------------------------------------------
@@ -431,7 +431,7 @@ Id: "3c5d6ec5-62d7-4a24-a789-9c4088fbef13"
 Defines: C
 when: 'A, B is \set'
 means: 'C is \set'
-specifies: 'C := \set:of[a, b]{(a, b) | a [.in:] A; b [.in:] B}'
+specifies: 'C := \set:of[a, b]{(a, b) | a [.in.]: A; b [.in.]: B}'
 Documented:
 . written: "A? \times B?"
 ------------------------------------------
@@ -442,15 +442,15 @@ Theorem:
 given: A, B, C
 where: 'A, B, C is \set'
 then:
-. 'A [:cup:] A = A'
-. 'A [:cap:] A = A'
+. 'A [.cup.]: A = A'
+. 'A [.cap.]: A = A'
 . 'A - A = \empty.set'
-. 'A [:cup:] \empty.set = A'
-. 'A [:cap:] \empty.set = \empty.set'
-. 'A [:cup:] (B [:cup:] C) = (A [:cup:] B) [:cup:] C'
-. 'A [:cap:] (B [:cap:] C) = (A [:cap:] B) [:cap:] C'
-. 'A [:cup:] B = B [:cup:] A'
-. 'A [:cap:] B = B [:cap:] A'
+. 'A [.cup.]: \empty.set = A'
+. 'A [.cap.]: \empty.set = \empty.set'
+. 'A [.cup.]: (B [.cup.]: C) = (A [.cup.]: B) [.cup.]: C'
+. 'A [.cap.]: (B [.cap.]: C) = (A [.cap.]: B) [.cap.]: C'
+. 'A [.cup.]: B = B [.cup.]: A'
+. 'A [.cap.]: B = B [.cap.]: A'
 ------------------------------------------
 Id: "85e4163a-8343-4c14-893d-3352f7de380b"
 

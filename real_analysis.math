@@ -10,7 +10,7 @@ Id: "aecb5b16-2e9a-4602-b489-1b81a5cdca0f"
 
 [\real]
 Describes: x
-satisfies: 'x [.in:] \reals'
+satisfies: 'x [.in.]: \reals'
 Documented:
 . called: "real"
 ------------------------------------------

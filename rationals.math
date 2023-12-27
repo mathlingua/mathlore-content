@@ -26,7 +26,7 @@ Id: "c5ea9f72-104a-4d56-bb75-5e9f59624fbf"
 Defines: Q := (X, +, *, 0, 1)
 means: 'X is \set'
 specifies: 'X := \rational.set'
-Provides: 'x [.in:] Q :-> x [.in:] X'
+Provides: 'x [.in.]: Q :-> x [.in.]: X'
 Documented:
 . written: "\mathbb{Q}"
 ------------------------------------------
