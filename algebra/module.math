@@ -6,7 +6,7 @@
 Describes: M := (R, G, *)
 when: 'R0 is \ring'
 extends: 'G is \group'
-satisfies:
+specifies:
 . 'R := R0'
 . '"*" is \function:on{R, G}:to{G}'
 . [scalar.multiplication]
@@ -51,7 +51,7 @@ Id: "b31db455-e075-4e67-823e-65d76087290a"
 Describes: M
 when: 'R is \ring.with.identity'
 extends: 'M is \left.module:over{R}'
-satisfies:
+specifies:
 . forAll: x
   where: 'x [.in.]: M'
   then: 'R.1 * x = x'
@@ -76,7 +76,7 @@ Id: "9e4db744-9571-4952-8f91-4ccb0873d788"
 Describes: M := (R, G, *)
 when: 'R0 is \ring'
 extends: 'G is \group'
-satisfies:
+specifies:
 . 'R := R0'
 . '"*" is \function:on{G, R}:to{G}'
 . [scalar.multiplication]
@@ -121,7 +121,7 @@ Id: "d8a4d363-63ff-4bc4-b0d1-60336739c587"
 Describes: M
 when: 'R is \ring.with.identity'
 extends: 'M is \right.module:over{R}'
-satisfies:
+specifies:
 . forAll: x
   where: 'x [.in.]: M'
   then: 'x * R.1  = x'

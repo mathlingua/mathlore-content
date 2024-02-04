@@ -5,7 +5,7 @@
 [\magma]
 Describes: M := (X, *)
 extends: 'X is \set'
-satisfies: '"*" is \binary.operation:on{M}'
+specifies: '"*" is \binary.operation:on{M}'
 Provides:
 . symbol: 'x [.in.]: M :-> x is \magma.element:of{M}'
   written: "x? \in M?"

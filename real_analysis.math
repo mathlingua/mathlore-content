@@ -10,7 +10,7 @@ Id: "aecb5b16-2e9a-4602-b489-1b81a5cdca0f"
 
 [\real]
 Describes: x
-satisfies: 'x [.in.]: \reals'
+specifies: 'x [.in.]: \reals'
 Documented:
 . called: "real"
 ------------------------------------------
@@ -28,7 +28,7 @@ Id: "8f0ed422-74b2-4bbb-873f-9e272ad4bd6f"
 [\real.sqrt(x)]
 Defines: f(x) := y
 means: 'f is \function:on{\reals}:to{\reals}'
-specifies:
+expresses:
 . 'y > 0'
 . 'y^2 = x'
 ------------------------------------------
@@ -55,7 +55,7 @@ Id: "33e40ee0-5046-4535-9a09-747f254a6c40"
 Defines: f(x) := y
 when: 'n is \positive.natural'
 means: 'f is \function:on{\reals}:to{\reals}'
-specifies:
+expresses:
 . 'y > 0'
 . 'y^n = x'
 Justified:
@@ -67,7 +67,7 @@ Id: "e94770b4-62b0-4acd-8cf0-c18a26d89217"
 [\real.square(x)]
 Defines: f(x)
 means: 'f is \function:on{\reals}:to{\reals}'
-specifies: 'f(x) := x^2'
+expresses: 'f(x) := x^2'
 ------------------------------------------
 Id: "bd82c6f5-13de-4b95-a9fd-6ff4cda2a7ea"
 

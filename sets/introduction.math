@@ -45,7 +45,7 @@ a set itself is.
 [\empty.set]
 Defines: X
 means: 'X is \set'
-specifies:
+expresses:
 . not:
   . exists: x
     where: 'x is \set'
@@ -60,7 +60,7 @@ Id: "97674113-6c06-48bc-9b90-69cb68224a41"
 [\non.empty.set]
 Describes: X
 extends: 'X is \set'
-satisfies: 'X != \empty.set'
+specifies: 'X != \empty.set'
 Documented:
 . called: "non-empty set"
 ------------------------------------------
@@ -183,7 +183,7 @@ Id: "55a10ba4-ba12-4ca0-9aa3-cc0351ede542"
 
 [\set]
 Describes: X
-satisfies:
+specifies:
 . '\set.axiom.existence.of.empty.set'
 . '\set.axiom.of.extensionality'
 . '\set.axiom.of.regularity'
@@ -217,7 +217,7 @@ condition or conditions.
 [\set:of[x...]{f(x...) | g(x...)...}]
 Defines: X := {u(x...) | ...}
 means: 'X is \set'
-specifies:
+expresses:
 . 'u(x...) := f(x...)'
 . 'g(x...)...'
 Documented:
@@ -229,7 +229,7 @@ Id: "f11cdc54-0ffd-480a-8e87-d491522c8857"
 [\set:from{a...}]
 Defines: X := {x | ...}
 means: 'X is \set'
-specifies:
+expresses:
 . anyOf: 'x = a...'
 Documented:
 . written: "\left \{ a?{... , ...} \right \}"
@@ -248,7 +248,7 @@ sets.
 [\subset:of{B}]
 Describes: A
 when: 'B is \set'
-satisfies:
+specifies:
 . forAll: a
   where: 'a [.in.]: A'
   then: 'a [.in.]: B'
@@ -261,7 +261,7 @@ Id: "c20a5eaa-5c1b-448c-9678-cdc53a7dabcf"
 [\superset:of{B}]
 Describes: A
 when: 'B is \set'
-satisfies:
+specifies:
 . forAll: b
   where: 'b [.in.]: B'
   then: 'b [.in.]: A'
@@ -298,7 +298,7 @@ Id: "6434eaa2-a091-42c0-adc8-b1ccb8fd3c75"
 [\strict.subset:of{B}]
 Describes: A
 when: 'B is \set'
-satisfies:
+specifies:
 . 'A [.subset.]: B'
 . 'A != B'
 Documented:
@@ -310,7 +310,7 @@ Id: "d246567b-c4b3-411f-abee-831573e50f82"
 [\strict.superset:of{B}]
 Describes: A
 when: 'B is \set'
-satisfies:
+specifies:
 . 'A [.superset.]: B'
 . 'A != B'
 Documented:
@@ -349,7 +349,7 @@ when: 'A, B, U is \set'
 suchThat:
 . 'A, B [.subset.]: U'
 means: 'C is \set'
-specifies: 'C := \set:of[c]{c | c [.in.]: A; c [.in.]: B}'
+expresses: 'C := \set:of[c]{c | c [.in.]: A; c [.in.]: B}'
 Documented:
 . written: "A? \cap_{U?} B?"
 ------------------------------------------
@@ -364,7 +364,7 @@ when:
 suchThat:
 . 'A, B [.subset.]: U'
 means: 'C is \set'
-specifies: 'C := A \set.intersect:within{U}/ B'
+expresses: 'C := A \set.intersect:within{U}/ B'
 Documented:
 . written: "A? \cap B?"
 ------------------------------------------
@@ -376,7 +376,7 @@ Defines: C
 when: 'A, B, U is \set'
 suchThat: 'A, B [.subset.]: U'
 means: 'C is \set'
-specifies: 'C := \set:of[c]{c | (c [.in.]: A) \or/ (c [.in.]: B)}'
+expresses: 'C := \set:of[c]{c | (c [.in.]: A) \or/ (c [.in.]: B)}'
 Documented:
 . written: "A? \cup_{U?} B?"
 ------------------------------------------
@@ -387,7 +387,7 @@ Id: "90df9713-3d23-4c38-ba45-28f2798fb307"
 Defines: C
 using: U
 means: 'C is \set'
-specifies: 'C := A \set.union:within{U}/ B'
+expresses: 'C := A \set.union:within{U}/ B'
 Documented:
 . written: "A? \cup B?"
 ------------------------------------------
@@ -398,7 +398,7 @@ Id: "cd4cb1c8-9d90-4dd3-b3c7-a5ef554a3438"
 Defines: C
 when: 'A, B is \set'
 means: 'C is \set'
-specifies: 'C := \set:of[c]{c | c [.in.]: A ; c [.notin.]: B}'
+expresses: 'C := \set:of[c]{c | c [.in.]: A ; c [.notin.]: B}'
 Documented:
 . written: "A? \backslash B?"
 ------------------------------------------
@@ -409,7 +409,7 @@ Id: "05f452a0-9168-498f-a5fa-d119cbc9233c"
 Defines: C
 when: 'A, B is \set'
 means: 'C is \set'
-specifies: 'C := (A - B) [.cup.]: (B - A)'
+expresses: 'C := (A - B) [.cup.]: (B - A)'
 Documented:
 . written: "A? \Delta B?"
 ------------------------------------------
@@ -420,7 +420,7 @@ Id: "3ba18db2-febc-4661-a386-ab3d988c8492"
 Defines: B
 when: 'A, U is \set'
 means: 'C is \set'
-specifies: 'B := \set:of[b]{b | b [.in.]: U; b [.notin.]: A}'
+expresses: 'B := \set:of[b]{b | b [.in.]: U; b [.notin.]: A}'
 Documented:
 . written: "A?^C"
 ------------------------------------------
@@ -431,7 +431,7 @@ Id: "3c5d6ec5-62d7-4a24-a789-9c4088fbef13"
 Defines: C
 when: 'A, B is \set'
 means: 'C is \set'
-specifies: 'C := \set:of[a, b]{(a, b) | a [.in.]: A; b [.in.]: B}'
+expresses: 'C := \set:of[a, b]{(a, b) | a [.in.]: A; b [.in.]: B}'
 Documented:
 . written: "A? \times B?"
 ------------------------------------------

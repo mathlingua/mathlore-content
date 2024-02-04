@@ -5,7 +5,7 @@
 [\monoid]
 Describes: M := (X, *, e)
 extends: '(X, "*") is \semigroup'
-satisfies:
+specifies:
 . 'e [.in.]: M'
 . forAll: x
   where: 'x [.in.]: M'

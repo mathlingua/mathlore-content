@@ -6,7 +6,7 @@
 Describes: d(x, y)
 when: 'X is \set'
 extends: 'd is \function:on{X, X}:to{\reals}'
-satisfies:
+specifies:
 . forAll: x
   where: 'x [.in.]: X'
   then: 'd(x, x) = 0'
@@ -32,7 +32,7 @@ Id: "be627b13-bda3-4e72-955e-4b960f2b123c"
 [\metric.space]
 Describes: M := (X, d)
 extends: 'X is \set'
-satisfies: 'd is \metric:on{X}'
+specifies: 'd is \metric:on{X}'
 Documented:
 . called: "metric space"
 ------------------------------------------

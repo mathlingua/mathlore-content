@@ -8,7 +8,7 @@ Describes: R := (X, +, *, 0)
 extends:
 . '(X, "+", 0) is \abelian.group'
 . '(X, "*") is \semigroup'
-satisfies:
+specifies:
 . [distributive.law]
   forAll: x, y, z
   where: 'x, y, z [.in.]: R'
@@ -61,7 +61,7 @@ Id: "7e9002e6-4aa3-4312-b113-798474c70e0f"
 [\commutative.ring]
 Describes: R
 extends: 'R is \ring'
-satisfies:
+specifies:
 . forAll: x, y
   where: 'x, y [.in.]: R'
   then: 'x * y = y * x'
@@ -83,7 +83,7 @@ Id: "57d40c75-7b95-4680-ac65-414efa306beb"
 [\trivial.ring]
 Defines: R := (X, +, *, 0)
 means: 'R is \ring'
-specifies:
+expresses:
 . define: x + y
   as: 'x + y := 0'
 . define: x * y
@@ -100,7 +100,7 @@ Id: "bcff7894-7ec2-44eb-ae00-6e445ef19c9a"
 [\nontrivial.ring]
 Describes: R
 extends: 'R is \ring'
-satisfies: 'R != \trivial.ring'
+specifies: 'R != \trivial.ring'
 Documented:
 . called: "non-trivial ring"
 ------------------------------------------
@@ -110,7 +110,7 @@ Id: "029fa21a-8527-4a08-9035-d5a29d8014f6"
 [\division.ring]
 Describes: R
 extends: 'R is \ring.with.identity'
-satisfies:
+specifies:
 . '0 != 1'
 . forAll: x
   where: 'x [.in.]: R'

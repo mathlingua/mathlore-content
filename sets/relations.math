@@ -6,7 +6,7 @@
 Describes: R
 when: 'A, B is \set'
 extends: 'R is \set'
-satisfies: 'R \subset/ (A \set.times/ B)'
+specifies: 'R \subset/ (A \set.times/ B)'
 Documented:
 . called: "relation on $A?$ and $B?$"
 ------------------------------------------
@@ -31,7 +31,7 @@ Id: "275414f9-69f7-4cd0-81f2-56b6ee94dad2"
 Describes: R
 when: 'A is \set'
 extends: 'A is \relation:on{A, A}'
-satisfies:
+specifies:
 . [reflexive]
   forAll: a
   where: 'a [.in.]: A'
@@ -63,7 +63,7 @@ when:
 . 'R is \equivalence.relation:on{A}'
 . 'x [.in.]: A'
 means: 'Y is \set'
-specifies: 'Y := \set:of[y]{y | y [.in.]: A ; y \related.to:over{R}/ x}'
+expresses: 'Y := \set:of[y]{y | y [.in.]: A ; y \related.to:over{R}/ x}'
 Documented:
 . written: "[x?]_{R?}"
 ------------------------------------------

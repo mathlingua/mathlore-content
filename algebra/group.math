@@ -5,7 +5,7 @@
 [\group]
 Describes: G := (X, *, e)
 extends: 'G is \monoid'
-satisfies:
+specifies:
 . [existence.of.inverses]
   forAll: x
   where: 'x [.in.]: G'
@@ -42,7 +42,7 @@ Id: "5291b552-c380-4ac3-ad58-8d86ea8de9af"
 [\finite.group]
 Describes: G := (X, *, e)
 extends: 'X is \set'
-satisfies: 'X is \finite.set'
+specifies: 'X is \finite.set'
 Documented:
 . called: "finite group"
 ------------------------------------------
@@ -53,7 +53,7 @@ Id: "404e418f-9ab4-4080-9dfd-ff8054f3f555"
 Describes: H := (Y, *_0, u)
 when: 'G is \group'
 extends: 'Y is \set'
-satisfies:
+specifies:
 . 'Y [.subset.]: X'
 . 'Y is \non.empty.set'
 . forAll: x, y
@@ -99,7 +99,7 @@ when:
 . 'G is \group'
 . 'x [.in.]: G'
 means: 'y [.in.]: G'
-specifies:
+expresses:
 . 'x * y = e'
 . 'y * x = e'
 Justified:
@@ -120,7 +120,7 @@ when:
 . 'x [.in.]: G'
 . 'n is \natural'
 means: 'y [.in.]: G'
-specifies:
+expresses:
 . piecewise:
   if: 'n = 0'
   then: 'y = e'
@@ -139,7 +139,7 @@ Id: "1aaf732a-1987-4ee2-860e-98adf261b5f6"
 [G1 := (X1, *_1, e1) \group.direct.product/ G2 := (X2, *_2, e2)]
 Defines: H := (Y, +, u)
 when: 'G1, G2 is \group'
-specifies:
+expresses:
 . 'Y := X1 \set.times/ X2'
 . 'u := (e1, e2)'
 Documented:
@@ -163,7 +163,7 @@ Id: "bba5ed08-adfd-4465-8192-d60f2998a271"
 [\abelian.group]
 Describes: G
 extends: 'G is \group'
-satisfies:
+specifies:
 . forAll: x, y
   where: 'x, y [.in.]: G'
   then: 'x * y = y * x'
@@ -222,7 +222,7 @@ Id: "6dcccfc0-be83-489a-9c2e-040e61bce8f7"
 Defines: k
 when: 'P is \\formulation{statement}'
 means: 'k is \natural'
-specifies:
+expresses:
 . 'P(k)'
 . not:
   . exists: j
@@ -242,7 +242,7 @@ when:
 . 'G is \group'
 . 'n is \natural'
 means: 'n is \natural'
-specifies:
+expresses:
 . 'n := \smallest.natural:suchThat[k]{x^k = e}'
 Documented:
 . called: "\textrm{order of } x? \textrm{ in group } G?"
