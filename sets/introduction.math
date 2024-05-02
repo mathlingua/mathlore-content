@@ -20,7 +20,7 @@ Later, we will get into the precise definition what a set is.
 ::
 
 
-[x \set.=/ y]
+[x \{set.=}/ y]
 States:
 when: 'x, y is \set'
 that:
@@ -94,7 +94,7 @@ to avoid paradoxes forming.
 Axiom:
 given: x, y
 where: 'x, y is \set'
-if:
+suchThat:
 . forAll: z
   where: 'z is \set'
   then:
@@ -124,7 +124,7 @@ Id: "fbcbfe6c-1790-44bf-b92f-edff8e26d71c"
 Axiom:
 given: x
 where: 'x is \set'
-if: 'x != \empty.set'
+suchThat: 'x != \empty.set'
 then:
 . exists: y
   where: 'y is \set'
@@ -170,7 +170,7 @@ Documented:
 Id: "ad51829a-9518-42a5-917c-f8e1fb117640"
 
 
-[x \set.not.in/ X]
+[x \{set.not.in}/ X]
 States:
 when: 'X is \set'
 that:
@@ -194,13 +194,13 @@ Provides:
 . 'x [.strict.subset.]: X :-> x is \strict.subset:of{X}'
 . 'x [.superset.]: X :-> x is \superset:of{X}'
 . 'x [.strict.superset.]: X :-> x is \strict.superset:of{X}'
-. 'x = y :=> x \set.=/ y'
-. 'x [.notin.]: X :=> x \set.not.in/ X'
-. 'x [.cup.]: y :=> x \set.union/ y'
-. 'x [.cap.]: y :=> x \set.intersect/ y'
-. 'x - y :=> x \set.minus/ y'
-. 'x [.times.]: y :=> x \set.times/ y'
-. 'x [.Delta.]: y :=> x \symmetric.difference/ y'
+. 'x = y :=> x \{set.=}/ y'
+. 'x [.notin.]: X :=> x \{set.not.in}/ X'
+. 'x [.cup.]: y :=> x \{set.union}/ y'
+. 'x [.cap.]: y :=> x \{set.intersect}/ y'
+. 'x - y :=> x \{set.minus}/ y'
+. 'x [.times.]: y :=> x \{set.times}/ y'
+. 'x [.Delta.]: y :=> x \{symmetric.difference}/ y'
 Documented:
 . called: "set"
 ------------------------------------------
@@ -271,7 +271,7 @@ Documented:
 Id: "c20a5eaa-5c1b-448c-9678-cdc53a7dabcf"
 
 
-[A \subset/ B]
+[A \{subset}/ B]
 States:
 when: 'A, B is \set'
 that:
@@ -283,7 +283,7 @@ Documented:
 Id: "32f6148f-1e08-4aca-a62d-9b0355d463d4"
 
 
-[A \superset/ B]
+[A \{superset}/ B]
 States:
 when: 'A, B is \set'
 that:
@@ -319,7 +319,7 @@ Documented:
 Id: "6984cb35-0d5c-43fa-aeb6-abaa899bf5c1"
 
 
-[A \strict.subset/ B]
+[A \{strict.subset}/ B]
 States:
 when: 'A, B is \set'
 that:
@@ -331,7 +331,7 @@ Documented:
 Id: "5b2e1df5-d5d6-49b1-9f76-f9669eb51629"
 
 
-[A \strict.superset/ B]
+[A \{strict.superset}/ B]
 States:
 when: 'A, B is \set'
 that:
@@ -343,7 +343,7 @@ Documented:
 Id: "636b9015-649f-4f84-9272-1a92df256b59"
 
 
-[A \set.intersect:within{U}/ B]
+[A \{set.intersect:within{U}}/ B]
 Defines: C
 when: 'A, B, U is \set'
 suchThat:
@@ -356,7 +356,7 @@ Documented:
 Id: "749a8b85-798e-43cc-8bfc-d54affd4370f"
 
 
-[A \set.intersect/ B]
+[A \{set.intersect}/ B]
 Defines: C
 using: U
 when:
@@ -364,14 +364,14 @@ when:
 suchThat:
 . 'A, B [.subset.]: U'
 means: 'C is \set'
-expresses: 'C := A \set.intersect:within{U}/ B'
+expresses: 'C := A \{set.intersect:within{U}}/ B'
 Documented:
 . written: "A? \cap B?"
 ------------------------------------------
 Id: "31125a8e-e201-4b92-8f15-0d3f5cd22b4f"
 
 
-[A \set.union:within{U}/ B]
+[A \{set.union:within{U}}/ B]
 Defines: C
 when: 'A, B, U is \set'
 suchThat: 'A, B [.subset.]: U'
@@ -383,18 +383,18 @@ Documented:
 Id: "90df9713-3d23-4c38-ba45-28f2798fb307"
 
 
-[A \set.union/ B]
+[A \{set.union}/ B]
 Defines: C
 using: U
 means: 'C is \set'
-expresses: 'C := A \set.union:within{U}/ B'
+expresses: 'C := A \{set.union:within{U}}/ B'
 Documented:
 . written: "A? \cup B?"
 ------------------------------------------
 Id: "cd4cb1c8-9d90-4dd3-b3c7-a5ef554a3438"
 
 
-[A \set.minus/ B]
+[A \{set.minus}/ B]
 Defines: C
 when: 'A, B is \set'
 means: 'C is \set'
@@ -405,7 +405,7 @@ Documented:
 Id: "05f452a0-9168-498f-a5fa-d119cbc9233c"
 
 
-[A \symmetric.difference/ B]
+[A \{symmetric.difference}/ B]
 Defines: C
 when: 'A, B is \set'
 means: 'C is \set'
@@ -427,7 +427,7 @@ Documented:
 Id: "3c5d6ec5-62d7-4a24-a789-9c4088fbef13"
 
 
-[A \set.times/ B]
+[A \{set.times}/ B]
 Defines: C
 when: 'A, B is \set'
 means: 'C is \set'

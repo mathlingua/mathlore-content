@@ -6,14 +6,14 @@
 Describes: R
 when: 'A, B is \set'
 extends: 'R is \set'
-specifies: 'R \subset/ (A \set.times/ B)'
+specifies: 'R \{subset}/ (A \{set.times}/ B)'
 Documented:
 . called: "relation on $A?$ and $B?$"
 ------------------------------------------
 Id: "4e5e4b4e-b50c-436e-b6ae-13ef9ff2d304"
 
 
-[a \related.to:over{R}/ b]
+[a \{related.to:over{R}}/ b]
 States:
 using: A, B
 when:
@@ -35,20 +35,20 @@ specifies:
 . [reflexive]
   forAll: a
   where: 'a [.in.]: A'
-  then: 'a \related.to:over{A}/ a'
+  then: 'a \{related.to:over{A}}/ a'
 . [symmetric]
   forAll: a, b
   where: 'a, b [.in.]: A'
-  suchThat: 'a \related.to:over{R}/ b'
-  then: 'b \related.to:over{R}/ a'
+  suchThat: 'a \{related.to:over{R}}/ b'
+  then: 'b \{related.to:over{R}}/ a'
 . [transitive]
   forAll: a, b, c
   where: 'a, b, c [.in.]: A'
   suchThat:
-  . 'a \related.to:over{R}/ b'
-  . 'b \related.to:over{R}/ c'
+  . 'a \{related.to:over{R}}/ b'
+  . 'b \{related.to:over{R}}/ c'
   then:
-  . 'a \related.to:over{R}/ c'
+  . 'a \{related.to:over{R}}/ c'
 Documented:
 . called: "equivalence relation on $A?$"
 ------------------------------------------
@@ -63,7 +63,7 @@ when:
 . 'R is \equivalence.relation:on{A}'
 . 'x [.in.]: A'
 means: 'Y is \set'
-expresses: 'Y := \set:of[y]{y | y [.in.]: A ; y \related.to:over{R}/ x}'
+expresses: 'Y := \set:of[y]{y | y [.in.]: A ; y \{related.to:over{R}}/ x}'
 Documented:
 . written: "[x?]_{R?}"
 ------------------------------------------

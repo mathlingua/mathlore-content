@@ -144,7 +144,7 @@ functions.
 ::
 
 
-[f \function.compose/ g]
+[f \{function.compose}/ g]
 Defines: h(x)
 using: A, B, C
 when:

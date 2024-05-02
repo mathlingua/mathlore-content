@@ -182,7 +182,7 @@ given: M := (R, G, *), *_0
 where:
 . 'M is \left.module'
 . '"*_0" is \function:on{M, R}:to{M}'
-if:
+suchThat:
 . forAll: m, r
   where:
   . 'm [.in.]: M'

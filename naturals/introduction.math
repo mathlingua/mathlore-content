@@ -23,14 +23,14 @@ specifies:
     where: 'm is \natural'
     suchThat: 'n = m++'
 Provides:
-. 'n = m :=> n \natural.=/ m'
-. 'n + m :=> n \natural.+/ m'
-. 'n * m :=> n \natural.*/ m'
+. 'n = m :=> n \{natural.=}/ m'
+. 'n + m :=> n \{natural.+}/ m'
+. 'n * m :=> n \{natural.*}/ m'
 . 'n++ :=> \natural.succ(n)'
-. 'n >= m :=> n \natural.>=/ m'
-. 'n > m :=> n \natural.>/ m'
-. 'n <= m :=> n \natural.<=/ m'
-. 'n < m :=> n \natural.</ m'
+. 'n >= m :=> n \{natural.>=}/ m'
+. 'n > m :=> n \{natural.>}/ m'
+. 'n <= m :=> n \{natural.<=}/ m'
+. 'n < m :=> n \{natural.<}/ m'
 Documented:
 . called: "natural number"
 ------------------------------------------

@@ -31,7 +31,7 @@ extends: 'x is \monoid.element:of{G}'
 Provides:
 . symbol: 'x.inv :=> \group.inverse:of{x}:in{G}'
   written: "{x?}^{-1}"
-. symbol: 'x :^ n :=> x \group.power/ n'
+. symbol: 'x :^ n :=> x \{group.power}/ n'
   written: "{x?}^{n?}"
 Documented:
 . called: "element of group G?"
@@ -71,7 +71,7 @@ Documented:
 Id: "c12a4601-5513-42b6-97e3-19e64896b14f"
 
 
-[H := (X, *, e) \subgroup/ G]
+[H := (X, *, e) \[subgroup]/ G]
 States:
 when:
 . 'G is \group'
@@ -86,7 +86,7 @@ Id: "8b8b2238-a9bb-44e4-a4aa-b7857fbd9d51"
 Theorem:
 given: G, H
 where: 'G is \group'
-if: 'H \subgroup/ G'
+suchThat: 'H \[subgroup]/ G'
 then: 'H is \group'
 ------------------------------------------
 Id: "6fe2d452-6b58-442e-920b-f273fac1b3b9"
@@ -112,7 +112,7 @@ Aliases:
 Id: "2293a62b-71a4-431e-82a1-c7613a52267f"
 
 
-[x \group.power/ n]
+[x \{group.power}/ n]
 Defines: y
 using: G := (X, *, e)
 when:
@@ -128,7 +128,7 @@ expresses:
   . exists: m
     where: 'm is \natural'
     suchThat: 'n = m++'
-  then: 'y = x * (x \group.power/ m)'
+  then: 'y = x * (x \{group.power}/ m)'
 Documented:
 . called: "x? raised to the power n?"
 . written: "{x?}^{n?}"
@@ -136,11 +136,11 @@ Documented:
 Id: "1aaf732a-1987-4ee2-860e-98adf261b5f6"
 
 
-[G1 := (X1, *_1, e1) \group.direct.product/ G2 := (X2, *_2, e2)]
+[G1 := (X1, *_1, e1) \{group.direct.product}/ G2 := (X2, *_2, e2)]
 Defines: H := (Y, +, u)
 when: 'G1, G2 is \group'
 expresses:
-. 'Y := X1 \set.times/ X2'
+. 'Y := X1 \{set.times}/ X2'
 . 'u := (e1, e2)'
 Documented:
 . called: "direct product of the groups G1? and G2?"
@@ -178,7 +178,7 @@ given: G := (X, *, e), e1, e2
 where:
 . 'G is \group'
 . 'e1, e2 [.in.]: G'
-if:
+suchThat:
 . forAll: x
   where: 'x [.in.]: G'
   then:
@@ -208,7 +208,7 @@ given: G := (X, *, e), a, b1, b2
 where:
 . 'G is \group'
 . 'a, b1, b2 [.in.]: G'
-if:
+suchThat:
 . 'a*b1 = e'
 . 'b1*a = e'
 . 'a*b2 = e'
