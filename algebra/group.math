@@ -223,13 +223,13 @@ Defines: k
 when: 'P is \\formulation{statement}'
 means: 'k is \natural'
 expresses:
-. 'P(k)'
+. 'P(k) is \\true'
 . not:
   . exists: j
     where: 'j is \natural'
     suchThat:
     . 'j < k'
-    . 'P(j)'
+    . 'P(j) is \\true'
 Documented:
 . written: "\textrm{smallest natural number such that } P?"
 ------------------------------------------

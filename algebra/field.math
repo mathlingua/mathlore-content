@@ -4,8 +4,9 @@
 
 [\field]
 Describes: F
-extends: 'F is \commutative.ring.with.identity'
-specifies: 'F is \division.ring'
+extends:
+. 'F is \commutative.ring.with.identity &
+        \division.ring'
 Provides:
 . symbol: 'x [.in.]: F :-> x is \field.element:of{F}'
 Documented:

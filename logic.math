@@ -31,7 +31,7 @@ Id: "96f81da6-0660-48b3-813a-583abc89a465"
 [\not{P}]
 States:
 that:
-. not: 'P'
+. not: 'P is \\true'
 Documented:
 . written: "\neg P?"
 ------------------------------------------

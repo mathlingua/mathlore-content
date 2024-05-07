@@ -50,8 +50,7 @@ Id: "b81dcd83-c8f9-4a7b-b68a-bf825cc8b342"
 Describes: x
 when: 'R is \ring'
 extends:
-. 'x is \ring.element:of{R}'
-. 'x is \monoid.element:of{R}'
+. 'x is \ring.element:of{R} & \monoid.element:of{R}'
 Documented:
 . called: "ring element of R?"
 ------------------------------------------
@@ -73,8 +72,7 @@ Id: "3352fddf-6cce-4a0d-93b7-9f79c493f942"
 
 [\commutative.ring.with.identity]
 Describes: R
-extends: 'R is \ring.with.identity'
-specifies: 'R also \commutative.ring'
+extends: 'R is \commutative.ring & \ring.with.identity'
 Documented:
 . called: "commutative ring with identity"
 ------------------------------------------
