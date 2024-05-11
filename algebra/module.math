@@ -8,7 +8,7 @@ when: 'R0 is \ring'
 extends: 'G is \group'
 specifies:
 . 'R := R0'
-. '"*" is \function:on{R, G}:to{G}'
+. '"*" is \function:on{R {.times.} G}:to{G}'
 . [scalar.multiplication]
   forAll: r, s, x, y
   where:
@@ -78,7 +78,7 @@ when: 'R0 is \ring'
 extends: 'G is \group'
 specifies:
 . 'R := R0'
-. '"*" is \function:on{G, R}:to{G}'
+. '"*" is \function:on{G {.times.} R}:to{G}'
 . [scalar.multiplication]
   forAll: r, s, x, y
   where:
@@ -181,7 +181,7 @@ Theorem:
 given: M := (R, G, *), *_0
 where:
 . 'M is \left.module'
-. '"*_0" is \function:on{M, R}:to{M}'
+. '"*_0" is \function:on{M {.times.} R}:to{M}'
 suchThat:
 . forAll: m, r
   where:

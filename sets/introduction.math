@@ -196,11 +196,11 @@ Provides:
 . 'x [.strict.superset.]: X :-> x is \strict.superset:of{X}'
 . 'x = y :=> x \{set.=}/ y'
 . 'x [.notin.]: X :=> x \{set.not.in}/ X'
-. 'x [.cup.]: y :=> x \{set.union}/ y'
-. 'x [.cap.]: y :=> x \{set.intersect}/ y'
+. 'x {.cup.}: y :=> x \{set.union}/ y'
+. 'x {.cap.}: y :=> x \{set.intersect}/ y'
 . 'x - y :=> x \{set.minus}/ y'
-. 'x [.times.]: y :=> x \{set.times}/ y'
-. 'x [.Delta.]: y :=> x \{symmetric.difference}/ y'
+. 'x {.times.}: y :=> x \{set.times}/ y'
+. 'x {.Delta.}: y :=> x \{symmetric.difference}/ y'
 Documented:
 . called: "set"
 ------------------------------------------

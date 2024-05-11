@@ -5,7 +5,7 @@
 [\metric:on{X}]
 Describes: d(x, y)
 when: 'X is \set'
-extends: 'd is \function:on{X, X}:to{\reals}'
+extends: 'd is \function:on{X {.times.} X}:to{\reals}'
 specifies:
 . forAll: x
   where: 'x [.in.]: X'

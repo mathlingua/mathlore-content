@@ -7,11 +7,11 @@ between mathematical structures.  The distinctive characteristic of a function
 is that it maps an input to a *unique* output.
 
 ::
-[\function:on{A...}:to{B}]
-Describes: f(x...)
-when: 'A..., B is \set'
+[\function:on{A}:to{B}]
+Describes: f(x)
+when: 'A, B is \set'
 extends:
-. 'x... [.in.]: A...'
+. 'x [.in.]: A'
 . 'f(x) [.in.]: B'
 specifies:
 . forAll: a
@@ -21,7 +21,7 @@ specifies:
     where: 'b [.in.]: B'
     suchThat: 'f(a) = b'
 Documented:
-. written: "A?{... \times ...} \rightarrow B?"
+. written: "A? \rightarrow B?"
 . called: "function on A? to B?"
 . overview: "::function.on.A.to.B"
 ------------------------------------------

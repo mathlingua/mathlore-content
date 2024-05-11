@@ -41,7 +41,7 @@ Id: "5291b552-c380-4ac3-ad58-8d86ea8de9af"
 
 [\finite.group]
 Describes: G := (X, *, e)
-extends: 'X is \set'
+extends: 'G is \group'
 specifies: 'X is \finite.set'
 Documented:
 . called: "finite group"
