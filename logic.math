@@ -5,7 +5,7 @@ Second-order logic will serve as the logical foundation for
 the mathematics in this work.
 ::
 
-[P \{and}/ Q]
+[P \.and./ Q]
 States:
 that:
 . 'P is \\true'
@@ -16,7 +16,7 @@ Documented:
 Id: "18582990-701a-40d3-8ce3-ae12bd08a561"
 
 
-[P \{or}/ Q]
+[P \.or./ Q]
 States:
 that:
 . anyOf:

@@ -1,4 +1,4 @@
-::function.on.A.to.B
+::[function.on.A.to.B]
 
 ## Functions
 
@@ -13,6 +13,7 @@ when: 'A, B is \set'
 specifies:
 . 'x [.in.]: A'
 . 'f(x) [.in.]: B'
+satisfying:
 . forAll: a
   where: 'a [.in.]: A'
   then:
@@ -27,7 +28,7 @@ Documented:
 Id: "dd66298e-4e01-400b-897b-712c4c0892a1"
 
 
-::injective.function
+::[injective.function]
 
 ## Injective Functions
 
@@ -42,7 +43,7 @@ Note: These types of functions are also said to be *one-to-one*.
 Describes: f(x)
 when: 'A, B is \set'
 extends: 'f is \function:on{A}:to{B}'
-specifies:
+satisfying:
 . forAll: x1, x2
   where: 'x1, x2 [.in.]: A'
   then:
@@ -58,7 +59,7 @@ Documented:
 Id: "84e7fd56-af43-441b-bc58-8b6093b14443"
 
 
-::surjective.function
+::[surjective.function]
 
 Similarly, in general, for the function $f$ where $f$ is a function on $A$ to
 $B$ it is possible for there to be an element $b \in B$ such that there doesn't
@@ -77,7 +78,7 @@ element.  Surjective functions are also said to be *onto*.
 Describes: f(x)
 when: 'A, B is \set'
 extends: 'f is \function:on{A}:to{B}'
-specifies:
+satisfying:
 . forAll: b
   where: 'b [.in.]: B'
   then:
@@ -123,7 +124,7 @@ Defines: g(x)
 using: A, B
 when: 'f is \function:on{A}:to{B}'
 means: 'g is \function:on{B}:to{A}'
-expresses:
+expressing:
 . forAll: a
   where: 'a [.in.]: A'
   then: 'g(f(a)) = a'
@@ -143,14 +144,14 @@ functions.
 ::
 
 
-[f \{function.compose}/ g]
+[f \.function.compose./ g]
 Defines: h(x)
 using: A, B, C
 when:
 . 'g is \function:on{A}:to{B}'
 . 'f is \function:on{B}:to{C}'
 means: 'h is \function:on{A}:to{C}'
-expresses: 'h(x) := f(g(x))'
+expressing: 'h(x) := f(g(x))'
 Documented:
 . written: "f+? \circ g+?"
 . called: "function composition"
@@ -169,7 +170,7 @@ structure.
 Defines: f(x)
 when: 'A is \set'
 means: 'f is \function:on{A}:to{A}'
-expresses: 'f(x) := x'
+expressing: 'f(x) := x'
 Documented:
 . written: "\textrm{id}_{A?}"
 . called: "identify function on $A?$"

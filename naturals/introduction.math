@@ -4,9 +4,8 @@
 
 [\natural.succ(n)]
 Defines: f(n)
-expresses:
-. 'n is \natural'
-. 'f(n) is \natural'
+when: 'n is \natural'
+expressing: 'f(n) is \natural'
 Documented:
 . written: "n?+\!\!+"
 . called: "successor of $n?$"
@@ -16,21 +15,21 @@ Id: "5826e12b-34e7-441f-8002-336d002e0ac5"
 
 [\natural]
 Describes: n
-specifies:
-. anyOf:
-  . 'n = 0'
-  . exists: m
-    where: 'm is \natural'
-    suchThat: 'n = m++'
+satisfying:
+. inductively:
+  oneOf:
+  . case: 'n := \natural.0'
+  . case: 'n := \natural.succ(m)'
+    using: m
 Provides:
-. 'n = m :=> n \{natural.=}/ m'
-. 'n + m :=> n \{natural.+}/ m'
-. 'n * m :=> n \{natural.*}/ m'
+. 'n = m :=> n \.natural.=./ m'
+. 'n + m :=> n \.natural.+./ m'
+. 'n * m :=> n \.natural.*./ m'
 . 'n++ :=> \natural.succ(n)'
-. 'n >= m :=> n \{natural.>=}/ m'
-. 'n > m :=> n \{natural.>}/ m'
-. 'n <= m :=> n \{natural.<=}/ m'
-. 'n < m :=> n \{natural.<}/ m'
+. 'n >= m :=> n \.natural.>=./ m'
+. 'n > m :=> n \.natural.>./ m'
+. 'n <= m :=> n \.natural.<=./ m'
+. 'n < m :=> n \.natural.<./ m'
 Documented:
 . called: "natural number"
 ------------------------------------------
@@ -66,7 +65,7 @@ Id: "6214d07e-66f8-471d-a528-3c243ccf7fc7"
 [\natural.set]
 Defines: N
 means: 'N is \set'
-expresses: 'N := \set:of[n]{n | n is \natural}'
+specifies: 'N := \set:of[n]{n | n is \natural}'
 Documented:
 . written: "\mathbb{N}"
 . called: "the set of natural numbers"
@@ -76,9 +75,10 @@ Id: "fd98138f-b329-4b31-ab42-d8e52a149bfc"
 
 [\naturals]
 Defines: N := (X, 0, succ(x))
-expresses:
+specifies:
 . 'X := \natural.set'
 . '0 := \natural.0'
+expressing:
 . 'succ(x) := \natural.succ(x)'
 Provides:
 . 'n [.in.]: N :-> n [.in.]: X'

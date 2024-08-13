@@ -21,7 +21,7 @@ when:
 . 'F is \field'
 . 'x [.in.]: F'
 means: 'y [.in.]: F'
-expresses:
+expressing:
 . 'x * y = 1'
 . 'y * x = 1'
 Documented:

@@ -5,7 +5,7 @@
 [\group]
 Describes: G := (X, *, e)
 extends: 'G is \monoid'
-specifies:
+satisfying:
 . [existence.of.inverses]
   forAll: x
   where: 'x [.in.]: G'
@@ -31,7 +31,7 @@ extends: 'x is \monoid.element:of{G}'
 Provides:
 . symbol: 'x.inv :=> \group.inverse:of{x}:in{G}'
   written: "{x?}^{-1}"
-. symbol: 'x :^ n :=> x \{group.power}/ n'
+. symbol: 'x :^ n :=> x \.group.power./ n'
   written: "{x?}^{n?}"
 Documented:
 . called: "element of group G?"
@@ -56,6 +56,7 @@ extends: 'Y is \set'
 specifies:
 . 'Y [.subset.]: X'
 . 'Y is \non.empty.set'
+satisfying:
 . forAll: x, y
   where: 'x, y [.in.]: Y'
   then: 'x *_0 y := x * y'
@@ -71,12 +72,12 @@ Documented:
 Id: "c12a4601-5513-42b6-97e3-19e64896b14f"
 
 
-[H := (X, *, e) \[subgroup]/ G]
+[H := (X, *, e) \.subgroup./ G]
 States:
 when:
 . 'G is \group'
 . 'X is \set'
-that: 'H is \subgroup:of{G}'
+specifies: 'H is \subgroup:of{G}'
 Documented:
 . written: "H? \leq G?"
 ------------------------------------------
@@ -86,7 +87,7 @@ Id: "8b8b2238-a9bb-44e4-a4aa-b7857fbd9d51"
 Theorem:
 given: G, H
 where: 'G is \group'
-suchThat: 'H \[subgroup]/ G'
+suchThat: 'H \.subgroup./ G'
 then: 'H is \group'
 ------------------------------------------
 Id: "6fe2d452-6b58-442e-920b-f273fac1b3b9"
@@ -99,7 +100,7 @@ when:
 . 'G is \group'
 . 'x [.in.]: G'
 means: 'y [.in.]: G'
-expresses:
+expressing:
 . 'x * y = e'
 . 'y * x = e'
 Justified:
@@ -112,7 +113,7 @@ Aliases:
 Id: "2293a62b-71a4-431e-82a1-c7613a52267f"
 
 
-[x \{group.power}/ n]
+[x \.group.power./ n]
 Defines: y
 using: G := (X, *, e)
 when:
@@ -120,7 +121,7 @@ when:
 . 'x [.in.]: G'
 . 'n is \natural'
 means: 'y [.in.]: G'
-expresses:
+expressing:
 . piecewise:
   if: 'n = 0'
   then: 'y = e'
@@ -128,7 +129,7 @@ expresses:
   . exists: m
     where: 'm is \natural'
     suchThat: 'n = m++'
-  then: 'y = x * (x \{group.power}/ m)'
+  then: 'y = x * (x \.group.power./ m)'
 Documented:
 . called: "x? raised to the power n?"
 . written: "{x?}^{n?}"
@@ -136,11 +137,11 @@ Documented:
 Id: "1aaf732a-1987-4ee2-860e-98adf261b5f6"
 
 
-[G1 := (X1, *_1, e1) \{group.direct.product}/ G2 := (X2, *_2, e2)]
+[G1 := (X1, *_1, e1) \.group.direct.product./ G2 := (X2, *_2, e2)]
 Defines: H := (Y, +, u)
 when: 'G1, G2 is \group'
-expresses:
-. 'Y := X1 \{set.times}/ X2'
+specifies:
+. 'Y := X1 \.set.times./ X2'
 . 'u := (e1, e2)'
 Documented:
 . called: "direct product of the groups G1? and G2?"
@@ -163,7 +164,7 @@ Id: "bba5ed08-adfd-4465-8192-d60f2998a271"
 [\abelian.group]
 Describes: G
 extends: 'G is \group'
-specifies:
+satisfying:
 . forAll: x, y
   where: 'x, y [.in.]: G'
   then: 'x * y = y * x'
@@ -222,8 +223,9 @@ Id: "6dcccfc0-be83-489a-9c2e-040e61bce8f7"
 Defines: k
 when: 'P is \\formulation{statement}'
 means: 'k is \natural'
-expresses:
+specifies:
 . 'P(k) is \\true'
+expressing:
 . not:
   . exists: j
     where: 'j is \natural'
@@ -242,7 +244,7 @@ when:
 . 'G is \group'
 . 'n is \natural'
 means: 'n is \natural'
-expresses:
+specifies:
 . 'n := \smallest.natural:suchThat[k]{x^k = e}'
 Documented:
 . called: "\textrm{order of } x? \textrm{ in group } G?"

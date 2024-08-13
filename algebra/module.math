@@ -8,7 +8,8 @@ when: 'R0 is \ring'
 extends: 'G is \group'
 specifies:
 . 'R := R0'
-. '"*" is \function:on{R {.times.} G}:to{G}'
+. '"*" is \function:on{R [.times.] G}:to{G}'
+satisfying:
 . [scalar.multiplication]
   forAll: r, s, x, y
   where:
@@ -51,7 +52,7 @@ Id: "b31db455-e075-4e67-823e-65d76087290a"
 Describes: M
 when: 'R is \ring.with.identity'
 extends: 'M is \left.module:over{R}'
-specifies:
+satisfying:
 . forAll: x
   where: 'x [.in.]: M'
   then: 'R.1 * x = x'
@@ -78,7 +79,8 @@ when: 'R0 is \ring'
 extends: 'G is \group'
 specifies:
 . 'R := R0'
-. '"*" is \function:on{G {.times.} R}:to{G}'
+. '"*" is \function:on{G [.times.] R}:to{G}'
+satisfying:
 . [scalar.multiplication]
   forAll: r, s, x, y
   where:
@@ -121,7 +123,7 @@ Id: "d8a4d363-63ff-4bc4-b0d1-60336739c587"
 Describes: M
 when: 'R is \ring.with.identity'
 extends: 'M is \right.module:over{R}'
-specifies:
+satisfying:
 . forAll: x
   where: 'x [.in.]: M'
   then: 'x * R.1  = x'
@@ -181,7 +183,7 @@ Theorem:
 given: M := (R, G, *), *_0
 where:
 . 'M is \left.module'
-. '"*_0" is \function:on{M {.times.} R}:to{M}'
+. '"*_0" is \function:on{M [.times.] R}:to{M}'
 suchThat:
 . forAll: m, r
   where:

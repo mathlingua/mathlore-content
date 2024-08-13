@@ -1,17 +1,16 @@
 
-[n \{natural.=}/ m]
+[n \.natural.=./ m]
 States:
 when: 'n, m is \natural'
 that:
-. anyOf:
-  . if: 'n = 0'
+. matching: n, m
+  against:
+  . case: 'n := 0'
     then: 'm = 0'
-  . if:
-    . exists: j, k
-      where: 'j, k is \natural'
-      suchThat:
-      . 'n = j++'
-      . 'm = k++'
+  . case:
+    . 'n := j++'
+    . 'm := k++'
+    using: j, k
     then: 'j = k'
 Documented:
 . written: "n? = m?"
@@ -19,18 +18,17 @@ Documented:
 Id: "e4967613-c907-48cb-a459-4c2813f6250f"
 
 
-[n \{natural.+}/ m]
+[n \.natural.+./ m]
 Defines: n + m
-expresses:
-. piecewise:
-  if: 'n = 0'
-  then: 'n + m := m'
-  elseIf:
-  . exists: k
-    where: 'k is \natural'
-    suchThat: 'n = k++'
-  then:
-  . 'n + m := (k + m)++'
+expressing:
+. matching: n
+  as: '\:natural'
+  against:
+  . case: 'n := 0'
+    then: 'n + m := m'
+  . case: 'n := k++'
+    using: k
+    then: 'n + m := (k + m)++'
 Documented:
 . written: "n? + m?"
 . called: "natural addition of $n?$ and $m?$"
@@ -93,10 +91,10 @@ then:
 Id: "91369cbd-3a99-4845-8e3a-6e4fadd47c3d"
 
 
-[n \{natural.*}/ m]
+[n \.natural.*./ m]
 Defines: n * m
 when: 'n, m is \natural'
-expresses:
+expressing:
 . piecewise:
   if: 'n = 0'
   then: 'n * m = 0'
@@ -113,7 +111,7 @@ Documented:
 Id: "c63d876a-8d92-42c8-9d3e-522c773ae693"
 
 
-[n \{natural.>=}/ m]
+[n \.natural.>=./ m]
 States:
 when: 'm, n is \natural'
 that:
@@ -127,7 +125,7 @@ Documented:
 Id: "b97d807f-4e00-45a8-b7b7-56196155c70f"
 
 
-[n \{natural.>}/ m]
+[n \.natural.>./ m]
 States:
 when: 'm, n is \natural'
 that:
@@ -140,7 +138,7 @@ Documented:
 Id: "052b1a5f-fbbb-4006-a120-800dc1c8a53d"
 
 
-[n \{natural.<=}/ m]
+[n \.natural.<=./ m]
 States:
 when: 'm, n is \natural'
 that: 'm >= n'
@@ -151,7 +149,7 @@ Documented:
 Id: "084bc2cb-cedd-4863-b1c8-23c469aa8f65"
 
 
-[n \{natural.<}/ m]
+[n \.natural.<./ m]
 States:
 when: 'm, n is \natural'
 that: 'm > n'

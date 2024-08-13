@@ -5,7 +5,7 @@
 [\quasigroup]
 Describes: Q := (X, *)
 extends: 'Q is \magma'
-specifies:
+satisfying:
 . [latin.square.property]
   forAll: a, b
   where: 'a, b [.in.]: Q'

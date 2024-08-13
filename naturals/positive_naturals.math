@@ -5,7 +5,7 @@
 [\positive.natural]
 Describes: n
 extends: 'n is \natural'
-specifies: 'n != 0'
+satisfying: 'n != 0'
 Documented:
 . called: "positive natural number"
 ------------------------------------------

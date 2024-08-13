@@ -15,7 +15,7 @@ Id: "c92ea4ed-c8f2-40b4-9a62-d47265b976e2"
 [\rational.set]
 Defines: X
 means: 'X is \set'
-expresses: 'X := \set:of[x]{x | x is \rational}'
+expressing: 'X := \set:of[x]{x | x is \rational}'
 Documented:
 . written: "\mathbb{Q}"
 ------------------------------------------
@@ -25,7 +25,7 @@ Id: "c5ea9f72-104a-4d56-bb75-5e9f59624fbf"
 [\rationals]
 Defines: Q := (X, +, *, 0, 1)
 means: 'X is \set'
-expresses: 'X := \rational.set'
+expressing: 'X := \rational.set'
 Provides: 'x [.in.]: Q :-> x [.in.]: X'
 Documented:
 . written: "\mathbb{Q}"
