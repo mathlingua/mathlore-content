@@ -237,7 +237,7 @@ Provides:
 . symbol: 'y [.in.]: X :-> y is \\select{specification}:from{P}'
   written: "y? \in X?"
 Documented:
-. written: "\left \. f? \: | \: g?{... \text{ and } ...} \right \}"
+. written: "\left \{ f? \: | \: g?{... \text{ and } ...} \right \}"
 ------------------------------------------
 Id: "f11cdc54-0ffd-480a-8e87-d491522c8857"
 
