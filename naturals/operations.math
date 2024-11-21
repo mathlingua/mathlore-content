@@ -20,7 +20,7 @@ Id: "e4967613-c907-48cb-a459-4c2813f6250f"
 
 [n \.natural.+./ m]
 Defines: n + m
-expressing:
+expresses:
 . matching: n
   as: '\:natural'
   against:
@@ -94,7 +94,7 @@ Id: "91369cbd-3a99-4845-8e3a-6e4fadd47c3d"
 [n \.natural.*./ m]
 Defines: n * m
 when: 'n, m is \natural'
-expressing:
+expresses:
 . piecewise:
   if: 'n = 0'
   then: 'n * m = 0'

@@ -16,7 +16,7 @@ Id: "0b0939af-e4a8-4c4d-b8fc-beba6a9e516c"
 Describes: x * y
 when: 'X is \set'
 extends: '"*" is \binary.operation:on{X}'
-satisfying:
+satisfies:
 . forAll: x, y, z
   where: 'x, y, z [.in.]: X'
   then: 'x * (y * z) = (x * y) * z'
@@ -30,7 +30,7 @@ Id: "4e45d31a-56d0-452c-8a94-38c09335cf2b"
 Describes: x * y
 when: 'X is \set'
 extends: '"*" is \binary.operation:on{X}'
-satisfying:
+satisfies:
 . forAll: x, y
   where: 'x, y [.in.]: X'
   then: 'x * y = y * x'
@@ -45,7 +45,7 @@ Describes: x * y
 using: X
 when: 'Y [.subset.]: X'
 extends: '"*" is \binary.operation:on{X}'
-satisfying:
+satisfies:
 . forAll: a, b
   where: 'a, b [.in.]: Y'
   then: 'a * b [.in.]: Y'

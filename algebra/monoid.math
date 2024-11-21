@@ -7,7 +7,7 @@ Describes: M := (X, *, e)
 extends: '(X, "*") is \semigroup'
 specifies:
 . 'e [.in.]: M'
-satisfying:
+satisfies:
 . forAll: x
   where: 'x [.in.]: M'
   then:

@@ -5,7 +5,7 @@
 [\group]
 Describes: G := (X, *, e)
 extends: 'G is \monoid'
-satisfying:
+satisfies:
 . [existence.of.inverses]
   forAll: x
   where: 'x [.in.]: G'
@@ -56,7 +56,7 @@ extends: 'Y is \set'
 specifies:
 . 'Y [.subset.]: X'
 . 'Y is \non.empty.set'
-satisfying:
+satisfies:
 . forAll: x, y
   where: 'x, y [.in.]: Y'
   then: 'x *_0 y := x * y'
@@ -100,7 +100,7 @@ when:
 . 'G is \group'
 . 'x [.in.]: G'
 means: 'y [.in.]: G'
-expressing:
+expresses:
 . 'x * y = e'
 . 'y * x = e'
 Justified:
@@ -121,7 +121,7 @@ when:
 . 'x [.in.]: G'
 . 'n is \natural'
 means: 'y [.in.]: G'
-expressing:
+expresses:
 . piecewise:
   if: 'n = 0'
   then: 'y = e'
@@ -164,7 +164,7 @@ Id: "bba5ed08-adfd-4465-8192-d60f2998a271"
 [\abelian.group]
 Describes: G
 extends: 'G is \group'
-satisfying:
+satisfies:
 . forAll: x, y
   where: 'x, y [.in.]: G'
   then: 'x * y = y * x'
@@ -225,7 +225,7 @@ when: 'P is \\formulation{statement}'
 means: 'k is \natural'
 specifies:
 . 'P(k) is \\true'
-expressing:
+expresses:
 . not:
   . exists: j
     where: 'j is \natural'

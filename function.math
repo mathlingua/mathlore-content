@@ -13,7 +13,7 @@ when: 'A, B is \set'
 specifies:
 . 'x [.in.]: A'
 . 'f(x) [.in.]: B'
-satisfying:
+satisfies:
 . forAll: a
   where: 'a [.in.]: A'
   then:
@@ -43,7 +43,7 @@ Note: These types of functions are also said to be *one-to-one*.
 Describes: f(x)
 when: 'A, B is \set'
 extends: 'f is \function:on{A}:to{B}'
-satisfying:
+satisfies:
 . forAll: x1, x2
   where: 'x1, x2 [.in.]: A'
   then:
@@ -78,7 +78,7 @@ element.  Surjective functions are also said to be *onto*.
 Describes: f(x)
 when: 'A, B is \set'
 extends: 'f is \function:on{A}:to{B}'
-satisfying:
+satisfies:
 . forAll: b
   where: 'b [.in.]: B'
   then:
@@ -124,7 +124,7 @@ Defines: g(x)
 using: A, B
 when: 'f is \function:on{A}:to{B}'
 means: 'g is \function:on{B}:to{A}'
-expressing:
+expresses:
 . forAll: a
   where: 'a [.in.]: A'
   then: 'g(f(a)) = a'
@@ -151,7 +151,7 @@ when:
 . 'g is \function:on{A}:to{B}'
 . 'f is \function:on{B}:to{C}'
 means: 'h is \function:on{A}:to{C}'
-expressing: 'h(x) := f(g(x))'
+expresses: 'h(x) := f(g(x))'
 Documented:
 . written: "f+? \circ g+?"
 . called: "function composition"
@@ -170,7 +170,7 @@ structure.
 Defines: f(x)
 when: 'A is \set'
 means: 'f is \function:on{A}:to{A}'
-expressing: 'f(x) := x'
+expresses: 'f(x) := x'
 Documented:
 . written: "\textrm{id}_{A?}"
 . called: "identify function on $A?$"

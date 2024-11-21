@@ -6,7 +6,7 @@
 Describes: d(x, y)
 when: 'X is \set'
 extends: 'd is \function:on{X [.times.] X}:to{\reals}'
-satisfying:
+satisfies:
 . forAll: x
   where: 'x [.in.]: X'
   then: 'd(x, x) = 0'

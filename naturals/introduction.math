@@ -5,7 +5,7 @@
 [\natural.succ(n)]
 Defines: f(n)
 when: 'n is \natural'
-expressing: 'f(n) is \natural'
+expresses: 'f(n) is \natural'
 Documented:
 . written: "n?+\!\!+"
 . called: "successor of $n?$"
@@ -15,7 +15,7 @@ Id: "5826e12b-34e7-441f-8002-336d002e0ac5"
 
 [\natural]
 Describes: n
-satisfying:
+satisfies:
 . inductively:
   oneOf:
   . case: 'n := \natural.0'
@@ -78,7 +78,7 @@ Defines: N := (X, 0, succ(x))
 specifies:
 . 'X := \natural.set'
 . '0 := \natural.0'
-expressing:
+expresses:
 . 'succ(x) := \natural.succ(x)'
 Provides:
 . 'n [.in.]: N :-> n [.in.]: X'
